@@ -3,7 +3,7 @@
 ## Group Members
 * Chris Banh
 * Carlos Quirarte
-* Johnny Nguyen
+* Johnny Nguyen // Is Dumb
 * Kevin Ngo
 * Han Tint
 
