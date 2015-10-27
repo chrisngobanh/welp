@@ -1,5 +1,10 @@
 #include "Car.h"
 
+Car::Car()
+{
+
+}
+
 Car::Car(string _make, string _model, string _type, string _engine, int _MPGCity, int _MPGFreeway, int _price) 
 {
 	make = _make;

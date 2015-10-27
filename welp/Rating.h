@@ -2,8 +2,8 @@
 #define RATING_H
 #include <string>
 
-#include "User.h";
-#include "Car.h";
+#include "User.h"
+#include "Car.h"
 
 using namespace std;
 
