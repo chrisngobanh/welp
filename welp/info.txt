@@ -1,0 +1,4 @@
+Honda,Civic (Sedan),25,40,Sedan,Gasoline,25000
+Honda,Civic (Coupe),25,40,Coupe,Gasoline,25000
+Honda,Accord,24,29,Sedan,Gasoline,3599
+Honda,Vezel,20,25,Mini SUV,Gasoline,4200
