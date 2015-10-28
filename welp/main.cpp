@@ -73,24 +73,46 @@ void listCars(string carType)
 			cin >> choice;
 			if (choice != "0")
 			{
-				pickCar(choice);
+				displayCarPage();
 			}
 		} while (choice != "0");
 	}
 	else if (carType == "2")
 	{
-		cout << "List of all the BMWs" << endl;
-		cout << "1) BMW M5" << endl;
+		do{
+			cout << "List of all the BMWs" << endl;
+			cout << "1) BMW M5" << endl;
+
+			cin >> choice;
+			if (choice != "0")
+			{
+				displayCarPage();
+			}
+		} while (choice != "0");
 	}
 	else if (carType == "3")
 	{
-		cout << "List of all the Hondas" << endl;
-		cout << "1) Honda Civic" << endl;
+		do{
+			cout << "List of all the Hondas" << endl;
+			cout << "1) Honda Civic" << endl;
+			cin >> choice;
+			if (choice != "0")
+			{
+				displayCarPage();
+			}
+		} while (choice != "0");
 	}
 	else if (carType == "4")
 	{
-		cout << "List of all the Toyotas" << endl;
-		cout << "1) Toyota Camry" << endl;
+		do{
+			cout << "List of all the Toyotas" << endl;
+			cout << "1) Toyota Camry" << endl;
+			cin >> choice;
+			if (choice != "0")
+			{
+				displayCarPage();
+			}
+		} while (choice != "0");
 	}
 	else if (carType == "9")
 	{
