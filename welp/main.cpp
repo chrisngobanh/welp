@@ -1,31 +1,145 @@
-#include <iostream>
-#include "Car.h"
-#include <fstream>
-#include <string>
+#include <cstddef>
 #include <cstdlib>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include "Car.h"
+#include "Rating.h"
 
 using namespace std;
+
+// Prototype functions
+void chooseCars();
+void listCars(string);
+void pickCar(string);
+void displayCarPage();
 
 Car* load();
 int getArrayLength();
 
 int main()
 {
-	Car* list = load();
-	
-	for (int i = 0; i < getArrayLength() ; i ++)
-	{
-	    cout << list[i].getMake() << " " << list[i].getModel() << " " <<  list[i].getType() << " " << list[i].getEngine() << " " << list[i].getMPGCity() << " " << list[i].getMPGFreeway() << " " << list[i].getPrice() << "\n";
-	}
-	
-	cout << getArrayLength();
+	cout << "Welcome to Welp! Its like Yelp, but for cars.\n" << endl;
+
+	string choice;
+	do{
+		cout << "*************MAIN MENU*************" << endl;
+		cout << "Enter the name make and model (e.g. Honda Civic) to start searching \nEnter L to browse from our list of cars \nEnter Q to quit" << endl;
+
+		cin >> choice;
+		if (choice == "L")
+		{
+			chooseCars();
+		}
+	} while (choice != "Q");
+
 
 	system("PAUSE");
-	return 0;
+	return 1;
 }
 
-//Make/Model/MPG City/MPG Freeway/Car Type/Engine Type/Price
-//Honda,Civic (Sedan),25,40,Sedan,Gasoline,25000
+void chooseCars()
+{
+	string choice;
+	// TODO: Change this so the values arent fixed and it reads value from an array instead
+	cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
+	do
+	{
+		cout << "\n*************BROWSE MENU*************" << endl;
+		cout << "1) Tesla" << endl;
+		cout << "2) BMW" << endl;
+		cout << "3) Honda" << endl;
+		cout << "4) Toyota" << endl;
+		cout << "9) All" << endl;
+		cout << "0) Back" << endl;
+
+		cin >> choice;
+		if (choice != "0")
+		{
+			listCars(choice);
+		}
+	} while (choice != "0");
+}
+
+void listCars(string carType)
+{
+	//TODO: Use arrays to create list instead
+
+	string choice;
+	if (carType == "1")
+	{
+		cout << "Print a list of all the Teslas" << endl;
+
+		do{
+			cout << "1) Tesla Model X" << endl;
+			cout << "0) Back" << endl;
+
+			cin >> choice;
+			if (choice != "0")
+			{
+				displayCarPage();
+			}
+		} while (choice != "0");
+	}
+	else if (carType == "2")
+	{
+		do{
+			cout << "List of all the BMWs" << endl;
+			cout << "1) BMW M5" << endl;
+
+			cin >> choice;
+			if (choice != "0")
+			{
+				displayCarPage();
+			}
+		} while (choice != "0");
+	}
+	else if (carType == "3")
+	{
+		do{
+			cout << "List of all the Hondas" << endl;
+			cout << "1) Honda Civic" << endl;
+			cin >> choice;
+			if (choice != "0")
+			{
+				displayCarPage();
+			}
+		} while (choice != "0");
+	}
+	else if (carType == "4")
+	{
+		do{
+			cout << "List of all the Toyotas" << endl;
+			cout << "1) Toyota Camry" << endl;
+			cin >> choice;
+			if (choice != "0")
+			{
+				displayCarPage();
+			}
+		} while (choice != "0");
+	}
+	else if (carType == "9")
+	{
+		cout << "List of all cars" << endl;
+	}
+
+
+}
+
+void pickCar(string carModel)
+{
+
+}
+
+void displayCarPage()
+{
+	cout << "\n*************TESLA MODEL X*************" << endl;
+	cout << "Body Type" << endl;
+	cout << "Engine Type" << endl;
+	cout << "MPG" << endl;
+	cout << "Price" << endl;
+	cout << "Rating" << endl;
+}
 
 int getArrayLength()
 {
@@ -50,6 +164,8 @@ int getArrayLength()
 	}
 }
 
+//Make/Model/MPG City/MPG Freeway/Car Type/Engine Type/Price
+//Honda,Civic (Sedan),25,40,Sedan,Gasoline,25000
 Car* load()
 {
 	Car* list = new Car[getArrayLength()];
@@ -143,24 +259,3 @@ Car* load()
 		exit(-1);
 	}
 }
-
-
-//Book book;
-//    string line;
-//    ifstream in ("library.txt");
-//    if (in.is_open())
-//    {
-//        while (getline(in, line))
-//        {
-//            string title = line;
-//            getline(in, line);
-//            string isbn = line;
-//            getline(in, line);
-//            string author = line;
-//            getline(in, line);
-//            string status = line;
-//            library.push_back(new Book(title, isbn, author, status));
-//        }
-//        in.close();
-//    }
-//    else cout << "Error: Unable to open file.\n\n";
