@@ -17,6 +17,8 @@ void displayCarPage();
 Car* load();
 int getArrayLength();
 
+void enterRating();
+
 int main()
 {
 	cout << "Welcome to Welp! Its like Yelp, but for cars.\n" << endl;
@@ -139,6 +141,18 @@ void displayCarPage()
 	cout << "MPG" << endl;
 	cout << "Price" << endl;
 	cout << "Rating" << endl;
+    
+    
+    /****** implementation of user review/ratings *******/
+    char choice;
+    
+    cout << "User, do you wish to enter your rating and/or review for the vehicle?\n";
+    cin >> choice;
+    
+    if (choice == 'Y' || choice == 'y')
+    {
+        enterRating();
+    }
 }
 
 int getArrayLength()
@@ -230,7 +244,7 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
-			while (line[substr_start + offset] != divider)
+			while (line[substr_start + offset] != sdivider)
 			{
 				offset++;
 			}
@@ -259,3 +273,9 @@ Car* load()
 		exit(-1);
 	}
 }
+
+void enterRating()
+{
+    
+}
+
