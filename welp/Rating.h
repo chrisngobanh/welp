@@ -2,8 +2,6 @@
 #define RATING_H
 #include <string>
 
-#include "User.h"
-
 using namespace std;
 
 // TODO: Add a feature to allow editing Ratings
@@ -12,17 +10,17 @@ class Rating
 private:
 	string description;
 	int stars;
-	User owner;
+	string owner;
 
 public:
 	// Constructor
 	Rating();
-	Rating(string _description, int _stars, User _owner);
+	Rating(string _description, int _stars, string _owner);
 
 	// Getters
 	string getDescription();
 	int getStars();
-	User getOwner();
+	string getOwner();
 };
 
 #endif
