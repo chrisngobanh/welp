@@ -3,7 +3,6 @@
 #include <string>
 
 #include "User.h"
-#include "Car.h"
 
 using namespace std;
 
@@ -14,18 +13,16 @@ private:
 	string description;
 	int stars;
 	User owner;
-	Car car;
 
 public:
 	// Constructor
 	Rating();
-	Rating(string _description, int _stars, User _owner, Car _car);
+	Rating(string _description, int _stars, User _owner);
 
 	// Getters
 	string getDescription();
 	int getStars();
 	User getOwner();
-	Car getCar();
 };
 
 #endif

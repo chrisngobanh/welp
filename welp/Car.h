@@ -1,6 +1,8 @@
 #ifndef CAR_H
 #define CAR_H
 #include <string>
+#include "Rating.h"
+#include "List.h"
 
 using namespace std;
 
@@ -32,6 +34,8 @@ public:
 	int getMPGCity();
 	int getMPGFreeway();
 	int getPrice();
+
+	List<Rating> ratings[5];
 };
 
 #endif
