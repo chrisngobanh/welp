@@ -3,7 +3,8 @@
 Rating::Rating()
 {}
 
-Rating::Rating(string _description, int _stars, User _owner)
+
+Rating::Rating(string _description, int _stars, string _owner)
 {
 	description = _description;
 	stars = _stars;
@@ -20,7 +21,7 @@ int Rating::getStars()
 	return stars;
 }
 
-User Rating::getOwner()
+string Rating::getOwner()
 {
 	return owner;
 }
