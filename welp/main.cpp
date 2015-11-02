@@ -23,6 +23,10 @@ int main()
 {
 	cout << "Welcome to Welp! Its like Yelp, but for cars.\n" << endl;
 
+
+	Car* carList = load();
+	//cout << carList[0].getModel();
+
 	string choice;
 	do{
 		cout << "*************MAIN MENU*************" << endl;
@@ -159,7 +163,7 @@ int getArrayLength()
 {
 	string line;
 	int length = 0;
-	ifstream in("info.txt");
+	ifstream in("Kars Data.txt");
 	if (in.is_open())
 	{
 		in.clear();
@@ -191,9 +195,9 @@ Car* load()
 	string make, model, type, engine;
 	int mpgcity, mpgfree, msrp;
 
-	char divider = ',';
+	char divider = '/';
 
-	ifstream in("info.txt");
+	ifstream in("Kars Data.txt");
 	if (in.is_open())
 	{
 		in.clear();
@@ -210,7 +214,6 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
-
 			while (line[substr_start + offset] != divider)
 			{
 				offset++;
@@ -218,7 +221,6 @@ Car* load()
 			model = line.substr(substr_start, offset);
 			substr_start = substr_start + offset + 1;
 			offset = 0;
-
 
 			while (line[substr_start + offset] != divider)
 			{
@@ -240,14 +242,6 @@ Car* load()
 			{
 				offset++;
 			}
-			type = line.substr(substr_start, offset);
-			substr_start = substr_start + offset + 1;
-			offset = 0;
-
-			while (line[substr_start + offset] != divider)
-			{
-				offset++;
-			}
 			engine = line.substr(substr_start, offset);
 			substr_start = substr_start + offset + 1;
 			offset = 0;
@@ -260,10 +254,11 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
-			list[index] = Car(make, model, type, engine, mpgcity, mpgfree, msrp);
+			//cout << make << model <<engine << " city: " << mpgcity << " Free: " <<  mpgfree << " price: " << msrp << endl;
+			list[index] = Car(make, model, engine, mpgcity, mpgfree, msrp);
 			index++;
+			// << "Added successfully" << endl;
 		}
-
 		in.close();
 		return list;
 	}

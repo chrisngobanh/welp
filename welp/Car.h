@@ -13,7 +13,6 @@ class Car
 private:
 	string make; // i.e. Ford
 	string model; // i.e. Mustang (Coupe)
-	string type; // i.e. Coupe
 	string engine; // i.e. ICE
 
 	int MPGCity; // i.e. 22
@@ -23,7 +22,7 @@ private:
 public:
 	// Constructor
 	Car();
-	Car(string _make, string _model, string _type, string _engine, int _MPGCity, int _MPGFreeway, int _price);
+	Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFreeway, int _price);
 	
 	// Getters
 	string getMake();

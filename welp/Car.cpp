@@ -4,18 +4,16 @@ Car::Car()
 {
 	make = "";
 	model = "";
-	type = "";
 	engine = "";
 	MPGCity = NULL;
 	MPGFreeway = NULL;
 	price = NULL;
 }
 
-Car::Car(string _make, string _model, string _type, string _engine, int _MPGCity, int _MPGFreeway, int _price)
+Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFreeway, int _price)
 {
 	make = _make;
 	model = _model;
-	type = _type;
 	engine = _engine;
 	MPGCity = _MPGCity;
 	MPGFreeway = _MPGFreeway;
@@ -31,10 +29,6 @@ string Car::getModel()
 	return model;
 }
 
-string Car::getType()
-{
-	return type;
-}
 
 string Car::getEngine()
 {
