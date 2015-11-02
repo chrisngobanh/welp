@@ -244,7 +244,7 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
-			while (line[substr_start + offset] != sdivider)
+			while (line[substr_start + offset] != divider)
 			{
 				offset++;
 			}
