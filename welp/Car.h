@@ -34,7 +34,9 @@ public:
 	int getMPGFreeway();
 	int getPrice();
 
-	List<Rating> ratings[5];
+	friend ostream& operator<<(ostream &os, const Car &car);
+
+	//List<Rating> ratings[5];
 };
 
 #endif

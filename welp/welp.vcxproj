@@ -69,6 +69,7 @@
     <ClCompile Include="Rating.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BST.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Rating.h" />

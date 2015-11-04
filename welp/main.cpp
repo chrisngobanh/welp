@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Car.h"
 #include "Rating.h"
+#include "BST.h"
 
 using namespace std;
 
@@ -15,6 +16,8 @@ void pickCar(string);
 void displayCarPage();
 
 Car* load();
+void loadMpgBST(Car* list, BST<int, Car> &bst);
+void loadPriceBST(Car* list, BST<int, Car> &bst);
 int getArrayLength();
 
 void enterRating();
@@ -25,6 +28,10 @@ int main()
 
 
 	Car* carList = load();
+	BST<int, Car> mpgBST = BST<int, Car>();
+	BST<int, Car> priceBST = BST<int, Car>();
+	loadMpgBST(carList, mpgBST);
+	loadPriceBST(carList, priceBST);
 	//cout << carList[0].getModel();
 
 	string choice;
@@ -38,7 +45,6 @@ int main()
 			chooseCars();
 		}
 	} while (choice != "Q");
-
 
 	system("PAUSE");
 	return 1;
@@ -266,6 +272,24 @@ Car* load()
 	{
 		cout << "Error: Unable to open the file.\n\n";
 		exit(-1);
+	}
+}
+
+void loadMpgBST(Car* list, BST<int, Car> &bst)
+{
+	int size = getArrayLength();
+	for (int i = 0; i < size; i++)
+	{
+		bst.add(list[i].getMPGCity(), list[i]);
+	}
+}
+
+void loadPriceBST(Car* list, BST<int, Car> &bst)
+{
+	int size = getArrayLength();
+	for (int i = 0; i < size; i++)
+	{
+		bst.add(list[i].getPrice(), list[i]);
 	}
 }
 
