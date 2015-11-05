@@ -53,6 +53,19 @@ int main()
 			chooseCars();
 		}
 	} while (choice != "2");
+    
+    /****** implementation of user review/ratings *******/
+    char usrChoice;
+    
+    cout << "User, do you wish to enter your rating and/or review for the vehicle?\n";
+    cin >> usrChoice;
+    
+    if (usrChoice == 'Y' || usrChoice == 'y')
+    {
+        enterRating();
+    }
+    /****************************************************/
+
 
 	system("PAUSE");
 	return 1;
@@ -351,6 +364,56 @@ void loadPriceBST(Car* list, BST<int, Car> &bst)
 
 void enterRating()
 {
+    string carMake;
+    string carModel;
+    string type;
+    string engine;
+    int city;
+    int freeway;
+    int price;
+    string description;
+    int stars;
     
+    string owner;
+    
+    char choice;
+    
+    do
+    {
+        /**** Info about the Car ****/
+        cout << "Please, give us information about the vehicle.\n";
+        cout << "Car make: ";
+        cin >> carMake;
+        cout << "Car model: ";
+        cin >> carModel;
+        cout<< "Sedan or Coupe? ";
+        cin >> type;
+        cout << "Engine Type: Gas, Electric or Hybrid? ";
+        cin >> engine;
+        cout << "MPG City: ";
+        cin >> city;
+        cout << "MPG Freeway: ";
+        cin >> freeway;
+        cout << "How much did you pay for the vehicle? ";
+        cin >> price;
+        
+        cout << "Tell us your personal thoughts about this vehicle.\n";
+        getline(cin, description);
+        cout << "From a rating of 1-10, give the car its deserved rating: ";
+        cin >> stars;
+        cout << "Finally, tell us your name: ";
+        getline(cin, owner);
+        
+        Car newCar(carMake, carModel, type, engine, city, freeway, price);
+        User newUser(owner);
+        Rating newRating(description, stars, newUser, newCar);
+        
+        cout << "Do you wish to leave another review for another vehicle? ";
+        cin >> choice;
+        
+    } while (choice != 'N' || choice != 'n');
+    
+    cout << "Thank you for sharing your experience!\n";
+
 }
 
