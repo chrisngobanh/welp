@@ -25,6 +25,7 @@ int getArrayLength();
 void enterRating();
 
 Car* carList;
+string userName;
 
 int main()
 {
@@ -36,6 +37,7 @@ int main()
 	BST<int, Car> priceBST = BST<int, Car>();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
+	cin >> userName;
 
 	string choice;
 	do{
@@ -386,8 +388,6 @@ void enterRating()
         cin >> carMake;
         cout << "Car model: ";
         cin >> carModel;
-        cout<< "Sedan or Coupe? ";
-        cin >> type;
         cout << "Engine Type: Gas, Electric or Hybrid? ";
         cin >> engine;
         cout << "MPG City: ";
@@ -404,9 +404,8 @@ void enterRating()
         cout << "Finally, tell us your name: ";
         getline(cin, owner);
         
-        Car newCar(carMake, carModel, type, engine, city, freeway, price);
-        User newUser(owner);
-        Rating newRating(description, stars, newUser, newCar);
+        Car newCar(carMake, carModel, engine, city, freeway, price);
+        Rating newRating(description, stars, userName);
         
         cout << "Do you wish to leave another review for another vehicle? ";
         cin >> choice;
