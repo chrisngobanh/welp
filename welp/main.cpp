@@ -12,8 +12,10 @@ using namespace std;
 // Prototype functions
 void chooseCars();
 void listCars(string);
-void pickCar(string);
+void pickCar(int index);
 void displayCarPage();
+void displayCarPage(int index);
+void listAllCars();
 
 Car* load();
 void loadMpgBST(Car* list, BST<int, Car> &bst);
@@ -22,17 +24,18 @@ int getArrayLength();
 
 void enterRating();
 
+Car* carList;
+
 int main()
 {
 	cout << "Welcome to Welp! Its like Yelp, but for cars.\n" << endl;
 
 
-	Car* carList = load();
+	carList = load();
 	BST<int, Car> mpgBST = BST<int, Car>();
 	BST<int, Car> priceBST = BST<int, Car>();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
-	//cout << carList[0].getModel();
 
 	string choice;
 	do{
@@ -54,10 +57,10 @@ void chooseCars()
 {
 	string choice;
 	// TODO: Change this so the values arent fixed and it reads value from an array instead
-	cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
 	do
 	{
 		cout << "\n*************BROWSE MENU*************" << endl;
+		cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
 		cout << "1) Tesla" << endl;
 		cout << "2) BMW" << endl;
 		cout << "3) Honda" << endl;
@@ -132,13 +135,39 @@ void listCars(string carType)
 	}
 	else if (carType == "9")
 	{
-		cout << "List of all cars" << endl;
+		listAllCars();
 	}
-
-
 }
 
-void pickCar(string carModel)
+void listAllCars()
+{
+	string choice;
+	string finalIndex = to_string(getArrayLength());
+
+	do{
+		cout << "\n*************ALL CARS MENU*************" << endl;
+		// Print out list of all cars
+		for (int i = 0; i < getArrayLength(); i++)
+		{
+			cout << i << ". ";
+			cout << carList[i].getMake() << " ";
+			cout << carList[i].getModel() << endl;
+		}
+		cout << getArrayLength() << ". Quit" << endl;
+
+		// Input validation
+		cin >> choice;
+		int intChoice = stoi(choice);
+
+		if (intChoice > 0 && intChoice < getArrayLength())
+		{
+			displayCarPage(intChoice);
+		}
+
+	} while (choice != finalIndex);
+}
+
+void pickCar(int index)
 {
 
 }
@@ -146,11 +175,11 @@ void pickCar(string carModel)
 void displayCarPage()
 {
 	cout << "\n*************TESLA MODEL X*************" << endl;
-	cout << "Body Type" << endl;
 	cout << "Engine Type" << endl;
-	cout << "MPG" << endl;
+	cout << "MPG City" << endl;
+	cout << "MPG Freeway" << endl;
 	cout << "Price" << endl;
-	cout << "Rating" << endl;
+	cout << "Rating" << endl; //TODO: How do ratings?
     
     
     /****** implementation of user review/ratings *******/
@@ -163,6 +192,28 @@ void displayCarPage()
     {
         enterRating();
     }
+}
+
+void displayCarPage(int index)
+{
+	cout << "\n*************" << carList[index].getMake() << " " << carList[index].getModel() <<  "*************" << endl;
+	cout << "Engine Type: " << carList[index].getEngine() << endl;
+	cout << "MPG City: " << carList[index].getMPGCity() <<endl;
+	cout << "MPG Freeway" << carList[index].getMPGFreeway() << endl;
+	cout << "Price: " << carList[index].getPrice() << endl;
+	cout << "Rating: " << endl;
+
+
+	/****** implementation of user review/ratings *******/
+	char choice;
+
+	cout << "User, do you wish to enter your rating and/or review for the vehicle? Y/N \n";
+	cin >> choice;
+
+	if (choice == 'Y' || choice == 'y')
+	{
+		enterRating();
+	}
 }
 
 int getArrayLength()
