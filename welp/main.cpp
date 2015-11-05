@@ -40,14 +40,19 @@ int main()
 	string choice;
 	do{
 		cout << "*************MAIN MENU*************" << endl;
-		cout << "Enter the name make and model (e.g. Honda Civic) to start searching \nEnter L to browse from our list of cars \nEnter Q to quit" << endl;
 
+		// README: This isn't working yet, so let's not include it.
+		// cout << "Enter the name make and model (e.g. Honda Civic) to start searching." << endl;
+
+		cout << "1. Browse from our list of cars" << endl; 
+		cout << "2. Quit" << endl;
+		cout << "Please select an option. ";
 		cin >> choice;
-		if (choice == "L")
+		if (choice == "1")
 		{
 			chooseCars();
 		}
-	} while (choice != "Q");
+	} while (choice != "2");
 
 	system("PAUSE");
 	return 1;
