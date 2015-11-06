@@ -25,9 +25,12 @@ int getArrayLength();
 void enterRating();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Car* carList;
 string userName;
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 int main()
@@ -206,6 +209,9 @@ void displayCarPage()
 	cout << "Rating" << endl; //TODO: How do ratings?
 =======
 	cout << "Rating" << endl;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     
     
@@ -219,6 +225,7 @@ void displayCarPage()
     {
         enterRating();
     }
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 }
 
@@ -242,6 +249,8 @@ void displayCarPage(int index)
 	{
 		enterRating();
 	}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 }
@@ -368,6 +377,7 @@ Car* load()
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 void loadMpgBST(Car* list, BST<int, Car> &bst)
 {
 	int size = getArrayLength();
@@ -413,6 +423,11 @@ void enterRating()
     
     cout << "Thank you for sharing your experience!\n";
 
+=======
+void enterRating()
+{
+    
+>>>>>>> Stashed changes
 =======
 void enterRating()
 {
