@@ -29,15 +29,26 @@ string userName;
 
 int main()
 {
-	cout << "Welcome to Welp! Its like Yelp, but for cars.\n" << endl;
+	cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
 
+	cout << "Created By:" << endl;
+	cout << "Chris Banh" << endl;
+	cout << "Carlos Quirarte" << endl;
+	cout << "Johnny Nguyen" << endl;
+	cout << "Kevin Ngo" << endl;
+	cout << "Han Tint" << endl;
+
+	cout << endl << endl << endl;
 
 	carList = load();
 	BST<int, Car> mpgBST = BST<int, Car>();
 	BST<int, Car> priceBST = BST<int, Car>();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
-	cin >> userName;
+	
+	cout << "What is your username? ";
+	getline(cin, userName);
+	system("CLS");
 
 	string choice;
 	do{
