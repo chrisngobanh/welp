@@ -16,8 +16,8 @@ Ford/Mustang/22/31/Gas/23895
 Ford/F-150/19/26/Gas/26615
 Acura/TLX/24/34/Gas/31695
 Chevrolet/Volt/35/40/Hybrid/33170
-Chevolet/Camaro/17/28/Gas/23705
-Chevorlet/Corvette/17/29/Gas/55400
+Chevrolet/Camaro/17/28/Gas/23705
+Chevrolet/Corvette/17/29/Gas/55400
 Nissan/Leaf/126/101/Electric/29010
 Nissan/Altima/27/38/Gas/22300
 Tesla/Model S/101/102/Electric/69900
