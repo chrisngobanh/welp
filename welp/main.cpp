@@ -24,15 +24,9 @@ int getArrayLength();
 
 void enterRating();
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 Car* carList;
 string userName;
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 int main()
 {
 	cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
@@ -216,15 +210,8 @@ void displayCarPage()
 	cout << "MPG City" << endl;
 	cout << "MPG Freeway" << endl;
 	cout << "Price" << endl;
-<<<<<<< Updated upstream
 	cout << "Rating" << endl; //TODO: How do ratings?
-=======
 	cout << "Rating" << endl;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-    
     
     /****** implementation of user review/ratings *******/
     char choice;
@@ -236,8 +223,6 @@ void displayCarPage()
     {
         enterRating();
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 }
 
 void displayCarPage(int index)
@@ -260,10 +245,6 @@ void displayCarPage(int index)
 	{
 		enterRating();
 	}
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 int getArrayLength()
@@ -349,8 +330,7 @@ Car* load()
 			{
 				offset++;
 			}
-<<<<<<< Updated upstream
-=======
+
 			type = line.substr(substr_start, offset);
 			substr_start = substr_start + offset + 1;
 			offset = 0;
@@ -359,7 +339,7 @@ Car* load()
 			{
 				offset++;
 			}
->>>>>>> Stashed changes
+
 			engine = line.substr(substr_start, offset);
 			substr_start = substr_start + offset + 1;
 			offset = 0;
@@ -387,8 +367,6 @@ Car* load()
 	}
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 void loadMpgBST(Car* list, BST<int, Car> &bst)
 {
 	int size = getArrayLength();
@@ -423,6 +401,7 @@ void enterRating()
         cout << "From a rating of 1-10, give the car its deserved rating: ";
         cin >> stars;
         cout << "Finally, tell us your name: ";
+        cin.ignore();
         getline(cin, owner);
         
         Rating newRating(description, stars, owner);
@@ -430,19 +409,9 @@ void enterRating()
         cout << "Do you wish to leave another review for another vehicle? ";
         cin >> choice;
         
-    } while (choice != 'N' || choice != 'n');
+    } while (choice != 'N' && choice != 'n');
     
     cout << "Thank you for sharing your experience!\n";
-
-=======
-void enterRating()
-{
-    
->>>>>>> Stashed changes
-=======
-void enterRating()
-{
-    
->>>>>>> Stashed changes
 }
+
 
