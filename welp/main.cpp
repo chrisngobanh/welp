@@ -24,9 +24,12 @@ int getArrayLength();
 
 void enterRating();
 
+<<<<<<< Updated upstream
 Car* carList;
 string userName;
 
+=======
+>>>>>>> Stashed changes
 int main()
 {
 	cout << "Welcome to Welp! Its like Yelp, but for cars.\n" << endl;
@@ -199,7 +202,11 @@ void displayCarPage()
 	cout << "MPG City" << endl;
 	cout << "MPG Freeway" << endl;
 	cout << "Price" << endl;
+<<<<<<< Updated upstream
 	cout << "Rating" << endl; //TODO: How do ratings?
+=======
+	cout << "Rating" << endl;
+>>>>>>> Stashed changes
     
     
     /****** implementation of user review/ratings *******/
@@ -212,6 +219,7 @@ void displayCarPage()
     {
         enterRating();
     }
+<<<<<<< Updated upstream
 }
 
 void displayCarPage(int index)
@@ -234,6 +242,8 @@ void displayCarPage(int index)
 	{
 		enterRating();
 	}
+=======
+>>>>>>> Stashed changes
 }
 
 int getArrayLength()
@@ -319,6 +329,17 @@ Car* load()
 			{
 				offset++;
 			}
+<<<<<<< Updated upstream
+=======
+			type = line.substr(substr_start, offset);
+			substr_start = substr_start + offset + 1;
+			offset = 0;
+
+			while (line[substr_start + offset] != sdivider)
+			{
+				offset++;
+			}
+>>>>>>> Stashed changes
 			engine = line.substr(substr_start, offset);
 			substr_start = substr_start + offset + 1;
 			offset = 0;
@@ -346,6 +367,7 @@ Car* load()
 	}
 }
 
+<<<<<<< Updated upstream
 void loadMpgBST(Car* list, BST<int, Car> &bst)
 {
 	int size = getArrayLength();
@@ -366,37 +388,15 @@ void loadPriceBST(Car* list, BST<int, Car> &bst)
 
 void enterRating()
 {
-    string carMake;
-    string carModel;
-    string type;
-    string engine;
-    int city;
-    int freeway;
-    int price;
     string description;
     int stars;
-    
     string owner;
     
     char choice;
     
     do
     {
-        /**** Info about the Car ****/
-        cout << "Please, give us information about the vehicle.\n";
-        cout << "Car make: ";
-        cin >> carMake;
-        cout << "Car model: ";
-        cin >> carModel;
-        cout << "Engine Type: Gas, Electric or Hybrid? ";
-        cin >> engine;
-        cout << "MPG City: ";
-        cin >> city;
-        cout << "MPG Freeway: ";
-        cin >> freeway;
-        cout << "How much did you pay for the vehicle? ";
-        cin >> price;
-        
+        /////////////// Info about the Car ///////////////
         cout << "Tell us your personal thoughts about this vehicle.\n";
         getline(cin, description);
         cout << "From a rating of 1-10, give the car its deserved rating: ";
@@ -404,8 +404,7 @@ void enterRating()
         cout << "Finally, tell us your name: ";
         getline(cin, owner);
         
-        Car newCar(carMake, carModel, engine, city, freeway, price);
-        Rating newRating(description, stars, userName);
+        Rating newRating(description, stars, owner);
         
         cout << "Do you wish to leave another review for another vehicle? ";
         cin >> choice;
@@ -414,5 +413,10 @@ void enterRating()
     
     cout << "Thank you for sharing your experience!\n";
 
+=======
+void enterRating()
+{
+    
+>>>>>>> Stashed changes
 }
 
