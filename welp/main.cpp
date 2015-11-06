@@ -72,17 +72,6 @@ int main()
 		}
 	} while (choice != "2");
     
-    /****** implementation of user review/ratings *******/
-    char usrChoice;
-    
-    cout << "User, do you wish to enter your rating and/or review for the vehicle?\n";
-    cin >> usrChoice;
-    
-    if (usrChoice == 'Y' || usrChoice == 'y')
-    {
-        enterRating();
-    }
-    /****************************************************/
 
 
 	system("PAUSE");
@@ -332,15 +321,6 @@ Car* load()
 			offset = 0;
 
 			while (line[substr_start + offset] != divider)
-			{
-				offset++;
-			}
-
-			type = line.substr(substr_start, offset);
-			substr_start = substr_start + offset + 1;
-			offset = 0;
-
-			while (line[substr_start + offset] != sdivider)
 			{
 				offset++;
 			}
