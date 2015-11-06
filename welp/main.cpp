@@ -31,12 +31,17 @@ int main()
 {
 	cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
 
-	cout << "Created By:" << endl;
-	cout << "Chris Banh" << endl;
-	cout << "Carlos Quirarte" << endl;
-	cout << "Johnny Nguyen" << endl;
-	cout << "Kevin Ngo" << endl;
-	cout << "Han Tint" << endl;
+	cout << "                       ______________" << endl;
+	cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
+	cout << "  \\=====_..--'/'''    |    | Han Tint     ``-._     Carlos Quirarte" << endl;
+	cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
+	cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
+	cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
+	cout << "|.__  .'/ /     \\ \\`.      \\    Johnny Nguyen    | .'/ /     \\ \\`. ```-- `." << endl;
+	cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
+	cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
+	cout << "         `-.....-'                  Kevin Ngo         `-.....-'" << endl;
+		
 
 	cout << endl << endl << endl;
 
