@@ -21,6 +21,11 @@ public:
 	string getDescription();
 	int getStars();
 	string getOwner();
+    
+    // Setters
+    void changeDescription(string _description);
+    void changeStars(int _stars);
+    void changeOwner(string _owner);
 };
 
 #endif
