@@ -375,26 +375,29 @@ void enterRating()
     string description;
     int stars;
     string owner;
-    
     char choice;
     
-    do
+    /////////////// Review about the Car ///////////////
+    
+    while (choice != 'n' && choice != 'N')
     {
-        /////////////// Info about the Car ///////////////
-        cout << "Tell us your personal thoughts about this vehicle.\n";
+        cout << "Tell us your personal thoughts about this vehicle:\n";
         getline(cin, description);
-        cout << "From a rating of 1-10, give the car its deserved rating: ";
+        cout << "\nFrom a rating of 1-10, give the car its deserved rating:\n";
         cin >> stars;
-        cout << "Finally, tell us your name: ";
+        cout << "\nFinally, tell us your name:\n";
         cin.ignore();
         getline(cin, owner);
         
         Rating newRating(description, stars, owner);
         
-        cout << "Do you wish to leave another review for another vehicle? ";
+        cout << "\nDo you wish to leave another review for this vehicle?\n";
         cin >> choice;
+        cout << endl;
         
-    } while (choice != 'N' && choice != 'n');
+        if (choice != 'n' && choice != 'N')
+            cin.ignore();
+    }
     
     cout << "Thank you for sharing your experience!\n";
 }
