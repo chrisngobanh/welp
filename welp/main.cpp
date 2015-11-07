@@ -376,6 +376,7 @@ void enterRating()
     int stars;
     string owner;
     char choice;
+    Rating * newRating;
     
     /////////////// Review about the Car ///////////////
     
@@ -389,7 +390,7 @@ void enterRating()
         cin.ignore();
         getline(cin, owner);
         
-        Rating newRating(description, stars, owner);
+        newRating = new Rating(description, stars, owner);
         
         cout << "\nDo you wish to leave another review for this vehicle?\n";
         cin >> choice;
@@ -398,7 +399,6 @@ void enterRating()
         if (choice != 'n' && choice != 'N')
             cin.ignore();
     }
-    
     cout << "Thank you for sharing your experience!\n";
 }
 

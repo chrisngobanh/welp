@@ -1,46 +1,53 @@
 #include "Rating.h"
 
-Rating::Rating()
-{}
+Rating::Rating(): size(0), head(NULL), tail(NULL), iterator(NULL) {}
 
-// Getter Function Definitions //
 Rating::Rating(string _description, int _stars, string _owner)
 {
-	description = _description;
-	stars = _stars;
-	owner = _owner;
+    if (head == NULL)
+    {
+        head = new Data(_description, _stars, _owner);
+        tail = head;
+        iterator = head;
+    }
+    else
+    {
+        Noderef newData = new Data(_description, _stars, _owner);
+        tail->next = newData;
+        newData->previous = tail;
+        tail = newData;
+    }
 }
 
+// Getter Function Definitions
 string Rating::getDescription()
 {
-	return description;
+    return iterator->description;
 }
 
 int Rating::getStars()
 {
-	return stars;
+    return iterator->stars;
 }
 
 string Rating::getOwner()
 {
-	return owner;
+    return iterator->owner;
 }
+
 
 // Setter Function Definitions //
 void Rating::changeDescription(string _description)
 {
-    description = _description;
+    iterator->description = _description;
 }
+
 void Rating::changeStars(int _stars)
 {
-    stars = _stars;
+    iterator->stars = _stars;
 }
+
 void Rating::changeOwner(string _owner)
 {
-    owner = _owner;
+    iterator->owner = _owner;
 }
-
-
-
-
-

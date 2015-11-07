@@ -8,19 +8,35 @@ using namespace std;
 class Rating
 {
 private:
-	string description;
-	int stars;
-	string owner;
-
+    struct Data
+    {
+        string description;
+        int stars;
+        string owner;
+        
+        Data * next;
+        Data * previous;
+        
+        Data(): next(NULL), previous(NULL) {}
+        Data(string _description, int _stars, string _owner):  next(NULL), previous(NULL) {}
+    };
+    typedef struct Data * Noderef;
+    
+    Noderef head;
+    Noderef tail;
+    Noderef iterator;
+    int size;
+    
+    
 public:
-	// Constructor
-	Rating();
-	Rating(string _description, int _stars, string _owner);
-
-	// Getters
-	string getDescription();
-	int getStars();
-	string getOwner();
+    // Constructor
+    Rating();
+    Rating(string _description, int _stars, string _owner);
+    
+    // Getters
+    string getDescription();
+    int getStars();
+    string getOwner();
     
     // Setters
     void changeDescription(string _description);
