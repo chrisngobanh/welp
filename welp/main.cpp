@@ -16,6 +16,7 @@ void pickCar(int index);
 void displayCarPage();
 void displayCarPage(int index);
 void listAllCars();
+void filterCars(string);
 
 Car* load();
 void loadMpgBST(Car* list, BST<int, Car> &bst);
@@ -173,10 +174,14 @@ void chooseCars()
 	{
 		cout << "\n*************BROWSE MENU*************" << endl;
 		cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
-		cout << "1) Tesla" << endl;
-		cout << "2) BMW" << endl;
-		cout << "3) Honda" << endl;
-		cout << "4) Toyota" << endl;
+		cout << "1) Honda" << endl;
+		cout << "2) Toyota" << endl;
+		cout << "3) Subaru" << endl;
+		cout << "4) Ford" << endl;
+		cout << "5) Acura" << endl;
+		cout << "6) Chevrolet" << endl;
+		cout << "7) Nissan" << endl;
+		cout << "8) Tesla" << endl;
 		cout << "9) All" << endl;
 		cout << "0) Back" << endl;
 
@@ -195,59 +200,103 @@ void listCars(string carType)
 	string choice;
 	if (carType == "1")
 	{
-		cout << "Print a list of all the Teslas" << endl;
+		filterCars("Honda");
 
-		do{
-			cout << "1) Tesla Model X" << endl;
-			cout << "0) Back" << endl;
+		//do{
 
-			cin >> choice;
-			if (choice != "0")
-			{
-				displayCarPage();
-			}
-		} while (choice != "0");
+
+		//	cin >> choice;
+		//	if (choice != "0")
+		//	{
+		//		displayCarPage();
+		//	}
+		//} while (choice != "0");
 	}
 	else if (carType == "2")
 	{
-		do{
-			cout << "List of all the BMWs" << endl;
-			cout << "1) BMW M5" << endl;
-
-			cin >> choice;
-			if (choice != "0")
-			{
-				displayCarPage();
-			}
-		} while (choice != "0");
+		filterCars("Toyota");
 	}
 	else if (carType == "3")
 	{
-		do{
-			cout << "List of all the Hondas" << endl;
-			cout << "1) Honda Civic" << endl;
-			cin >> choice;
-			if (choice != "0")
-			{
-				displayCarPage();
-			}
-		} while (choice != "0");
+		filterCars("Subaru");
+
 	}
 	else if (carType == "4")
 	{
-		do{
-			cout << "List of all the Toyotas" << endl;
-			cout << "1) Toyota Camry" << endl;
-			cin >> choice;
-			if (choice != "0")
-			{
-				displayCarPage();
-			}
-		} while (choice != "0");
+		filterCars("Ford");
+
 	}
+	else if (carType == "5")
+	{
+		filterCars("Acura");
+
+	}
+	else if (carType == "6")
+	{
+		filterCars("Chevrolet");
+	}
+	else if (carType == "7")
+	{
+		filterCars("Nissan");
+
+	}
+	else if (carType == "8")
+	{
+		filterCars("Tesla");
+	}
+	//else if (carType == "9")
+	//{
+	//	filterCars("BMW");
+
+	//	do{
+	//		cout << "List of all the Toyotas" << endl;
+	//		cout << "1) Toyota Camry" << endl;
+	//		cin >> choice;
+	//		if (choice != "0")
+	//		{
+	//			displayCarPage();
+	//		}
+	//	} while (choice != "0");
+	//}
+	//else if (carType == "4")
+	//{
+	//	filterCars("Ford");
+
+	//	do{
+	//		cout << "List of all the Toyotas" << endl;
+	//		cout << "1) Toyota Camry" << endl;
+	//		cin >> choice;
+	//		if (choice != "0")
+	//		{
+	//			displayCarPage();
+	//		}
+	//	} while (choice != "0");
+	//}
 	else if (carType == "9")
 	{
 		listAllCars();
+	}
+
+	cin >> choice;
+	int intChoice = stoi(choice);
+
+	if (intChoice > 0 && intChoice < getArrayLength())
+	{
+		displayCarPage(intChoice);
+	}
+
+}
+void filterCars(string carMake)
+{
+	cout << "\n*************CAR LIST*************" << endl;
+	for (int i = 0; i < getArrayLength(); i++)
+	{
+		if (carList[i].getMake() == carMake)
+		{
+			cout << i << ". ";
+			cout << carList[i].getMake() << " ";
+			cout << carList[i].getModel() << endl;
+		}
 	}
 }
 
@@ -311,7 +360,7 @@ void displayCarPage(int index)
 	cout << "\n*************" << carList[index].getMake() << " " << carList[index].getModel() <<  "*************" << endl;
 	cout << "Engine Type: " << carList[index].getEngine() << endl;
 	cout << "MPG City: " << carList[index].getMPGCity() <<endl;
-	cout << "MPG Freeway" << carList[index].getMPGFreeway() << endl;
+	cout << "MPG Freeway: " << carList[index].getMPGFreeway() << endl;
 	cout << "Price: " << carList[index].getPrice() << endl;
 	cout << "Rating: " << endl;
 
