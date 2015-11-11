@@ -457,7 +457,7 @@ void loadPriceBST(Car* list, BST<int, Car> &bst)
 	}
 }
 
-/*  //May delete this function to be replaced by the Rating's Class member function.
+  //May delete this function to be replaced by the Rating's Class member function.
 void enterRating()
 {
     string description;
@@ -468,7 +468,7 @@ void enterRating()
     
     /////////////// Review about the Car ///////////////
     
-    while (choice != 'n' && choice != 'N')
+    do
     {
         cout << "Tell us your personal thoughts about this vehicle:\n";
         getline(cin, description);
@@ -486,8 +486,8 @@ void enterRating()
         
         if (choice != 'n' && choice != 'N')
             cin.ignore();
-    }
+	} while (choice != 'n' && choice != 'N');
     cout << "Thank you for sharing your experience!\n";
-}*/
+}
 
 
