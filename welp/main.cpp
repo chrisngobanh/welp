@@ -148,7 +148,7 @@ int main()
     ///////////END OF TESTING///////////////
 
 	system("PAUSE");
-	return 1;
+	return 0;
 }
 
 void splashMenu()
