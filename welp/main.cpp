@@ -11,6 +11,7 @@ using namespace std;
 
 // Prototype functions
 void splashMenu(); // This is the splash menu for our app
+void searchForCarsMenu();
 void chooseCars();
 void listCars(string);
 void pickCar(int index);
@@ -42,15 +43,20 @@ int main()
 	do{
 		system("CLS");
 		cout << "*************MAIN MENU*************" << endl;
-		cout << "1. Browse from our list of cars" << endl; 
-		cout << "2. Quit" << endl;
+		cout << "1. Browse our list of cars" << endl; 
+		cout << "2. Search for a car" << endl;
+		cout << "3. Quit" << endl;
 		cout << "Please select an option. ";
-		cin >> choice;
+		getline(cin, choice);
 		if (choice == "1")
 		{
 			chooseCars();
 		}
-	} while (choice != "2");
+		else if (choice == "2")
+		{
+			searchForCarsMenu();
+		}
+	} while (choice != "3");
     
     /////////////TESTING: Entering and revising reviews///////////////////
     Rating rate;
@@ -503,4 +509,20 @@ void enterRating()
     cout << "Thank you for sharing your experience!\n";
 }
 
+void searchForCarsMenu()
+{
+	system("CLS");
+	cout << "****Search for Cars*****" << endl;
+	cout << "1. Search by car name" << endl;
+	cout << "2. Search for cars by manufacturer" << endl;
+	cout << "3. Search cars in a price range" << endl;
+	cout << "4. Go Back.";
+	cout << endl;
+	
+	cout << "What is your option? ";
 
+	string choice;
+	getline(cin, choice);
+
+	system("PAUSE");
+}
