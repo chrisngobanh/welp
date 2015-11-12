@@ -54,10 +54,10 @@ int main()
 	
 	cout << "What is your username? ";
 	getline(cin, userName);
-	system("CLS");
 
 	string choice;
 	do{
+		system("CLS");
 		cout << "*************MAIN MENU*************" << endl;
 
 		// README: This isn't working yet, so let's not include it.
@@ -172,7 +172,8 @@ void chooseCars()
 	// TODO: Change this so the values arent fixed and it reads value from an array instead
 	do
 	{
-		cout << "\n*************BROWSE MENU*************" << endl;
+		system("CLS");
+		cout << "*************BROWSE MENU*************" << endl;
 		cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
 		cout << "1) Honda" << endl;
 		cout << "2) Toyota" << endl;
@@ -288,7 +289,8 @@ void listCars(string carType)
 }
 void filterCars(string carMake)
 {
-	cout << "\n*************CAR LIST*************" << endl;
+	system("CLS");
+	cout << "*************CAR LIST*************" << endl;
 	for (int i = 0; i < getArrayLength(); i++)
 	{
 		if (carList[i].getMake() == carMake)
@@ -306,7 +308,8 @@ void listAllCars()
 	string finalIndex = to_string(getArrayLength());
 
 	do{
-		cout << "\n*************ALL CARS MENU*************" << endl;
+		system("CLS");
+		cout << "*************ALL CARS MENU*************" << endl;
 		// Print out list of all cars
 		for (int i = 0; i < getArrayLength(); i++)
 		{
@@ -335,7 +338,8 @@ void pickCar(int index)
 
 void displayCarPage()
 {
-	cout << "\n*************TESLA MODEL X*************" << endl;
+	system("CLS");
+	cout << "*************TESLA MODEL X*************" << endl;
 	cout << "Engine Type" << endl;
 	cout << "MPG City" << endl;
 	cout << "MPG Freeway" << endl;
@@ -357,7 +361,8 @@ void displayCarPage()
 
 void displayCarPage(int index)
 {
-	cout << "\n*************" << carList[index].getMake() << " " << carList[index].getModel() <<  "*************" << endl;
+	system("CLS");
+	cout << "*************" << carList[index].getMake() << " " << carList[index].getModel() <<  "*************" << endl;
 	cout << "Engine Type: " << carList[index].getEngine() << endl;
 	cout << "MPG City: " << carList[index].getMPGCity() <<endl;
 	cout << "MPG Freeway: " << carList[index].getMPGFreeway() << endl;
