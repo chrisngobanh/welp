@@ -42,10 +42,6 @@ int main()
 	do{
 		system("CLS");
 		cout << "*************MAIN MENU*************" << endl;
-
-		// README: This isn't working yet, so let's not include it.
-		// cout << "Enter the name make and model (e.g. Honda Civic) to start searching." << endl;
-
 		cout << "1. Browse from our list of cars" << endl; 
 		cout << "2. Quit" << endl;
 		cout << "Please select an option. ";
@@ -205,16 +201,6 @@ void listCars(string carType)
 	if (carType == "1")
 	{
 		filterCars("Honda");
-
-		//do{
-
-
-		//	cin >> choice;
-		//	if (choice != "0")
-		//	{
-		//		displayCarPage();
-		//	}
-		//} while (choice != "0");
 	}
 	else if (carType == "2")
 	{
@@ -248,34 +234,6 @@ void listCars(string carType)
 	{
 		filterCars("Tesla");
 	}
-	//else if (carType == "9")
-	//{
-	//	filterCars("BMW");
-
-	//	do{
-	//		cout << "List of all the Toyotas" << endl;
-	//		cout << "1) Toyota Camry" << endl;
-	//		cin >> choice;
-	//		if (choice != "0")
-	//		{
-	//			displayCarPage();
-	//		}
-	//	} while (choice != "0");
-	//}
-	//else if (carType == "4")
-	//{
-	//	filterCars("Ford");
-
-	//	do{
-	//		cout << "List of all the Toyotas" << endl;
-	//		cout << "1) Toyota Camry" << endl;
-	//		cin >> choice;
-	//		if (choice != "0")
-	//		{
-	//			displayCarPage();
-	//		}
-	//	} while (choice != "0");
-	//}
 	else if (carType == "9")
 	{
 		listAllCars();
@@ -408,8 +366,6 @@ int getArrayLength()
 	}
 }
 
-//Make/Model/MPG City/MPG Freeway/Car Type/Engine Type/Price
-//Honda,Civic (Sedan),25,40,Sedan,Gasoline,25000
 Car* load()
 {
 	Car* list = new Car[getArrayLength()];
