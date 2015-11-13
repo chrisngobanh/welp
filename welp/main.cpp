@@ -10,6 +10,8 @@
 using namespace std;
 
 // Prototype functions
+void splashMenu(); // This is the splash menu for our app
+void searchForCarsMenu();
 void chooseCars();
 void listCars(string);
 void pickCar(int index);
@@ -32,48 +34,32 @@ string userName;
 
 int main()
 {
-	cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
-
-	cout << "                       ______________" << endl;
-	cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
-	cout << "  \\=====_..--'/'''    |    | Han Tint     ``-._     Carlos Quirarte" << endl;
-	cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
-	cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
-	cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
-	cout << "|.__  .'/ /     \\ \\`.      \\    Johnny Nguyen    | .'/ /     \\ \\`. ```-- `." << endl;
-	cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
-	cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
-	cout << "         `-.....-'                  Kevin Ngo         `-.....-'" << endl;
-
-
-	cout << endl << endl << endl;
-
+	splashMenu();
 	carList = load();
 	BST<int, Car> mpgBST = BST<int, Car>();
 	BST<int, Car> priceBST = BST<int, Car>();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
-
-	cout << "What is your username? ";
-	getline(cin, userName);
 	system("CLS");
 
 	string choice;
 	do{
+		system("CLS");
 		cout << "*************MAIN MENU*************" << endl;
-
-		// README: This isn't working yet, so let's not include it.
-		// cout << "Enter the name make and model (e.g. Honda Civic) to start searching." << endl;
-
-		cout << "1. Browse from our list of cars" << endl;
-		cout << "2. Quit" << endl;
+		cout << "1. Browse our list of cars" << endl;
+		cout << "2. Search for a car" << endl;
+		cout << "3. Quit" << endl;
 		cout << "Please select an option. ";
-		cin >> choice;
+		getline(cin, choice);
 		if (choice == "1")
 		{
 			chooseCars();
 		}
-	} while (choice != "2");
+		else if (choice == "2")
+		{
+			searchForCarsMenu();
+		}
+	} while (choice != "3");
 
 	/////////////TESTING: Entering and revising reviews///////////////////
 	Rating rate;
@@ -165,7 +151,27 @@ int main()
 	///////////END OF TESTING///////////////
 
 	system("PAUSE");
-	return 1;
+	return 0;
+}
+
+void splashMenu()
+{
+	cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
+
+	cout << "                       ______________" << endl;
+	cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
+	cout << "  \\=====_..--'/'''    |    | Han Tint     ``-._     Carlos Quirarte" << endl;
+	cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
+	cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
+	cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
+	cout << "|.__  .'/ /     \\ \\`.      \\    Johnny Nguyen    | .'/ /     \\ \\`. ```-- `." << endl;
+	cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
+	cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
+	cout << "         `-.....-'                  Kevin Ngo         `-.....-'" << endl;
+	cout << endl << endl << endl;
+
+	cout << "What is your username? ";
+	getline(cin, userName);
 }
 
 void chooseCars()
@@ -174,7 +180,8 @@ void chooseCars()
 	// TODO: Change this so the values arent fixed and it reads value from an array instead
 	do
 	{
-		cout << "\n*************BROWSE MENU*************" << endl;
+		system("CLS");
+		cout << "*************BROWSE MENU*************" << endl;
 		cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
 		cout << "1) Honda" << endl;
 		cout << "2) Toyota" << endl;
@@ -193,7 +200,7 @@ void chooseCars()
 		if (choice != "0" && isInteger(choice))
 		{
 			int intChoice = stoi(choice);
-			if (intChoice >=0 && intChoice <= 11)
+			if (intChoice >= 0 && intChoice <= 11)
 				listCars(choice);
 		}
 	} while (choice != "0");
@@ -208,55 +215,55 @@ void listCars(string carType)
 	int filteredSize;
 
 
-		if (carType == "1")
-		{
-			filteredSize = filterCars("Honda", filteredCars);
-		}
-		else if (carType == "2")
-		{
-			filteredSize = filterCars("Toyota", filteredCars);
-		}
-		else if (carType == "3")
-		{
-			filteredSize = filterCars("Subaru", filteredCars);
-		}
-		else if (carType == "4")
-		{
-			filteredSize = filterCars("Ford", filteredCars);
-		}
-		else if (carType == "5")
-		{
-			filteredSize = filterCars("Acura", filteredCars);
+	if (carType == "1")
+	{
+		filteredSize = filterCars("Honda", filteredCars);
+	}
+	else if (carType == "2")
+	{
+		filteredSize = filterCars("Toyota", filteredCars);
+	}
+	else if (carType == "3")
+	{
+		filteredSize = filterCars("Subaru", filteredCars);
+	}
+	else if (carType == "4")
+	{
+		filteredSize = filterCars("Ford", filteredCars);
+	}
+	else if (carType == "5")
+	{
+		filteredSize = filterCars("Acura", filteredCars);
 
-		}
-		else if (carType == "6")
-		{
-			filteredSize = filterCars("Chevrolet", filteredCars);
-		}
-		else if (carType == "7")
-		{
-			filteredSize = filterCars("Nissan", filteredCars);
-		}
-		else if (carType == "8")
-		{
-			filteredSize = filterCars("Tesla", filteredCars);
-		}
-		else if (carType == "9")
-		{
-			filteredSize = filterCars("BMW", filteredCars);
-		}
-		else if (carType == "10")
-		{
-			filteredSize = filterCars("Ford", filteredCars);
-		}
-		else if (carType == "11")
-		{
-			listAllCars();
-		}
+	}
+	else if (carType == "6")
+	{
+		filteredSize = filterCars("Chevrolet", filteredCars);
+	}
+	else if (carType == "7")
+	{
+		filteredSize = filterCars("Nissan", filteredCars);
+	}
+	else if (carType == "8")
+	{
+		filteredSize = filterCars("Tesla", filteredCars);
+	}
+	else if (carType == "9")
+	{
+		filteredSize = filterCars("BMW", filteredCars);
+	}
+	else if (carType == "10")
+	{
+		filteredSize = filterCars("Ford", filteredCars);
+	}
+	else if (carType == "11")
+	{
+		listAllCars();
+	}
 }
-
 int filterCars(string carMake, Car* filteredCars)
 {
+	system("CLS");
 	int count = 0;
 	string choice;
 	int intChoice;
@@ -267,7 +274,7 @@ int filterCars(string carMake, Car* filteredCars)
 		if (carList[i].getMake() == carMake)
 		{
 			count++;
-			filteredCars[count-1] = carList[i];
+			filteredCars[count - 1] = carList[i];
 			filteredCars[1];
 			cout << count << ". ";
 			cout << carList[i].getMake() << " ";
@@ -282,11 +289,8 @@ int filterCars(string carMake, Car* filteredCars)
 	if (isInteger(choice) && choice != "0")
 	{
 		intChoice = stoi(choice);
-
-		if (intChoice > 0 && intChoice <= count);
-		{
+		if (intChoice > 0 && intChoice <= count)
 			displayCarPage(filteredCars[intChoice - 1]);
-		}
 	}
 
 	return count;
@@ -298,7 +302,8 @@ void listAllCars()
 	string finalIndex = to_string(getArrayLength());
 
 	do{
-		cout << "\n*************ALL CARS MENU*************" << endl;
+		system("CLS");
+		cout << "*************ALL CARS MENU*************" << endl;
 		// Print out list of all cars
 		for (int i = 1; i < getArrayLength(); i++)
 		{
@@ -328,7 +333,8 @@ void pickCar(int index)
 
 void displayCarPage()
 {
-	cout << "\n*************TESLA MODEL X*************" << endl;
+	system("CLS");
+	cout << "*************TESLA MODEL X*************" << endl;
 	cout << "Engine Type" << endl;
 	cout << "MPG City" << endl;
 	cout << "MPG Freeway" << endl;
@@ -371,7 +377,8 @@ void displayCarPage(Car car)
 
 void displayCarPage(int index)
 {
-	cout << "\n*************" << carList[index].getMake() << " " << carList[index].getModel() << "*************" << endl;
+	system("CLS");
+	cout << "*************" << carList[index].getMake() << " " << carList[index].getModel() << "*************" << endl;
 	cout << "Engine Type: " << carList[index].getEngine() << endl;
 	cout << "MPG City: " << carList[index].getMPGCity() << endl;
 	cout << "MPG Freeway: " << carList[index].getMPGFreeway() << endl;
@@ -414,6 +421,7 @@ int getArrayLength()
 	}
 }
 
+
 inline bool isInteger(const std::string & s)
 {
 	if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
@@ -426,6 +434,7 @@ inline bool isInteger(const std::string & s)
 
 //Make/Model/MPG City/MPG Freeway/Car Type/Engine Type/Price
 //Honda,Civic (Sedan),25,40,Sedan,Gasoline,25000
+
 Car* load()
 {
 	Car* list = new Car[getArrayLength()];
@@ -563,4 +572,20 @@ void enterRating()
 	cout << "Thank you for sharing your experience!\n";
 }
 
+void searchForCarsMenu()
+{
+	system("CLS");
+	cout << "****Search for Cars*****" << endl;
+	cout << "1. Search by car name" << endl;
+	cout << "2. Search for cars by manufacturer" << endl;
+	cout << "3. Search cars in a price range" << endl;
+	cout << "4. Go Back.";
+	cout << endl;
 
+	cout << "What is your option? ";
+
+	string choice;
+	getline(cin, choice);
+
+	system("PAUSE");
+}
