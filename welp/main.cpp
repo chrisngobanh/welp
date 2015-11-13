@@ -17,7 +17,7 @@ void displayCarPage();
 void displayCarPage(Car car);
 void displayCarPage(int index);
 void listAllCars();
-int filterCars(string, Car**);
+int filterCars(string, Car*);
 inline bool isInteger(const std::string & s);
 
 Car* load();
@@ -196,7 +196,7 @@ void chooseCars()
 			if (intChoice >=0 && intChoice <= 11)
 				listCars(choice);
 		}
-	} while (choice != "0" || isInteger(choice));
+	} while (choice != "0");
 }
 
 
@@ -204,10 +204,9 @@ void listCars(string carType)
 {
 	int intChoice;
 	string choice;
-	Car* filteredCars[20];
+	Car filteredCars[30];
 	int filteredSize;
 
-	do{
 
 		if (carType == "1")
 		{
@@ -254,26 +253,14 @@ void listCars(string carType)
 		{
 			listAllCars();
 		}
-
-		cin >> choice;
-
-		if (isInteger(choice) && choice != "0")
-		{
-			intChoice = stoi(choice);
-
-			if (intChoice > 0 && intChoice <= filteredSize)
-			{
-				cout << filteredCars[intChoice];
-				//displayCarPage(filteredCars[intChoice]);
-			}
-		}
-	} while (choice != "0");
-
 }
 
-int filterCars(string carMake, Car* &filteredCars)
+int filterCars(string carMake, Car* filteredCars)
 {
 	int count = 0;
+	string choice;
+	int intChoice;
+
 	cout << "\n*************CAR LIST*************" << endl;
 	for (int i = 0; i < getArrayLength(); i++)
 	{
@@ -288,6 +275,20 @@ int filterCars(string carMake, Car* &filteredCars)
 		}
 	}
 
+	cout << "0. Back" << endl;
+
+	// Input Validation by checking if its an integer and within the range of teh array
+	cin >> choice;
+	if (isInteger(choice) && choice != "0")
+	{
+		intChoice = stoi(choice);
+
+		if (intChoice > 0 && intChoice <= count);
+		{
+			displayCarPage(filteredCars[intChoice - 1]);
+		}
+	}
+
 	return count;
 }
 
@@ -299,24 +300,25 @@ void listAllCars()
 	do{
 		cout << "\n*************ALL CARS MENU*************" << endl;
 		// Print out list of all cars
-		for (int i = 0; i < getArrayLength(); i++)
+		for (int i = 1; i < getArrayLength(); i++)
 		{
 			cout << i << ". ";
-			cout << carList[i].getMake() << " ";
-			cout << carList[i].getModel() << endl;
+			cout << carList[i - 1].getMake() << " ";
+			cout << carList[i - 1].getModel() << endl;
 		}
-		cout << getArrayLength() << ". Quit" << endl;
+		cout << "0. Quit" << endl;
 
-		// Input validation
+		// Input validation by checking for integer and range
 		cin >> choice;
-		int intChoice = stoi(choice);
-
-		if (intChoice > 0 && intChoice < getArrayLength())
+		if (isInteger(choice))
 		{
-			displayCarPage(intChoice);
+			int intChoice = stoi(choice);
+			if (intChoice > 0 && intChoice < getArrayLength())
+			{
+				displayCarPage(intChoice - 1);
+			}
 		}
-
-	} while (choice != finalIndex);
+	} while (choice != "0");
 }
 
 void pickCar(int index)
@@ -354,6 +356,17 @@ void displayCarPage(Car car)
 	cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
 	cout << "Price: " << car.getPrice() << endl;
 	cout << "Rating: " << endl;
+
+	/****** implementation of user review/ratings *******/
+	char choice;
+
+	cout << "User, do you wish to enter your rating and/or review for the vehicle? Y/N \n";
+	cin >> choice;
+
+	if (choice == 'Y' || choice == 'y')
+	{
+		enterRating();
+	}
 }
 
 void displayCarPage(int index)
