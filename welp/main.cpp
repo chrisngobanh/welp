@@ -14,9 +14,11 @@ void chooseCars();
 void listCars(string);
 void pickCar(int index);
 void displayCarPage();
+void displayCarPage(Car car);
 void displayCarPage(int index);
 void listAllCars();
-void filterCars(string);
+int filterCars(string, Car**);
+inline bool isInteger(const std::string & s);
 
 Car* load();
 void loadMpgBST(Car* list, BST<int, Car> &bst);
@@ -42,7 +44,7 @@ int main()
 	cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
 	cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
 	cout << "         `-.....-'                  Kevin Ngo         `-.....-'" << endl;
-		
+
 
 	cout << endl << endl << endl;
 
@@ -51,7 +53,7 @@ int main()
 	BST<int, Car> priceBST = BST<int, Car>();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
-	
+
 	cout << "What is your username? ";
 	getline(cin, userName);
 	system("CLS");
@@ -63,7 +65,7 @@ int main()
 		// README: This isn't working yet, so let's not include it.
 		// cout << "Enter the name make and model (e.g. Honda Civic) to start searching." << endl;
 
-		cout << "1. Browse from our list of cars" << endl; 
+		cout << "1. Browse from our list of cars" << endl;
 		cout << "2. Quit" << endl;
 		cout << "Please select an option. ";
 		cin >> choice;
@@ -72,95 +74,95 @@ int main()
 			chooseCars();
 		}
 	} while (choice != "2");
-    
-    /////////////TESTING: Entering and revising reviews///////////////////
-    Rating rate;
-    
-    string owner, description, newDescription, searchOwner;
-    char aChoice, sChoice, dChoice;
-    int stars;
-    
-    cout << "Would you like to leave a review? (Y/N) \n";
-    cin >> aChoice;
-    if (aChoice == 'Y')
-    {
-        cin.ignore();
-        cout << "\nTell us your personal thoughts about this vehicle:\n";
-        getline(cin, description);
-        cout << "\nFrom a rating of 1-10, give the car its deserved rating:\n";
-        cin >> stars;
-        cout << "\nFinally, tell us your name:\n";
-        cin.ignore();
-        getline(cin, owner);
-        
-        rate.newReview(description, stars, owner);
-    }
-    
-    cout << "\nSize of list: " << rate.get_size() << endl;
-    cout << "\nWould you like to search for a review based on the owner's name? (Y/N) \n";
-    cin >> aChoice;
-    if (aChoice == 'Y')
-    {
-        cout << "\nWhat is the owner's name for the review that you would like to search for?\n";
-        cin.ignore();
-        getline(cin, searchOwner);
-        if (rate.searchByOwner(searchOwner))
-        {
-            cout << endl;
-            rate.print();
-            
-            //Were not going to allow anybody to just change an existing review,
-            //this is just for testing.
-            cout << "***** Would you like to update the information? (Y/N) ***** \n";
-            cin >> aChoice;
-            if (aChoice == 'Y')
-            {
-                cout << "*** Update the number of stars? (Y/N) \n";
-                cin >> sChoice;
-                if (sChoice == 'Y')
-                {
-                    cout << "What level of stars would you like to give? \n";
-                    cin >> stars;
-                    rate.changeStars(stars);
-                }
-                cout << "*** Update the review? (Y/N) \n";
-                cin >> dChoice;
-                if (dChoice == 'Y')
-                {
-                    cout << "Please, tell us your thoughts on the vehicle: \n";
-                    cin.ignore();
-                    getline(cin, newDescription);
-                    rate.changeDescription(newDescription);
-                }
-            }
-        }
-        else
-        {
-            cout << "The name on the review was not found!\n";
-        }
-    }
-    cout << endl;
-    
-    rate.printAll();
-    
-    //Testing more function
-    if (rate.off_end())
-    {
-        cout << "Iterator was not pointing to anything, but now testing begin() \n";
-        rate.begin();
-    }
-    else
-        cout << "Iterator pointing to an element\n";
-    
-    cout << "Testing currentOwner(): " << rate.currentOwner() << endl;
-    
-    cout << "Testing remove(): \n";
-    rate.remove();
-    
-    rate.printAll();
-    
-    cout << endl;
-    ///////////END OF TESTING///////////////
+
+	/////////////TESTING: Entering and revising reviews///////////////////
+	Rating rate;
+
+	string owner, description, newDescription, searchOwner;
+	char aChoice, sChoice, dChoice;
+	int stars;
+
+	cout << "Would you like to leave a review? (Y/N) \n";
+	cin >> aChoice;
+	if (aChoice == 'Y')
+	{
+		cin.ignore();
+		cout << "\nTell us your personal thoughts about this vehicle:\n";
+		getline(cin, description);
+		cout << "\nFrom a rating of 1-10, give the car its deserved rating:\n";
+		cin >> stars;
+		cout << "\nFinally, tell us your name:\n";
+		cin.ignore();
+		getline(cin, owner);
+
+		rate.newReview(description, stars, owner);
+	}
+
+	cout << "\nSize of list: " << rate.get_size() << endl;
+	cout << "\nWould you like to search for a review based on the owner's name? (Y/N) \n";
+	cin >> aChoice;
+	if (aChoice == 'Y')
+	{
+		cout << "\nWhat is the owner's name for the review that you would like to search for?\n";
+		cin.ignore();
+		getline(cin, searchOwner);
+		if (rate.searchByOwner(searchOwner))
+		{
+			cout << endl;
+			rate.print();
+
+			//Were not going to allow anybody to just change an existing review,
+			//this is just for testing.
+			cout << "***** Would you like to update the information? (Y/N) ***** \n";
+			cin >> aChoice;
+			if (aChoice == 'Y')
+			{
+				cout << "*** Update the number of stars? (Y/N) \n";
+				cin >> sChoice;
+				if (sChoice == 'Y')
+				{
+					cout << "What level of stars would you like to give? \n";
+					cin >> stars;
+					rate.changeStars(stars);
+				}
+				cout << "*** Update the review? (Y/N) \n";
+				cin >> dChoice;
+				if (dChoice == 'Y')
+				{
+					cout << "Please, tell us your thoughts on the vehicle: \n";
+					cin.ignore();
+					getline(cin, newDescription);
+					rate.changeDescription(newDescription);
+				}
+			}
+		}
+		else
+		{
+			cout << "The name on the review was not found!\n";
+		}
+	}
+	cout << endl;
+
+	rate.printAll();
+
+	//Testing more function
+	if (rate.off_end())
+	{
+		cout << "Iterator was not pointing to anything, but now testing begin() \n";
+		rate.begin();
+	}
+	else
+		cout << "Iterator pointing to an element\n";
+
+	cout << "Testing currentOwner(): " << rate.currentOwner() << endl;
+
+	cout << "Testing remove(): \n";
+	rate.remove();
+
+	rate.printAll();
+
+	cout << endl;
+	///////////END OF TESTING///////////////
 
 	system("PAUSE");
 	return 1;
@@ -182,122 +184,111 @@ void chooseCars()
 		cout << "6) Chevrolet" << endl;
 		cout << "7) Nissan" << endl;
 		cout << "8) Tesla" << endl;
-		cout << "9) All" << endl;
+		cout << "9) BMW" << endl;
+		cout << "10) Ford" << endl;
+		cout << "11) All" << endl;
 		cout << "0) Back" << endl;
 
 		cin >> choice;
-		if (choice != "0")
+		if (choice != "0" && isInteger(choice))
 		{
-			listCars(choice);
+			int intChoice = stoi(choice);
+			if (intChoice >=0 && intChoice <= 11)
+				listCars(choice);
 		}
-	} while (choice != "0");
+	} while (choice != "0" || isInteger(choice));
 }
+
 
 void listCars(string carType)
 {
-	//TODO: Use arrays to create list instead
-
+	int intChoice;
 	string choice;
-	if (carType == "1")
-	{
-		filterCars("Honda");
+	Car* filteredCars[20];
+	int filteredSize;
 
-		//do{
+	do{
 
+		if (carType == "1")
+		{
+			filteredSize = filterCars("Honda", filteredCars);
+		}
+		else if (carType == "2")
+		{
+			filteredSize = filterCars("Toyota", filteredCars);
+		}
+		else if (carType == "3")
+		{
+			filteredSize = filterCars("Subaru", filteredCars);
+		}
+		else if (carType == "4")
+		{
+			filteredSize = filterCars("Ford", filteredCars);
+		}
+		else if (carType == "5")
+		{
+			filteredSize = filterCars("Acura", filteredCars);
 
-		//	cin >> choice;
-		//	if (choice != "0")
-		//	{
-		//		displayCarPage();
-		//	}
-		//} while (choice != "0");
-	}
-	else if (carType == "2")
-	{
-		filterCars("Toyota");
-	}
-	else if (carType == "3")
-	{
-		filterCars("Subaru");
+		}
+		else if (carType == "6")
+		{
+			filteredSize = filterCars("Chevrolet", filteredCars);
+		}
+		else if (carType == "7")
+		{
+			filteredSize = filterCars("Nissan", filteredCars);
+		}
+		else if (carType == "8")
+		{
+			filteredSize = filterCars("Tesla", filteredCars);
+		}
+		else if (carType == "9")
+		{
+			filteredSize = filterCars("BMW", filteredCars);
+		}
+		else if (carType == "10")
+		{
+			filteredSize = filterCars("Ford", filteredCars);
+		}
+		else if (carType == "11")
+		{
+			listAllCars();
+		}
 
-	}
-	else if (carType == "4")
-	{
-		filterCars("Ford");
+		cin >> choice;
 
-	}
-	else if (carType == "5")
-	{
-		filterCars("Acura");
+		if (isInteger(choice) && choice != "0")
+		{
+			intChoice = stoi(choice);
 
-	}
-	else if (carType == "6")
-	{
-		filterCars("Chevrolet");
-	}
-	else if (carType == "7")
-	{
-		filterCars("Nissan");
-
-	}
-	else if (carType == "8")
-	{
-		filterCars("Tesla");
-	}
-	//else if (carType == "9")
-	//{
-	//	filterCars("BMW");
-
-	//	do{
-	//		cout << "List of all the Toyotas" << endl;
-	//		cout << "1) Toyota Camry" << endl;
-	//		cin >> choice;
-	//		if (choice != "0")
-	//		{
-	//			displayCarPage();
-	//		}
-	//	} while (choice != "0");
-	//}
-	//else if (carType == "4")
-	//{
-	//	filterCars("Ford");
-
-	//	do{
-	//		cout << "List of all the Toyotas" << endl;
-	//		cout << "1) Toyota Camry" << endl;
-	//		cin >> choice;
-	//		if (choice != "0")
-	//		{
-	//			displayCarPage();
-	//		}
-	//	} while (choice != "0");
-	//}
-	else if (carType == "9")
-	{
-		listAllCars();
-	}
-
-	cin >> choice;
-	int intChoice = stoi(choice);
-
-	if (intChoice > 0 && intChoice < getArrayLength())
-	{
-		displayCarPage(intChoice);
-	}
+			if (intChoice > 0 && intChoice <= filteredSize)
+			{
+				cout << filteredCars[intChoice];
+				//displayCarPage(filteredCars[intChoice]);
+			}
+		}
+	} while (choice != "0");
 
 }
-void filterCars(string carMake)
+
+int filterCars(string carMake, Car* &filteredCars)
 {
+	int count = 0;
 	cout << "\n*************CAR LIST*************" << endl;
 	for (int i = 0; i < getArrayLength(); i++)
 	{
 		if (carList[i].getMake() == carMake)
 		{
-			cout << i << ". ";
+			count++;
+			filteredCars[count-1] = carList[i];
+			filteredCars[1];
+			cout << count << ". ";
 			cout << carList[i].getMake() << " ";
 			cout << carList[i].getModel() << endl;
 		}
 	}
+
+	return count;
 }
 
 void listAllCars()
@@ -342,24 +333,34 @@ void displayCarPage()
 	cout << "Price" << endl;
 	cout << "Rating" << endl; //TODO: How do ratings?
 	cout << "Rating" << endl;
-    
-    /****** implementation of user review/ratings *******/
-    char choice;
-    
-    cout << "User, do you wish to enter your rating and/or review for the vehicle?\n";
-    cin >> choice;
-    
-    if (choice == 'Y' || choice == 'y')
-    {
-        enterRating();
-    }
+
+	/****** implementation of user review/ratings *******/
+	char choice;
+
+	cout << "User, do you wish to enter your rating and/or review for the vehicle?\n";
+	cin >> choice;
+
+	if (choice == 'Y' || choice == 'y')
+	{
+		enterRating();
+	}
+}
+
+void displayCarPage(Car car)
+{
+	cout << "\n*************" << car.getMake() << " " << car.getModel() << "*************" << endl;
+	cout << "Engine Type: " << car.getEngine() << endl;
+	cout << "MPG City: " << car.getMPGCity() << endl;
+	cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
+	cout << "Price: " << car.getPrice() << endl;
+	cout << "Rating: " << endl;
 }
 
 void displayCarPage(int index)
 {
-	cout << "\n*************" << carList[index].getMake() << " " << carList[index].getModel() <<  "*************" << endl;
+	cout << "\n*************" << carList[index].getMake() << " " << carList[index].getModel() << "*************" << endl;
 	cout << "Engine Type: " << carList[index].getEngine() << endl;
-	cout << "MPG City: " << carList[index].getMPGCity() <<endl;
+	cout << "MPG City: " << carList[index].getMPGCity() << endl;
 	cout << "MPG Freeway: " << carList[index].getMPGFreeway() << endl;
 	cout << "Price: " << carList[index].getPrice() << endl;
 	cout << "Rating: " << endl;
@@ -398,6 +399,16 @@ int getArrayLength()
 		cout << "Error: Unable to open file.\n\n";
 		return -1;
 	}
+}
+
+inline bool isInteger(const std::string & s)
+{
+	if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
+
+	char * p;
+	strtol(s.c_str(), &p, 10);
+
+	return (*p == 0);
 }
 
 //Make/Model/MPG City/MPG Freeway/Car Type/Engine Type/Price
@@ -506,37 +517,37 @@ void loadPriceBST(Car* list, BST<int, Car> &bst)
 	}
 }
 
-  //May delete this function to be replaced by the Rating's Class member function.
+//May delete this function to be replaced by the Rating's Class member function.
 void enterRating()
 {
-    string description;
-    int stars;
-    string owner;
-    char choice;
-    Rating * newRating;
-    
-    /////////////// Review about the Car ///////////////
-    
-    do
-    {
-        cout << "Tell us your personal thoughts about this vehicle:\n";
-        getline(cin, description);
-        cout << "\nFrom a rating of 1-10, give the car its deserved rating:\n";
-        cin >> stars;
-        cout << "\nFinally, tell us your name:\n";
-        cin.ignore();
-        getline(cin, owner);
-        
-        newRating = new Rating(description, stars, owner);
-        
-        cout << "\nDo you wish to leave another review for this vehicle?\n";
-        cin >> choice;
-        cout << endl;
-        
-        if (choice != 'n' && choice != 'N')
-            cin.ignore();
+	string description;
+	int stars;
+	string owner;
+	char choice;
+	Rating * newRating;
+
+	/////////////// Review about the Car ///////////////
+
+	do
+	{
+		cout << "Tell us your personal thoughts about this vehicle:\n";
+		getline(cin, description);
+		cout << "\nFrom a rating of 1-10, give the car its deserved rating:\n";
+		cin >> stars;
+		cout << "\nFinally, tell us your name:\n";
+		cin.ignore();
+		getline(cin, owner);
+
+		newRating = new Rating(description, stars, owner);
+
+		cout << "\nDo you wish to leave another review for this vehicle?\n";
+		cin >> choice;
+		cout << endl;
+
+		if (choice != 'n' && choice != 'N')
+			cin.ignore();
 	} while (choice != 'n' && choice != 'N');
-    cout << "Thank you for sharing your experience!\n";
+	cout << "Thank you for sharing your experience!\n";
 }
 
 
