@@ -34,11 +34,12 @@ private:
     void inOrderPrint(Nodeptr root);
     void preOrderPrint(Nodeptr root);
     void postOrderPrint(Nodeptr root);
+    void inOrderPrint(Nodeptr root, bstvalue min, bstvalue max);
+    void preOrderPrint(Nodeptr root, bstvalue min, bstvalue max);
+    void postOrderPrint(Nodeptr root, bstvalue min, bstvalue max);
     void deleteTree(Nodeptr root);
     bool containsValue(Nodeptr root, bstvalue value, bstobj obj);
     bstobj findMin(Nodeptr root);
-
-
 
 public:
     BST();
@@ -50,6 +51,9 @@ public:
     void printInOrder();
     void printPreOrder();
     void printPostOrder();
+    void printInOrder(bstvalue min, bstvalue max);
+    void printPreOrder(bstvalue min, bstvalue max);
+    void printPostOrder(bstvalue min, bstvalue max);
     bool contains(bstvalue value);
     bstobj minimum();
 
@@ -113,6 +117,41 @@ void BST<bstvalue, bstobj>::postOrderPrint(Nodeptr root)
         postOrderPrint(root->left);
         postOrderPrint(root->right);
         cout << root->value << " ";
+    }
+}
+
+//--------------------------------------
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::inOrderPrint(Nodeptr root, bstvalue min, bstvalue max)
+{
+    if (root != NULL)
+    {
+        inOrderPrint(root->left, min, max);
+        if (root->value >= min && root->value <= max) cout << root->value << " ";
+        inOrderPrint(root->right, min, max);
+    }
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::preOrderPrint(Nodeptr root, bstvalue min, bstvalue max)
+{
+    if (root != NULL)
+    {
+        if (root->value >= min && root->value <= max) cout << root->value << " ";
+        preOrderPrint(root->left, min, max);
+        preOrderPrint(root->right, min, max);
+    }
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::postOrderPrint(Nodeptr root, bstvalue min, bstvalue max)
+{
+    if (root != NULL)
+    {
+        postOrderPrint(root->left, min, max);
+        postOrderPrint(root->right, min, max);
+        if (root->value >= min && root->value <= max) cout << root->value << " ";
     }
 }
 
@@ -219,6 +258,30 @@ void BST<bstvalue, bstobj>::printPostOrder()
     if (isEmpty()) cout << "Error: The tree is empty.\n\n";
     else postOrderPrint(root);
 }
+
+//------------------------------------------------
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::printInOrder(bstvalue min, bstvalue max)
+{
+    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    else inOrderPrint(root, min, max);
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::printPreOrder(bstvalue min, bstvalue max)
+{
+    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    else preOrderPrint(root, min, max);
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::printPostOrder(bstvalue min, bstvalue max)
+{
+    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    else postOrderPrint(root, min, max);
+}
+
 
 template <class bstvalue, class bstobj>
 bool BST<bstvalue, bstobj>::contains(bstvalue value)

@@ -3,9 +3,12 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "Car.h"
 #include "Rating.h"
 #include "BST.h"
+#include "HashTable.h"
+#include "Review.h"
 
 using namespace std;
 
@@ -23,9 +26,10 @@ int filterCars(string, Car*);
 inline bool isInteger(const std::string & s);
 
 Car* load();
+int getArrayLength();
 void loadMpgBST(Car* list, BST<int, Car> &bst);
 void loadPriceBST(Car* list, BST<int, Car> &bst);
-int getArrayLength();
+void loadReviewTable(HashTable<Review> &table);
 
 void enterRating();
 
@@ -40,6 +44,9 @@ int main()
 	BST<int, Car> priceBST = BST<int, Car>();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
+	HashTable<Review> reviewTable = HashTable<Review>();
+	loadReviewTable(reviewTable);
+
 	system("CLS");
 
 	string choice;
@@ -199,7 +206,7 @@ void chooseCars()
 		cin >> choice;
 		if (choice != "0" && isInteger(choice))
 		{
-			int intChoice = stoi(choice);
+			int intChoice = atoi(choice.c_str());
 			if (intChoice >= 0 && intChoice <= 11)
 				listCars(choice);
 		}
@@ -288,7 +295,7 @@ int filterCars(string carMake, Car* filteredCars)
 	cin >> choice;
 	if (isInteger(choice) && choice != "0")
 	{
-		intChoice = stoi(choice);
+		intChoice = atoi(choice.c_str());
 		if (intChoice > 0 && intChoice <= count)
 			displayCarPage(filteredCars[intChoice - 1]);
 	}
@@ -299,7 +306,8 @@ int filterCars(string carMake, Car* filteredCars)
 void listAllCars()
 {
 	string choice;
-	string finalIndex = to_string(getArrayLength());
+//	string finalIndex = getArrayLength();
+
 
 	do{
 		system("CLS");
@@ -317,7 +325,7 @@ void listAllCars()
 		cin >> choice;
 		if (isInteger(choice))
 		{
-			int intChoice = stoi(choice);
+			int intChoice = atoi(choice.c_str());
 			if (intChoice > 0 && intChoice < getArrayLength())
 			{
 				displayCarPage(intChoice - 1);
@@ -416,7 +424,7 @@ int getArrayLength()
 	}
 	else
 	{
-		cout << "Error: Unable to open file.\n\n";
+		cout << "Error 1: Unable to open file \"Kars Data.txt\"" << endl << endl;
 		return -1;
 	}
 }
@@ -455,6 +463,7 @@ Car* load()
 		in.seekg(0, ios::beg);
 		while (getline(in, line))
 		{
+		    //Get the make
 			substr_start = 0;
 			offset = 0;
 			while (line[substr_start + offset] != divider)
@@ -465,6 +474,7 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
+            //Get the model
 			while (line[substr_start + offset] != divider)
 			{
 				offset++;
@@ -473,6 +483,7 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
+            //Get the mpgcity
 			while (line[substr_start + offset] != divider)
 			{
 				offset++;
@@ -481,6 +492,7 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
+            //Get the mpgfree
 			while (line[substr_start + offset] != divider)
 			{
 				offset++;
@@ -489,15 +501,16 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
+            //Get the engine
 			while (line[substr_start + offset] != divider)
 			{
 				offset++;
 			}
-
 			engine = line.substr(substr_start, offset);
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
+            //Get the price
 			while (line[substr_start + offset] != NULL)
 			{
 				offset++;
@@ -506,7 +519,7 @@ Car* load()
 			substr_start = substr_start + offset + 1;
 			offset = 0;
 
-			//cout << make << model <<engine << " city: " << mpgcity << " Free: " <<  mpgfree << " price: " << msrp << endl;
+			//make << model << engine << mpgcity <<  mpgfree << msrp
 			list[index] = Car(make, model, engine, mpgcity, mpgfree, msrp);
 			index++;
 			// << "Added successfully" << endl;
@@ -516,7 +529,85 @@ Car* load()
 	}
 	else
 	{
-		cout << "Error: Unable to open the file.\n\n";
+		cout << "Error 2: Unable to open the file \"Kars Data.txt\"." << endl << endl;
+		exit(-1);
+	}
+}
+
+void loadReviewTable(HashTable<Review> &table)
+{
+    string line;
+
+	int substr_start, offset;
+
+	string make, model, owner, description;
+	int stars;
+
+	char divider = '/';
+
+	ifstream in("reviews.txt");
+	if (in.is_open())
+	{
+		in.clear();
+		in.seekg(0, ios::beg);
+		while (getline(in, line))
+		{
+		    //Get the make
+			substr_start = 0;
+			offset = 0;
+			while (line[substr_start + offset] != divider)
+			{
+				offset++;
+			}
+			make = line.substr(substr_start, offset);
+			substr_start = substr_start + offset + 1;
+			offset = 0;
+
+            //Get the model
+			while (line[substr_start + offset] != divider)
+			{
+				offset++;
+			}
+			model = line.substr(substr_start, offset);
+			substr_start = substr_start + offset + 1;
+			offset = 0;
+
+            //Get the owner
+			while (line[substr_start + offset] != divider)
+			{
+				offset++;
+			}
+			owner = line.substr(substr_start, offset);
+			substr_start = substr_start + offset + 1;
+			offset = 0;
+
+            //Get the stars
+			while (line[substr_start + offset] != divider)
+			{
+				offset++;
+			}
+			stars = atoi(line.substr(substr_start, offset).c_str());
+			substr_start = substr_start + offset + 1;
+			offset = 0;
+
+            //Get the description
+			while (line[substr_start + offset] != NULL)
+			{
+				offset++;
+			}
+			description = line.substr(substr_start, offset);
+			substr_start = substr_start + offset + 1;
+			offset = 0;
+
+			//owner >> description >> stars >> make >> model
+            Review review = Review(owner, description, stars, make, model);
+            table.addItem(make, model, review);
+		}
+		in.close();
+	}
+	else
+	{
+		cout << "Error 3: Unable to open the file \"reviews.txt\"." << endl << endl;
 		exit(-1);
 	}
 }

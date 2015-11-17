@@ -30,6 +30,7 @@ private:
 	NodeRef tail;
 	NodeRef iterator; //points to one node at a time
 	int size;
+	string identifier; //so that the hash table knows when to stop looking
 
 	void reverse(NodeRef node);
 
@@ -74,6 +75,12 @@ public:
 
 	/**Manipulation Procedures*/
 
+	void setIdentifier(string _identifier);
+	//changes the identifier
+
+	double getAverage();
+	//gets the average of the list by casting listobj to an int
+
 	void begin();
 	//Moves the iterator to point to the first element in the list
 	//If the list is empty, the iterator remains NULL
@@ -111,6 +118,10 @@ public:
 	//Moves the iterator forward by one element in the list
 	//Has no effect if the iterator is offend or the list is empty
 
+	bool scrollTo(listitem _data);
+	//Moves the iterator to a node with matching data
+	//Returns true if such a node exists
+
 	/**Additional List Operations*/
 
 	void print();
@@ -122,20 +133,27 @@ public:
 	//Calls the reverse helper function to
 	//Pre: !isEmpty()
 
+	operator const string()
+	{
+	    return identifier;
+	};
+	//string cast for use in the hash table to know when it gets the right List
+
 
 };
 
-template class List<int>;
-template class List<double>;
-template class List<char>;
-template class List<string>;
-#endif
+//template class List<int>;
+//template class List<double>;
+//template class List<char>;
+//template class List<string>;
+//#endif
 
 template <class listitem>
 List<listitem>::List()
 {
 	size = 0;
 	head = tail = iterator = NULL;
+	identifier = "";
 
 	if (size != 0)
 	{
@@ -345,6 +363,10 @@ void List<listitem>::insert(listitem data)
 	{
 		cout << "Iterator is currently off the end, can't insert the data." << endl;
 	}
+    else if (iterator == tail)
+    {
+        push_back(data);
+    }
 	else
 	{
 		NodeRef newNode = new Node(data);
@@ -419,9 +441,7 @@ void List<listitem>::pop_front()
 	{
 		delete head;
 		head = tail = iterator = NULL;
-
 		size = 0;
-
 	}
 	else
 	{
@@ -452,13 +472,10 @@ void List<listitem>::pop_back()
 	{
 		delete tail;
 		tail = head = iterator = NULL;
-
 		size = 0;
-
 	}
 	else
 	{
-
 		if (iterator == tail)
 		{
 			iterator = tail->previous; // If iterator is currently at the tail, move it to tail->next (the new tail)
@@ -498,6 +515,7 @@ void List<listitem>::remove()
 		else
 		{
 			iterator->previous->next = iterator->next;
+			iterator->next->previous = iterator->previous;
 			delete iterator;
 			iterator = NULL;
 		}
@@ -514,17 +532,25 @@ void List<listitem>::scroll()
 	}
 }
 
+template <class listitem>
+bool List<listitem>::scrollTo(listitem _data)
+{
+    iterator = head;
+    while (iterator != NULL && iterator->data != _data)
+    {
+        iterator = iterator->next;
+    }
+    return (iterator != NULL);
+}
 
 template <class listitem>
 void List<listitem>::print()
 {
-
 	NodeRef temp = head;
 	while (temp != NULL) {
-		cout << temp->data << " ";
+		cout << temp->data << endl << endl;
 		temp = temp->next;
 	}
-	cout << endl;
 }
 
 template <class listitem>
@@ -541,3 +567,30 @@ void List<listitem>::reverse(NodeRef node)
 		reverse(node->previous);
 	}
 }
+
+template <class listitem>
+void List<listitem>::setIdentifier(string _identifier)
+{
+	identifier = _identifier;
+}
+
+template <class listitem>
+double List<listitem>::getAverage()
+{
+    double sum = 0;
+    iterator = head;
+    while (iterator != NULL)
+    {
+        sum = sum + (int)(iterator->data);
+        iterator = iterator->next;
+    }
+    return sum/size;
+}
+
+//template <class listitem>
+//operator const List<listitem>::string()
+//{
+//	return identifier;
+//}
+
+#endif

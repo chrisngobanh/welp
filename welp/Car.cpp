@@ -5,9 +5,9 @@ Car::Car()
 	make = "";
 	model = "";
 	engine = "";
-	MPGCity = NULL;
-	MPGFreeway = NULL;
-	price = NULL;
+	MPGCity = 0;
+	MPGFreeway = 0;
+	price = 0;
 }
 
 Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFreeway, int _price)
