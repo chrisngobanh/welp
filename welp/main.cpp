@@ -22,12 +22,17 @@ void displayCarPage();
 void displayCarPage(Car car);
 void displayCarPage(int index);
 void listAllCars();
+void sortByCategoryMenu();
+void sortByMpgMenu();
+void sortByMpgFreewayMenu();
+void sortByPriceMenu();
 int filterCars(string, Car*);
 inline bool isInteger(const std::string & s);
 
 Car* load();
 int getArrayLength();
 void loadMpgBST(Car* list, BST<int, Car> &bst);
+void loadMpgFreewayBST(Car* list, BST<int, Car> &bst);
 void loadPriceBST(Car* list, BST<int, Car> &bst);
 void loadReviewTable(HashTable<Review> &table);
 
@@ -35,15 +40,19 @@ void enterRating();
 
 Car* carList;
 string userName;
+BST<int, Car> mpgBST;
+BST<int, Car> mpgFreewayBST;
+BST<int, Car> priceBST;
 
 int main()
 {
 	splashMenu();
 	carList = load();
-	BST<int, Car> mpgBST = BST<int, Car>();
-	BST<int, Car> priceBST = BST<int, Car>();
+	mpgBST = BST<int, Car>();
+	priceBST = BST<int, Car>();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
+	loadMpgFreewayBST(carList, mpgFreewayBST);
 	HashTable<Review> reviewTable = HashTable<Review>();
 	loadReviewTable(reviewTable);
 
@@ -67,7 +76,11 @@ int main()
 		{
 			searchForCarsMenu();
 		}
-	} while (choice != "3");
+		else if (choice == "3")
+		{
+			sortByCategoryMenu();
+		}
+	} while (choice != "4");
 
 	/////////////TESTING: Entering and revising reviews///////////////////
 	Rating rate;
@@ -214,6 +227,152 @@ void chooseCars()
 	} while (choice != "0");
 }
 
+void sortByCategoryMenu()
+{
+	string choice;
+	// TODO: Change this so the values arent fixed and it reads value from an array instead
+	do
+	{
+		//system("CLS");
+		cout << "*************CATEGORY MENU*************" << endl;
+		cout << "What would you like to sort cars by?" << endl;
+		cout << "1) MPG City" << endl;
+		cout << "2) MPG Freeway" << endl;
+		cout << "3) Price" << endl;
+		cout << "4) Rating" << endl;
+
+		cin >> choice;
+		if (choice != "0" && isInteger(choice))
+		{
+			int intChoice = atoi(choice.c_str());
+
+			if (intChoice == 1)
+			{
+				sortByMpgMenu();
+			}
+			else if (intChoice == 2)
+			{
+				sortByMpgFreewayMenu();
+			}
+			else if (intChoice == 3)
+			{
+				sortByPriceMenu();
+			}
+			else if (intChoice == 4)
+			{
+				// TODO:
+			}
+		}
+	} while (choice != "0");
+}
+
+void sortByMpgMenu()
+{
+	system("CLS");
+	string choice;
+	int intChoice;
+	int count;
+
+	do{
+		system("CLS");
+		count = 0;
+
+		cout << "\n*************SORTED MPG LIST*************" << endl;
+		for (int i = 0; i < getArrayLength(); i++)
+		{ 
+			count++;
+			cout << count << ". ";
+			cout << carList[i].getMake() << " ";
+			cout << carList[i].getModel() << endl;
+		}
+
+		cout << "0. Back" << endl;
+
+		// Input Validation by checking if its an integer and within the range of teh array
+		cin >> choice;
+		if (isInteger(choice) && choice != "0")
+		{
+			intChoice = atoi(choice.c_str());
+			if (intChoice > 0 && intChoice <= count)
+			{
+				displayCarPage(carList[count - 1]);
+			}
+
+		}
+	} while (choice != "0");
+}
+
+void sortByMpgFreewayMenu()
+{
+	system("CLS");
+	string choice;
+	int intChoice;
+	int count;
+
+	do{
+		system("CLS");
+		count = 0;
+
+		cout << "\n*************SORTED MPG FREEWAY LIST*************" << endl;
+		for (int i = 0; i < getArrayLength(); i++)
+		{
+			count++;
+			cout << count << ". ";
+			cout << carList[i].getMake() << " ";
+			cout << carList[i].getModel() << endl;
+		}
+
+		cout << "0. Back" << endl;
+
+		// Input Validation by checking if its an integer and within the range of teh array
+		cin >> choice;
+		if (isInteger(choice) && choice != "0")
+		{
+			intChoice = atoi(choice.c_str());
+			if (intChoice > 0 && intChoice <= count)
+			{
+				displayCarPage(carList[count - 1]);
+			}
+
+		}
+	} while (choice != "0");
+}
+
+void sortByPriceMenu()
+{
+	system("CLS");
+	string choice;
+	int intChoice;
+	int count;
+
+	do{
+		system("CLS");
+		count = 0;
+
+		cout << "\n*************SORTED MPG FREEWAY LIST*************" << endl;
+		for (int i = 0; i < getArrayLength(); i++)
+		{
+			count++;
+			cout << count << ". ";
+			cout << carList[i].getMake() << " ";
+			cout << carList[i].getModel() << endl;
+		}
+
+		cout << "0. Back" << endl;
+
+		// Input Validation by checking if its an integer and within the range of teh array
+		cin >> choice;
+		if (isInteger(choice) && choice != "0")
+		{
+			intChoice = atoi(choice.c_str());
+			if (intChoice > 0 && intChoice <= count)
+			{
+				displayCarPage(carList[count - 1]);
+			}
+
+		}
+	} while (choice != "0");
+}
 
 void listCars(string carType)
 {
@@ -276,7 +435,6 @@ int filterCars(string carMake, Car* filteredCars)
 	string choice;
 	int intChoice;
 	int count;
-	bool isValidInput = false;
 
 	do{
 		system("CLS");
@@ -305,7 +463,6 @@ int filterCars(string carMake, Car* filteredCars)
 			intChoice = atoi(choice.c_str());
 			if (intChoice > 0 && intChoice <= count)
 			{
-				isValidInput = true;
 				displayCarPage(filteredCars[intChoice - 1]);
 			}
 
@@ -602,6 +759,17 @@ void loadMpgBST(Car* list, BST<int, Car> &bst)
 	for (int i = 0; i < size; i++)
 	{
 		bst.add(list[i].getMPGCity(), list[i]);
+		cout << list[i].getMPGCity() << endl;
+	}
+}
+
+void loadMpgFreewayBST(Car* list, BST<int, Car> &bst)
+{
+	int size = getArrayLength();
+	for (int i = 0; i < size; i++)
+	{
+		bst.add(list[i].getMPGFreeway(), list[i]);
+		cout << list[i].getMPGFreeway() << endl;
 	}
 }
 
