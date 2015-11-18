@@ -5,9 +5,11 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
 
+//An object can have multiple ways to compare itself
 template <class bstvalue, class bstobj>
 class BST
 {
@@ -37,6 +39,8 @@ private:
     void inOrderPrint(Nodeptr root, bstvalue min, bstvalue max);
     void preOrderPrint(Nodeptr root, bstvalue min, bstvalue max);
     void postOrderPrint(Nodeptr root, bstvalue min, bstvalue max);
+    void inOrderVector(Nodeptr root, vector<bstobj> &list);
+    void inOrderVector(Nodeptr root, bstvalue min, bstvalue max, vector<bstobj> &list);
     void deleteTree(Nodeptr root);
     bool containsValue(Nodeptr root, bstvalue value, bstobj obj);
     bstobj findMin(Nodeptr root);
@@ -54,6 +58,8 @@ public:
     void printInOrder(bstvalue min, bstvalue max);
     void printPreOrder(bstvalue min, bstvalue max);
     void printPostOrder(bstvalue min, bstvalue max);
+    void getVectorInOrder(vector<bstobj> &list);
+    void getVectorInOrder(bstvalue min, bstvalue max, vector<bstobj> &list);
     bool contains(bstvalue value);
     bstobj minimum();
 
@@ -156,6 +162,28 @@ void BST<bstvalue, bstobj>::postOrderPrint(Nodeptr root, bstvalue min, bstvalue 
 }
 
 template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, vector<bstobj> &list)
+{
+    if (root != NULL)
+    {
+        inOrderVector(root->left, list);
+        list.push_back(root->data);
+        inOrderVector(root->right, list);
+    }
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, bstvalue min, bstvalue max, vector<bstobj> &list)
+{
+    if (root != NULL)
+    {
+        inOrderVector(root->left, min, max, list);
+        if (root->value >= min && root->value <= max) list.push_back(root->data);
+        inOrderVector(root->right, min, max, list);
+    }
+}
+
+template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::deleteTree(Nodeptr root)
 {
     if (root != NULL)
@@ -232,7 +260,7 @@ bstobj BST<bstvalue, bstobj>::getRoot()
 {
     if (root == NULL)
     {
-        cout << "Error: The root is empty.\n\n";
+        cout << "Error: The tree is empty." << endl << endl;
         exit(-1); // what to do if bstdata is a non reference like string?
     }
     else return root->obj;
@@ -241,21 +269,21 @@ bstobj BST<bstvalue, bstobj>::getRoot()
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printInOrder()
 {
-    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
     else inOrderPrint(root);
 }
 
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printPreOrder()
 {
-    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
     else preOrderPrint(root);
 }
 
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printPostOrder()
 {
-    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
     else postOrderPrint(root);
 }
 
@@ -264,24 +292,37 @@ void BST<bstvalue, bstobj>::printPostOrder()
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printInOrder(bstvalue min, bstvalue max)
 {
-    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
     else inOrderPrint(root, min, max);
 }
 
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printPreOrder(bstvalue min, bstvalue max)
 {
-    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
     else preOrderPrint(root, min, max);
 }
 
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printPostOrder(bstvalue min, bstvalue max)
 {
-    if (isEmpty()) cout << "Error: The tree is empty.\n\n";
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
     else postOrderPrint(root, min, max);
 }
 
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::getVectorInOrder(vector<bstobj> &list)
+{
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
+    else inOrderVector(root, list);
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::getVectorInOrder(bstvalue min, bstvalue max, vector<bstobj> &list)
+{
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
+    else inOrderVector(root, min, max, list);
+}
 
 template <class bstvalue, class bstobj>
 bool BST<bstvalue, bstobj>::contains(bstvalue value)
