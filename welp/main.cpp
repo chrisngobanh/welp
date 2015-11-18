@@ -233,13 +233,14 @@ void sortByCategoryMenu()
 	// TODO: Change this so the values arent fixed and it reads value from an array instead
 	do
 	{
-		//system("CLS");
+		system("CLS");
 		cout << "*************CATEGORY MENU*************" << endl;
 		cout << "What would you like to sort cars by?" << endl;
 		cout << "1) MPG City" << endl;
 		cout << "2) MPG Freeway" << endl;
 		cout << "3) Price" << endl;
 		cout << "4) Rating" << endl;
+		cout << "0) Back" << endl;
 
 		cin >> choice;
 		if (choice != "0" && isInteger(choice))
@@ -276,14 +277,19 @@ void sortByMpgMenu()
 	do{
 		system("CLS");
 		count = 0;
+		vector<Car> carVector;
+		int min = INT_MIN; int max = INT_MAX;
+		mpgBST.getVectorInOrder(min, max, carVector);
 
-		cout << "\n*************SORTED MPG LIST*************" << endl;
-		for (int i = 0; i < getArrayLength(); i++)
+		cout << "*************SORTED MPG LIST*************" << endl;
+
+		for (int i = 0; i < carVector.size(); i++)
 		{ 
 			count++;
 			cout << count << ". ";
-			cout << carList[i].getMake() << " ";
-			cout << carList[i].getModel() << endl;
+			cout << carVector[i].getMake() << " ";
+			cout << carVector[i].getModel() << "/ MPG: ";
+			cout << carVector[i].getMPGCity() << endl;
 		}
 
 		cout << "0. Back" << endl;
@@ -295,9 +301,8 @@ void sortByMpgMenu()
 			intChoice = atoi(choice.c_str());
 			if (intChoice > 0 && intChoice <= count)
 			{
-				displayCarPage(carList[count - 1]);
+				displayCarPage(carVector[intChoice - 1]);
 			}
-
 		}
 	} while (choice != "0");
 }
@@ -312,14 +317,19 @@ void sortByMpgFreewayMenu()
 	do{
 		system("CLS");
 		count = 0;
+		vector<Car> carVector;
+		int min = INT_MIN; int max = INT_MAX;
+		mpgFreewayBST.getVectorInOrder(min, max, carVector);
 
-		cout << "\n*************SORTED MPG FREEWAY LIST*************" << endl;
-		for (int i = 0; i < getArrayLength(); i++)
+		cout << "*************SORTED MPG FREEWAY LIST*************" << endl;
+
+		for (int i = 0; i < carVector.size(); i++)
 		{
 			count++;
 			cout << count << ". ";
-			cout << carList[i].getMake() << " ";
-			cout << carList[i].getModel() << endl;
+			cout << carVector[i].getMake() << " ";
+			cout << carVector[i].getModel() << "/ MPG Freeway: ";
+			cout << carVector[i].getMPGFreeway() << endl;
 		}
 
 		cout << "0. Back" << endl;
@@ -331,9 +341,8 @@ void sortByMpgFreewayMenu()
 			intChoice = atoi(choice.c_str());
 			if (intChoice > 0 && intChoice <= count)
 			{
-				displayCarPage(carList[count - 1]);
+				displayCarPage(carVector[intChoice - 1]);
 			}
-
 		}
 	} while (choice != "0");
 }
@@ -348,14 +357,18 @@ void sortByPriceMenu()
 	do{
 		system("CLS");
 		count = 0;
+		vector<Car> carVector;
+		int min = INT_MIN; int max = INT_MAX;
+		priceBST.getVectorInOrder(min, max, carVector);
 
-		cout << "\n*************SORTED MPG FREEWAY LIST*************" << endl;
-		for (int i = 0; i < getArrayLength(); i++)
+		cout << "*************SORTED PRICE LIST*************" << endl;
+		for (int i = 0; i < carVector.size(); i++)
 		{
 			count++;
 			cout << count << ". ";
-			cout << carList[i].getMake() << " ";
-			cout << carList[i].getModel() << endl;
+			cout << carVector[i].getMake() << " ";
+			cout << carVector[i].getModel() << "/ Price: ";
+			cout << carVector[i].getPrice() << endl;
 		}
 
 		cout << "0. Back" << endl;
@@ -367,9 +380,8 @@ void sortByPriceMenu()
 			intChoice = atoi(choice.c_str());
 			if (intChoice > 0 && intChoice <= count)
 			{
-				displayCarPage(carList[count - 1]);
+				displayCarPage(carVector[intChoice - 1]);
 			}
-
 		}
 	} while (choice != "0");
 }
@@ -759,7 +771,6 @@ void loadMpgBST(Car* list, BST<int, Car> &bst)
 	for (int i = 0; i < size; i++)
 	{
 		bst.add(list[i].getMPGCity(), list[i]);
-		cout << list[i].getMPGCity() << endl;
 	}
 }
 
@@ -769,7 +780,6 @@ void loadMpgFreewayBST(Car* list, BST<int, Car> &bst)
 	for (int i = 0; i < size; i++)
 	{
 		bst.add(list[i].getMPGFreeway(), list[i]);
-		cout << list[i].getMPGFreeway() << endl;
 	}
 }
 

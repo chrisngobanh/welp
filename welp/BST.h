@@ -167,7 +167,7 @@ void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, vector<bstobj> &list)
     if (root != NULL)
     {
         inOrderVector(root->left, list);
-        list.push_back(root->data);
+        list.insert(list.begin(), root->obj);
         inOrderVector(root->right, list);
     }
 }
@@ -178,7 +178,7 @@ void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, bstvalue min, bstvalue m
     if (root != NULL)
     {
         inOrderVector(root->left, min, max, list);
-        if (root->value >= min && root->value <= max) list.push_back(root->data);
+		if (root->value >= min && root->value <= max) list.insert(list.begin(), root->obj);
         inOrderVector(root->right, min, max, list);
     }
 }
