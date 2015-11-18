@@ -55,6 +55,7 @@ int main()
 		cout << "*************MAIN MENU*************" << endl;
 		cout << "1. Browse our list of cars" << endl;
 		cout << "2. Search for a car" << endl;
+		cout << "3. Sort cars by category" << endl;
 		cout << "3. Quit" << endl;
 		cout << "Please select an option. ";
 		getline(cin, choice);
@@ -268,37 +269,48 @@ void listCars(string carType)
 		listAllCars();
 	}
 }
+
 int filterCars(string carMake, Car* filteredCars)
 {
 	system("CLS");
-	int count = 0;
 	string choice;
 	int intChoice;
+	int count;
+	bool isValidInput = false;
 
-	cout << "\n*************CAR LIST*************" << endl;
-	for (int i = 0; i < getArrayLength(); i++)
-	{
-		if (carList[i].getMake() == carMake)
+	do{
+		system("CLS");
+		count = 0;
+
+		cout << "\n*************CAR LIST*************" << endl;
+		for (int i = 0; i < getArrayLength(); i++)
 		{
-			count++;
-			filteredCars[count - 1] = carList[i];
-			filteredCars[1];
-			cout << count << ". ";
-			cout << carList[i].getMake() << " ";
-			cout << carList[i].getModel() << endl;
+			if (carList[i].getMake() == carMake)
+			{
+				count++;
+				filteredCars[count - 1] = carList[i];
+				filteredCars[1];
+				cout << count << ". ";
+				cout << carList[i].getMake() << " ";
+				cout << carList[i].getModel() << endl;
+			}
 		}
-	}
 
-	cout << "0. Back" << endl;
+		cout << "0. Back" << endl;
 
-	// Input Validation by checking if its an integer and within the range of teh array
-	cin >> choice;
-	if (isInteger(choice) && choice != "0")
-	{
-		intChoice = atoi(choice.c_str());
-		if (intChoice > 0 && intChoice <= count)
-			displayCarPage(filteredCars[intChoice - 1]);
-	}
+		// Input Validation by checking if its an integer and within the range of teh array
+		cin >> choice;
+		if (isInteger(choice) && choice != "0")
+		{
+			intChoice = atoi(choice.c_str());
+			if (intChoice > 0 && intChoice <= count)
+			{
+				isValidInput = true;
+				displayCarPage(filteredCars[intChoice - 1]);
+			}
+
+		}
+	} while (choice != "0");
 
 	return count;
 }
@@ -332,34 +344,6 @@ void listAllCars()
 			}
 		}
 	} while (choice != "0");
-}
-
-void pickCar(int index)
-{
-
-}
-
-void displayCarPage()
-{
-	system("CLS");
-	cout << "*************TESLA MODEL X*************" << endl;
-	cout << "Engine Type" << endl;
-	cout << "MPG City" << endl;
-	cout << "MPG Freeway" << endl;
-	cout << "Price" << endl;
-	cout << "Rating" << endl; //TODO: How do ratings?
-	cout << "Rating" << endl;
-
-	/****** implementation of user review/ratings *******/
-	char choice;
-
-	cout << "User, do you wish to enter your rating and/or review for the vehicle?\n";
-	cin >> choice;
-
-	if (choice == 'Y' || choice == 'y')
-	{
-		enterRating();
-	}
 }
 
 void displayCarPage(Car car)
