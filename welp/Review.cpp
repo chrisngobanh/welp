@@ -66,7 +66,8 @@ bool Review::operator!=(const Review &review)
 ostream& operator<<(ostream &os, const Review &review)
 {
     int width = 18 - review.make.size();
-    cout << review.make << " " << setw(width) << left << review.model << "  Rating: " << review.stars << endl;
-    cout << review.owner << " comments:" << endl;
-    cout << review.description;
+    os << review.make << " " << setw(width) << left << review.model << "  Rating: " << review.stars << endl;
+    os << review.owner << " comments:" << endl;
+    os << review.description;
+	return os;
 }

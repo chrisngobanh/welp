@@ -67,12 +67,14 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rating.cpp" />
+    <ClCompile Include="Review.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BST.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Rating.h" />
+    <ClInclude Include="Review.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Kars Data.txt" />
