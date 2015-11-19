@@ -53,6 +53,13 @@ BST<int, Car> mpgFreewayBST;
 BST<int, Car> priceBST;
 BST<double, Car> avgRatingBST;
 
+/**
+* Get User Input Handler
+*
+* This function gets user input when called. 
+* It returns the user input.
+* Ignores empty lines
+*/
 string getUserInput()
 {
 	string input;
@@ -62,6 +69,19 @@ string getUserInput()
 		if (input.size()) break;
 	}
 	return input;
+}
+
+/**
+* Covert String To Int Handler
+*
+* This function converts a string to an int
+* If the string is not an int, then it returns -1
+* Otherwise, it'll return an int that is the string's int form
+*/
+int convertStringToInt(string input)
+{
+	if (!isInteger(input)) return -1;
+	return atoi(input.c_str());
 }
 
 int main()
@@ -975,11 +995,10 @@ void searchForCarsByPriceMenu()
 		string max;
 		getline(cin, max);
 
-		try {
-			int minInt = stoi(min);
-			int maxInt = stoi(max);
+		int minInt = convertStringToInt(min);
+		int maxInt = convertStringToInt(max);
 
-			if (!(minInt > maxInt))
+			if (!(minInt > maxInt) && minInt != -1 && maxInt != -1)
 			{
 				vector<Car> cars;
 
@@ -1003,12 +1022,6 @@ void searchForCarsByPriceMenu()
 			{
 				cout << "Bad price range. Please try again." << endl;
 			}
-		
-		}
-		catch (invalid_argument e)
-		{
-			cout << "Bad price range. Please try again." << endl;
-		}
 
 
 		cout << "Do you want to continue searching for cars by price? (y/n) ";
