@@ -18,6 +18,7 @@ using namespace std;
 void splashMenu(); // This is the splash menu for our app
 void searchForCarsMenu(); // This is the menu for the search function
 void searchForCarByNameMenu();
+void searchForCarByMakeMenu();
 void chooseCars();
 void listCars(string);
 void pickCar(int index);
@@ -879,12 +880,12 @@ void searchForCarsMenu()
 	}
 	else if (choice == "2")
 	{
-
+		searchForCarByMakeMenu();
 	}
 	else if (choice == "3")
 	{
 
-	}
+	} 
 }
 
 /**
@@ -911,4 +912,31 @@ void searchForCarByNameMenu()
 			displayCarPage(i);
 		}
 	}
+}
+
+/**
+* Search for Car by Car Make Menu
+*
+* This is a part of the search feature
+*/
+void searchForCarByMakeMenu()
+{
+	system("CLS");
+	cout << "*****Search for Car by Car Manufacturer*****" << endl;
+	cout << "Please input a car name (i.e. Tesla) ";
+	string name;
+	getline(cin, name);
+
+	// This is a linear search
+	// TODO: Convert this to a binary search
+	// TODO: Wait until Johnny creates the array of car makes
+	//for (int i = 0; i < getArrayLength(); i++)
+	//{
+	//	// If the car's name is found, then render the car page for the user
+	//	if (name.compare(carList[i].getMake()) == 0)
+	//	{
+	//		// README: Uncomment when we implement car ids
+	//		displayCarPage(i);
+	//	}
+	//}
 }
