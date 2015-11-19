@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <climits>
 #include "Car.h"
 #include "Rating.h"
 #include "BST.h"
@@ -35,26 +36,36 @@ void loadMpgBST(Car* list, BST<int, Car> &bst);
 void loadMpgFreewayBST(Car* list, BST<int, Car> &bst);
 void loadPriceBST(Car* list, BST<int, Car> &bst);
 void loadReviewTable(HashTable<Review> &table);
+void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst);
 
 void enterRating();
 
 Car* carList;
 string userName;
+HashTable<Review> reviewTable;
 BST<int, Car> mpgBST;
 BST<int, Car> mpgFreewayBST;
 BST<int, Car> priceBST;
+BST<double, Car> avgRatingBST;
 
 int main()
 {
 	splashMenu();
-	carList = load();
+
+	reviewTable = HashTable<Review>();
 	mpgBST = BST<int, Car>();
 	priceBST = BST<int, Car>();
+	avgRatingBST = BST<double, Car>();
+	mpgFreewayBST = BST<int, Car>();
+
+
+    carList = load();
 	loadMpgBST(carList, mpgBST);
 	loadPriceBST(carList, priceBST);
 	loadMpgFreewayBST(carList, mpgFreewayBST);
-	HashTable<Review> reviewTable = HashTable<Review>();
 	loadReviewTable(reviewTable);
+	loadAvgRatingBST(carList, reviewTable, avgRatingBST);
+
 
 	system("CLS");
 
@@ -284,7 +295,7 @@ void sortByMpgMenu()
 		cout << "*************SORTED MPG LIST*************" << endl;
 
 		for (int i = 0; i < carVector.size(); i++)
-		{ 
+		{
 			count++;
 			cout << count << ". ";
 			cout << carVector[i].getMake() << " ";
@@ -789,6 +800,17 @@ void loadPriceBST(Car* list, BST<int, Car> &bst)
 	for (int i = 0; i < size; i++)
 	{
 		bst.add(list[i].getPrice(), list[i]);
+	}
+}
+
+void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst)
+{
+    int size = getArrayLength();
+	for (int i = 0; i < size; i++)
+	{
+	    Car car = list[i];
+	    double avg_rating = table.getAverageRatingBucket(car.getMake(), car.getModel());
+		bst.add(avg_rating, car);
 	}
 }
 
