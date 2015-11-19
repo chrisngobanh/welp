@@ -133,7 +133,7 @@ public:
 	//Calls the reverse helper function to
 	//Pre: !isEmpty()
 
-	operator const string()
+	explicit operator const string()
 	{
 	    return identifier;
 	};
