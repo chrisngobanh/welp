@@ -18,7 +18,8 @@ using namespace std;
 void splashMenu(); // This is the splash menu for our app
 void searchForCarsMenu(); // This is the menu for the search function
 void searchForCarByNameMenu();
-void searchForCarByMakeMenu();
+void searchForCarsByMakeMenu();
+void searchForCarsByPriceMenu();
 void chooseCars();
 void listCars(string);
 void pickCar(int index);
@@ -880,11 +881,11 @@ void searchForCarsMenu()
 	}
 	else if (choice == "2")
 	{
-		searchForCarByMakeMenu();
+		searchForCarsByMakeMenu();
 	}
 	else if (choice == "3")
 	{
-
+		searchForCarsByPriceMenu();
 	} 
 }
 
@@ -919,7 +920,7 @@ void searchForCarByNameMenu()
 *
 * This is a part of the search feature
 */
-void searchForCarByMakeMenu()
+void searchForCarsByMakeMenu()
 {
 	system("CLS");
 	cout << "*****Search for Car by Car Manufacturer*****" << endl;
@@ -939,4 +940,42 @@ void searchForCarByMakeMenu()
 	//		displayCarPage(i);
 	//	}
 	//}
+}
+
+void searchForCarsByPriceMenu()
+{
+	system("CLS");
+	cout << "*****Search for Car by Price Range*****" << endl;
+	bool isGood = false;
+
+	while (!isGood)
+	{
+		cout << "Please input the min price (25000) ";
+		string min;
+		getline(cin, min);
+
+		cout << "Please input the max price (50000) ";
+		string max;
+		getline(cin, max);
+
+		try {
+			int minInt = stoi(min);
+			int maxInt = stoi(max);
+
+			if (minInt > maxInt)
+			{
+				cout << "Bad price range. Please try again." << endl;
+				continue; // Ignore rest of loop and run loop again
+			}
+		}
+		catch (invalid_argument e)
+		{
+			cout << "Bad price range. Please try again." << endl;
+			continue;
+		}
+
+		system("PAUSE");
+	}
+
+
 }
