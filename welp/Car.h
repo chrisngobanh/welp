@@ -27,6 +27,7 @@ public:
 	// Getters
 	string getMake();
 	string getModel();
+	string getName();
 	string getType();
 	string getEngine();
 	

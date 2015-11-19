@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <climits>
+#include <vector>
 #include "Car.h"
 #include "Rating.h"
 #include "BST.h"
@@ -13,9 +14,10 @@
 
 using namespace std;
 
-// Prototype functions
+// Menu Function
 void splashMenu(); // This is the splash menu for our app
-void searchForCarsMenu();
+void searchForCarsMenu(); // This is the menu for the search function
+void searchForCarByNameMenu();
 void chooseCars();
 void listCars(string);
 void pickCar(int index);
@@ -29,6 +31,7 @@ void sortByMpgFreewayMenu();
 void sortByPriceMenu();
 int filterCars(string, Car*);
 inline bool isInteger(const std::string & s);
+
 
 Car* load();
 int getArrayLength();
@@ -847,6 +850,16 @@ void enterRating()
 	cout << "Thank you for sharing your experience!\n";
 }
 
+/**
+ * Search For Cars Menu
+ *
+ * This is the menu for the searching feature
+ * There are 4 menu options:
+ * 1. Search by Car Name
+ * 2. Search by Car Manufacturer
+ * 3. Search by Price Range
+ * 4. Go Back
+ */
 void searchForCarsMenu()
 {
 	system("CLS");
@@ -856,11 +869,46 @@ void searchForCarsMenu()
 	cout << "3. Search cars in a price range" << endl;
 	cout << "4. Go Back.";
 	cout << endl;
-
 	cout << "What is your option? ";
-
 	string choice;
 	getline(cin, choice);
 
-	system("PAUSE");
+	if (choice == "1")
+	{
+		searchForCarByNameMenu();
+	}
+	else if (choice == "2")
+	{
+
+	}
+	else if (choice == "3")
+	{
+
+	}
+}
+
+/**
+ * Search for Car by Car Name Menu
+ * 
+ * This is a part of the search feature
+ */
+void searchForCarByNameMenu()
+{
+	system("CLS");
+	cout << "*****Search for Car by Car Name*****" << endl;
+	cout << "Please input a car name (i.e. Honda Accord) ";
+	string name;
+	getline(cin, name);
+
+	// This is a linear search
+	// TODO: Convert this to a binary search
+	for (int i = 0; i < getArrayLength(); i++)
+	{
+		// If the car's name is found, then render the car page for the user
+		if (name.compare(carList[i].getName()) == 0)
+		{
+			// README: Uncomment when we implement car ids
+			displayCarPage(i);
+		}
+	}
 }

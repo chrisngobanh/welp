@@ -29,6 +29,12 @@ string Car::getModel()
 	return model;
 }
 
+string Car::getName()
+{
+	return make + " " + model;
+}
+
+
 
 string Car::getEngine()
 {
