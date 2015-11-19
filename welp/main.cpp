@@ -79,7 +79,7 @@ int main()
 		cout << "1. Browse our list of cars" << endl;
 		cout << "2. Search for a car" << endl;
 		cout << "3. Sort cars by category" << endl;
-		cout << "3. Quit" << endl;
+		cout << "4. Quit" << endl;
 		cout << "Please select an option. ";
 		getline(cin, choice);
 		if (choice == "1")
