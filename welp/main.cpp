@@ -572,7 +572,19 @@ void listAllCars()
 
 void displayCarPage(Car car)
 {
-	cout << "\n*************" << car.getMake() << " " << car.getModel() << "*************" << endl;
+	system("CLS");
+	cout << "*************" << car.getMake() << " " << car.getModel() << "*************" << endl;
+	cout << "                       ______________" << endl;
+	cout << "               __..=='|'   |         ``-._" << endl;
+	cout << "  \\=====_..--'/'''    |    |              ``-._" << endl;
+	cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
+	cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
+	cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
+	cout << "|.__  .'/ /     \\ \\`.      \\                     | .'/ /     \\ \\`. ```-- `." << endl;
+	cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
+	cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
+	cout << "         `-.....-'                                    `-.....-'" << endl;
+	cout << endl << endl << endl;
 	cout << "Engine Type: " << car.getEngine() << endl;
 	cout << "MPG City: " << car.getMPGCity() << endl;
 	cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
