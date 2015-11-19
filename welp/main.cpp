@@ -53,6 +53,17 @@ BST<int, Car> mpgFreewayBST;
 BST<int, Car> priceBST;
 BST<double, Car> avgRatingBST;
 
+string getUserInput()
+{
+	string input;
+	// Check if user input is empty. If it isn't, then end loop
+	while (getline(cin, input))
+	{
+		if (input.size()) break;
+	}
+	return input;
+}
+
 int main()
 {
 	splashMenu();
@@ -74,7 +85,7 @@ int main()
 
 	system("CLS");
 
-	string choice;
+	bool isGood = false;
 	do{
 		system("CLS");
 		cout << "*************MAIN MENU*************" << endl;
@@ -83,7 +94,9 @@ int main()
 		cout << "3. Sort cars by category" << endl;
 		cout << "4. Quit" << endl;
 		cout << "Please select an option. ";
-		getline(cin, choice);
+
+		string choice = getUserInput();
+
 		if (choice == "1")
 		{
 			chooseCars();
@@ -96,7 +109,11 @@ int main()
 		{
 			sortByCategoryMenu();
 		}
-	} while (choice != "4");
+		else if (choice == "4")
+		{
+			isGood = true;
+		}
+	} while (!isGood);
 
 	/////////////TESTING: Entering and revising reviews///////////////////
 	Rating rate;
@@ -208,7 +225,9 @@ void splashMenu()
 	cout << endl << endl << endl;
 
 	cout << "What is your username? ";
-	getline(cin, userName);
+
+	// Check if user input is empty. If it isn't, then end loop
+	userName = getUserInput();
 }
 
 void chooseCars()
@@ -909,7 +928,6 @@ void searchForCarByNameMenu()
 		// If the car's name is found, then render the car page for the user
 		if (name.compare(carList[i].getName()) == 0)
 		{
-			// README: Uncomment when we implement car ids
 			displayCarPage(i);
 		}
 	}
@@ -944,12 +962,11 @@ void searchForCarsByMakeMenu()
 
 void searchForCarsByPriceMenu()
 {
-	system("CLS");
-	cout << "*****Search for Car by Price Range*****" << endl;
 	bool isGood = false;
-
 	while (!isGood)
-	{
+	{	
+		system("CLS");
+		cout << "*****Search for Car by Price Range*****" << endl;
 		cout << "Please input the min price (25000) ";
 		string min;
 		getline(cin, min);
@@ -962,19 +979,50 @@ void searchForCarsByPriceMenu()
 			int minInt = stoi(min);
 			int maxInt = stoi(max);
 
-			if (minInt > maxInt)
+			if (!(minInt > maxInt))
+			{
+				vector<Car> cars;
+
+				// This is a linear search
+				// TODO: Convert this to a binary search
+				for (int i = 0; i < getArrayLength(); i++)
+				{
+					// If car price is in range
+					if (carList[i].getPrice() >= minInt && carList[i].getPrice() <= maxInt)
+					{
+						cars.push_back(carList[i]);
+					}
+				}
+
+				if (cars.size() == 0)
+				{
+					cout << "No cars found. Please try again." << endl;
+				}
+			}
+			else
 			{
 				cout << "Bad price range. Please try again." << endl;
-				continue; // Ignore rest of loop and run loop again
 			}
+		
 		}
 		catch (invalid_argument e)
 		{
 			cout << "Bad price range. Please try again." << endl;
-			continue;
 		}
 
-		system("PAUSE");
+
+		cout << "Do you want to continue searching for cars by price? (y/n) ";
+		string choice;
+		getline(cin, choice);
+
+		if (choice == "") {
+			choice = "n";
+		}
+		// Check if the first character in the answer is a y or Y. If false, stop the loop.
+		if (!(choice.at(0) == 'y' || choice.at(0) == 'Y'))
+		{
+			isGood = true;
+		}
 	}
 
 
