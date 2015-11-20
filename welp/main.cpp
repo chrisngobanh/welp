@@ -1070,7 +1070,7 @@ void loadCarMake(vector<string>& makeList, Car* cList)
 		makeSize = makeList.size();
 
 		// If carMake is empty then pushback Make
-		if (makeSize = 0)
+		if (makeSize == 0)
 		{
 			makeList.push_back(Make);
 		}
