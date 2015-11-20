@@ -42,6 +42,7 @@ void loadMpgFreewayBST(Car* list, BST<int, Car> &bst);
 void loadPriceBST(Car* list, BST<int, Car> &bst);
 void loadReviewTable(HashTable<Review> &table);
 void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst);
+void loadCarMake(vector<string>& makeList, Car* cList);
 
 void enterRating();
 
@@ -52,6 +53,7 @@ BST<int, Car> mpgBST;
 BST<int, Car> mpgFreewayBST;
 BST<int, Car> priceBST;
 BST<double, Car> avgRatingBST;
+vector<string> carMake;
 
 /**
 * Get User Input Handler
@@ -1051,4 +1053,42 @@ void searchForCarsByPriceMenu()
 	}
 
 
+}
+
+
+void loadCarMake(vector<string>& makeList, Car* cList)
+{
+	string Make;
+	bool isDupe = true;
+	int makeSize = 0;
+	int size = getArrayLength();
+
+	//Reads car makes from clist
+	for (int i = 0; i < size; i++)
+	{
+		Make = cList[i].getMake();
+		makeSize = makeList.size();
+
+		// If carMake is empty then pushback Make
+		if (makeSize = 0)
+		{
+			makeList.push_back(Make);
+		}
+
+		// If carMake is not empty then check if Make is a duplicate
+		// Duplicates are ignored, while new Makes are added
+		else
+		{
+			for (int j = 0; j < makeSize; j++)
+			{
+				if (Make == makeList[j])
+				{
+					isDupe = true;
+					break;
+				}
+				else isDupe = false;
+			}
+			if (!isDupe) makeList.push_back(Make);
+		}
+	}
 }
