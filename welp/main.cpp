@@ -43,6 +43,8 @@ void loadPriceBST(Car* list, BST<int, Car> &bst);
 void loadReviewTable(HashTable<Review> &table);
 void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst);
 void loadCarMake(vector<string>& makeList, Car* cList);
+void saveReviews(HashTable<Review> Table, Car* list);
+
 
 void enterRating();
 
@@ -1056,34 +1058,79 @@ void searchForCarsByPriceMenu()
 
 void loadCarMake(vector<string>& makeList, Car* cList)
 {
-string Make;
-bool isDupe = true;
-int makeSize = 0;
-int size = getArrayLength();
-//Reads car makes from clist
-for (int i = 0; i < size; i++)
-{
-Make = cList[i].getMake();
-makeSize = makeList.size();
-// If carMake is empty then pushback Make
-if (makeSize = 0)
-{
-makeList.push_back(Make);
+	string Make;
+	bool isDupe = true;
+	int makeSize = 0;
+	int size = getArrayLength();
+
+	//Reads car makes from clist
+	for (int i = 0; i < size; i++)
+	{
+		Make = cList[i].getMake();
+		makeSize = makeList.size();
+
+		// If carMake is empty then pushback Make
+		if (makeSize = 0)
+		{
+			makeList.push_back(Make);
+		}
+
+		// If carMake is not empty then check if Make is a duplicate
+		// Duplicates are ignored, while new Makes are added
+		else
+		{
+			for (int j = 0; j < makeSize; j++)
+			{
+				if (Make == makeList[j])
+				{
+					isDupe = true;
+					break;
+				}
+				else isDupe = false;
+			}
+			if (!isDupe) makeList.push_back(Make);
+		}
+	}
 }
-// If carMake is not empty then check if Make is a duplicate
-// Duplicates are ignored, while new Makes are added
-else
+
+void saveReviews(HashTable<Review> Table, Car* list)
 {
-for (int j = 0; j < makeSize; j++)
-{
-if (Make == makeList[j])
-{
-isDupe = true;
-break;
-}
-else isDupe = false;
-}
-if (!isDupe) makeList.push_back(Make);
-}
-}
+	// Make/Model/Owner/Stars/Description
+
+	int size = getArrayLength();
+	int rSize = 0;
+	string Make, Model;
+	ofstream save("reviews.txt");
+	List<Review> rList;
+
+	if (save.is_open())
+	{
+		// Checks every car for reviews
+		for (int i = 0; i < size; i++)
+		{
+			Make = list[i].getMake();
+			Model = list[i].getModel();
+			rList = Table.getValue(Make, Model);
+
+			// If the car has no reviews, move to next car
+			// Cars with reviews are outputted to 'reviews.txt'
+			if (!rList.empty())
+			{
+				rList.begin();
+				rSize = rList.get_size();
+				for (int j = 0; j < rSize; j++)
+				{
+					save << rList.current().getMake() << "/" << rList.current().getModel() << "/" << rList.current().getOwner() << "/" << rList.current().getStars() << "/" << rList.current().getDescription() << endl;
+					rList.scroll();
+				}
+			}
+		}
+
+		save.close();
+	}
+	else
+	{
+		cout << "Error : Unable to open file 'reviews.txt' ";
+		exit(-1);
+	}
 }
