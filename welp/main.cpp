@@ -591,16 +591,20 @@ void displayCarPage(Car car)
 	cout << "Price: " << car.getPrice() << endl;
 	cout << "Rating: " << endl;
 
-	/****** implementation of user review/ratings *******/
-	char choice;
-
-	cout << "User, do you wish to enter your rating and/or review for the vehicle? Y/N \n";
-	cin >> choice;
-
-	if (choice == 'Y' || choice == 'y')
-	{
-		enterRating();
-	}
+	
+    /* Do you want the menu to be implemented here, example:
+     1. View reviews
+     2. Add a review
+     3. Delete your review
+     4. Quit
+     
+     or should I modify the already existent, enterRating() 
+     and set the menu there? I thought maybe we can use this function
+     at every car menu option, like in the function below, displayCarPage(int index)
+    */
+    
+    
+    
 }
 
 void displayCarPage(int index)
@@ -613,17 +617,10 @@ void displayCarPage(int index)
 	cout << "Price: " << carList[index].getPrice() << endl;
 	cout << "Rating: " << endl;
 
+    /* Another menu here or a line of code
+     calling on enterRating() ?
+     */
 
-	/****** implementation of user review/ratings *******/
-	char choice;
-
-	cout << "User, do you wish to enter your rating and/or review for the vehicle? Y/N \n";
-	cin >> choice;
-
-	if (choice == 'Y' || choice == 'y')
-	{
-		enterRating();
-	}
 }
 
 int getArrayLength()
