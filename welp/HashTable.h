@@ -47,6 +47,9 @@ public:
     double getAverageRatingBucket(string key, string identifier);
     //Gets the average rating of a car
 
+    List<hashobj> getValue(string key, string identifier);
+    //Gets the list object at the index
+
 private:
 
     static const int TABLE_SIZE = 52;
@@ -195,6 +198,19 @@ double HashTable<hashobj>::getAverageRatingBucket(string key, string identifier)
     }
 
     return getAverageRatingBucket(index);
+}
+
+template <class hashobj>
+List<hashobj> HashTable<hashobj>::getValue(string key, string identifier)
+{
+    int index = baseHash(key, identifier);
+    int jump = jumpHash(index);
+    while ( (string)Table[index] != identifier && indexIsFilled(index) )
+    {
+        index = (index + jump) % TABLE_SIZE;
+    }
+
+    return Table[index];
 }
 
 #endif /* HASHTABLE_H_ */
