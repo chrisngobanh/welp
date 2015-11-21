@@ -6,6 +6,7 @@
 #include <sstream>
 #include <climits>
 #include <vector>
+#include "List.h"
 #include "Car.h"
 #include "Rating.h"
 #include "BST.h"
@@ -44,7 +45,7 @@ void loadPriceBST(Car* list, BST<int, Car> &bst);
 void loadReviewTable(HashTable<Review> &table);
 void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst);
 void loadCarMake(vector<string>& makeList, Car* cList);
-void saveReviews(HashTable<Review> Table, Car* list);
+void saveReviews(HashTable<Review> &Table, Car* list);
 
 
 Car* carList;
@@ -91,14 +92,14 @@ int convertStringToInt(string input)
 int main()
 {
     splashMenu();
-    
+
     reviewTable = HashTable<Review>();
     mpgBST = BST<int, Car>();
     priceBST = BST<int, Car>();
     avgRatingBST = BST<double, Car>();
     mpgFreewayBST = BST<int, Car>();
-    
-    
+
+
     carList = load();
     loadMpgBST(carList, mpgBST);
     loadPriceBST(carList, priceBST);
@@ -106,12 +107,12 @@ int main()
     loadReviewTable(reviewTable);
     loadAvgRatingBST(carList, reviewTable, avgRatingBST);
     loadCarMake(carMakeVector, carList);
-    
-    
+
     system("CLS");
-    
+
     bool isGood = false;
-    do{
+    do
+    {
         system("CLS");
         cout << "*************MAIN MENU*************" << endl;
         cout << "1. Browse our list of cars" << endl;
@@ -119,9 +120,9 @@ int main()
         cout << "3. Sort cars by category" << endl;
         cout << "4. Quit" << endl;
         cout << "Please select an option. ";
-        
+
         string choice = getUserInput();
-        
+
         if (choice == "1")
         {
             chooseCars();
@@ -138,18 +139,19 @@ int main()
         {
             isGood = true;
         }
-    } while (!isGood);
-    
-    
-    
+    }
+    while (!isGood);
+
+
+
     /////////////Removing this code///////////////////
     /*
      Rating rate;
-     
+
      string owner, description, newDescription, searchOwner;
      char aChoice, sChoice, dChoice;
      int stars;
-     
+
      cout << "Would you like to leave a review? (Y/N) \n";
      cin >> aChoice;
      if (aChoice == 'Y')
@@ -162,10 +164,10 @@ int main()
      cout << "\nFinally, tell us your name:\n";
      cin.ignore();
      getline(cin, owner);
-     
+
      rate.newReview(description, stars, owner);
      }
-     
+
      cout << "\nSize of list: " << rate.get_size() << endl;
      cout << "\nWould you like to search for a review based on the owner's name? (Y/N) \n";
      cin >> aChoice;
@@ -178,7 +180,7 @@ int main()
      {
      cout << endl;
      rate.print();
-     
+
      //Were not going to allow anybody to just change an existing review,
      //this is just for testing.
      cout << "***** Would you like to update the information? (Y/N) ***** \n";
@@ -189,18 +191,18 @@ int main()
      cin >> sChoice;
      if (sChoice == 'Y')
      {
-					cout << "What level of stars would you like to give? \n";
-					cin >> stars;
-					rate.changeStars(stars);
+    				cout << "What level of stars would you like to give? \n";
+    				cin >> stars;
+    				rate.changeStars(stars);
      }
      cout << "*** Update the review? (Y/N) \n";
      cin >> dChoice;
      if (dChoice == 'Y')
      {
-					cout << "Please, tell us your thoughts on the vehicle: \n";
-					cin.ignore();
-					getline(cin, newDescription);
-					rate.changeDescription(newDescription);
+    				cout << "Please, tell us your thoughts on the vehicle: \n";
+    				cin.ignore();
+    				getline(cin, newDescription);
+    				rate.changeDescription(newDescription);
      }
      }
      }
@@ -210,9 +212,9 @@ int main()
      }
      }
      cout << endl;
-     
+
      rate.printAll();
-     
+
      //Testing more function
      if (rate.off_end())
      {
@@ -221,18 +223,19 @@ int main()
      }
      else
      cout << "Iterator pointing to an element\n";
-     
+
      cout << "Testing currentOwner(): " << rate.currentOwner() << endl;
-     
+
      cout << "Testing remove(): \n";
      rate.remove();
-     
+
      rate.printAll();
-     
+
      cout << endl;
      */
-    
-    
+
+    saveReviews(reviewTable, carList);
+
     system("PAUSE");
     return 0;
 }
@@ -240,7 +243,7 @@ int main()
 void splashMenu()
 {
     cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
-    
+
     cout << "                       ______________" << endl;
     cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
     cout << "  \\=====_..--'/'''    |    | Han Tint     ``-._     Carlos Quirarte" << endl;
@@ -252,9 +255,9 @@ void splashMenu()
     cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
     cout << "         `-.....-'                  Kevin Ngo         `-.....-'" << endl;
     cout << endl << endl << endl;
-    
+
     cout << "What is your username? ";
-    
+
     // Check if user input is empty. If it isn't, then end loop
     userName = getUserInput();
 }
@@ -280,7 +283,7 @@ void chooseCars()
         cout << "10) Ford" << endl;
         cout << "11) All" << endl;
         cout << "0) Back" << endl;
-        
+
         cin >> choice;
         if (choice != "0" && isInteger(choice))
         {
@@ -288,7 +291,8 @@ void chooseCars()
             if (intChoice >= 0 && intChoice <= 11)
                 listCars(choice);
         }
-    } while (choice != "0");
+    }
+    while (choice != "0");
 }
 
 void sortByCategoryMenu()
@@ -305,12 +309,12 @@ void sortByCategoryMenu()
         cout << "3) Price" << endl;
         cout << "4) Rating" << endl;
         cout << "0) Back" << endl;
-        
+
         cin >> choice;
         if (choice != "0" && isInteger(choice))
         {
             int intChoice = atoi(choice.c_str());
-            
+
             if (intChoice == 1)
             {
                 sortByMpgMenu();
@@ -328,7 +332,8 @@ void sortByCategoryMenu()
                 // TODO:
             }
         }
-    } while (choice != "0");
+    }
+    while (choice != "0");
 }
 
 void sortByMpgMenu()
@@ -337,16 +342,18 @@ void sortByMpgMenu()
     string choice;
     int intChoice;
     int count;
-    
-    do{
+
+    do
+    {
         system("CLS");
         count = 0;
         vector<Car> carVector;
-        int min = INT_MIN; int max = INT_MAX;
+        int min = INT_MIN;
+        int max = INT_MAX;
         mpgBST.getVectorInOrder(min, max, carVector);
-        
+
         cout << "*************SORTED MPG LIST*************" << endl;
-        
+
         for (int i = 0; i < carVector.size(); i++)
         {
             count++;
@@ -355,9 +362,9 @@ void sortByMpgMenu()
             cout << carVector[i].getModel() << "/ MPG: ";
             cout << carVector[i].getMPGCity() << endl;
         }
-        
+
         cout << "0. Back" << endl;
-        
+
         // Input Validation by checking if its an integer and within the range of teh array
         cin >> choice;
         if (isInteger(choice) && choice != "0")
@@ -368,7 +375,8 @@ void sortByMpgMenu()
                 displayCarPage(carVector[intChoice - 1]);
             }
         }
-    } while (choice != "0");
+    }
+    while (choice != "0");
 }
 
 void sortByMpgFreewayMenu()
@@ -377,16 +385,18 @@ void sortByMpgFreewayMenu()
     string choice;
     int intChoice;
     int count;
-    
-    do{
+
+    do
+    {
         system("CLS");
         count = 0;
         vector<Car> carVector;
-        int min = INT_MIN; int max = INT_MAX;
+        int min = INT_MIN;
+        int max = INT_MAX;
         mpgFreewayBST.getVectorInOrder(min, max, carVector);
-        
+
         cout << "*************SORTED MPG FREEWAY LIST*************" << endl;
-        
+
         for (int i = 0; i < carVector.size(); i++)
         {
             count++;
@@ -395,9 +405,9 @@ void sortByMpgFreewayMenu()
             cout << carVector[i].getModel() << "/ MPG Freeway: ";
             cout << carVector[i].getMPGFreeway() << endl;
         }
-        
+
         cout << "0. Back" << endl;
-        
+
         // Input Validation by checking if its an integer and within the range of teh array
         cin >> choice;
         if (isInteger(choice) && choice != "0")
@@ -408,7 +418,8 @@ void sortByMpgFreewayMenu()
                 displayCarPage(carVector[intChoice - 1]);
             }
         }
-    } while (choice != "0");
+    }
+    while (choice != "0");
 }
 
 void sortByPriceMenu()
@@ -417,14 +428,16 @@ void sortByPriceMenu()
     string choice;
     int intChoice;
     int count;
-    
-    do{
+
+    do
+    {
         system("CLS");
         count = 0;
         vector<Car> carVector;
-        int min = INT_MIN; int max = INT_MAX;
+        int min = INT_MIN;
+        int max = INT_MAX;
         priceBST.getVectorInOrder(min, max, carVector);
-        
+
         cout << "*************SORTED PRICE LIST*************" << endl;
         for (int i = 0; i < carVector.size(); i++)
         {
@@ -434,9 +447,9 @@ void sortByPriceMenu()
             cout << carVector[i].getModel() << "/ Price: ";
             cout << carVector[i].getPrice() << endl;
         }
-        
+
         cout << "0. Back" << endl;
-        
+
         // Input Validation by checking if its an integer and within the range of teh array
         cin >> choice;
         if (isInteger(choice) && choice != "0")
@@ -447,7 +460,8 @@ void sortByPriceMenu()
                 displayCarPage(carVector[intChoice - 1]);
             }
         }
-    } while (choice != "0");
+    }
+    while (choice != "0");
 }
 
 void listCars(string carType)
@@ -456,8 +470,8 @@ void listCars(string carType)
     string choice;
     Car filteredCars[30];
     int filteredSize;
-    
-    
+
+
     if (carType == "1")
     {
         filteredSize = filterCars("Honda", filteredCars);
@@ -477,7 +491,7 @@ void listCars(string carType)
     else if (carType == "5")
     {
         filteredSize = filterCars("Acura", filteredCars);
-        
+
     }
     else if (carType == "6")
     {
@@ -511,11 +525,12 @@ int filterCars(string carMake, Car* filteredCars)
     string choice;
     int intChoice;
     int count;
-    
-    do{
+
+    do
+    {
         system("CLS");
         count = 0;
-        
+
         cout << "\n*************CAR LIST*************" << endl;
         for (int i = 0; i < getArrayLength(); i++)
         {
@@ -529,9 +544,9 @@ int filterCars(string carMake, Car* filteredCars)
                 cout << carList[i].getModel() << endl;
             }
         }
-        
+
         cout << "0. Back" << endl;
-        
+
         // Input Validation by checking if its an integer and within the range of teh array
         cin >> choice;
         if (isInteger(choice) && choice != "0")
@@ -541,10 +556,11 @@ int filterCars(string carMake, Car* filteredCars)
             {
                 displayCarPage(filteredCars[intChoice - 1]);
             }
-            
+
         }
-    } while (choice != "0");
-    
+    }
+    while (choice != "0");
+
     return count;
 }
 
@@ -552,9 +568,10 @@ void listAllCars()
 {
     string choice;
     //	string finalIndex = getArrayLength();
-    
-    
-    do{
+
+
+    do
+    {
         system("CLS");
         cout << "*************ALL CARS MENU*************" << endl;
         // Print out list of all cars
@@ -565,7 +582,7 @@ void listAllCars()
             cout << carList[i - 1].getModel() << endl;
         }
         cout << "0. Quit" << endl;
-        
+
         // Input validation by checking for integer and range
         cin >> choice;
         if (isInteger(choice))
@@ -576,7 +593,8 @@ void listAllCars()
                 displayCarPage(intChoice - 1);
             }
         }
-    } while (choice != "0");
+    }
+    while (choice != "0");
 }
 
 void displayCarPage(Car car)
@@ -599,10 +617,10 @@ void displayCarPage(Car car)
     cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
     cout << "Price: " << car.getPrice() << endl;
     cout << "Rating: " << endl;
-    
-    
+
+
     raitingMenu();
-    
+
 }
 
 void displayCarPage(int index)
@@ -614,13 +632,13 @@ void displayCarPage(int index)
     cout << "MPG Freeway: " << carList[index].getMPGFreeway() << endl;
     cout << "Price: " << carList[index].getPrice() << endl;
     cout << "Rating: " << endl;
-    
+
     raitingMenu();
-    
+
     /* Another menu here or a line of code
      calling on enterRating() ?
      */
-    
+
 }
 
 int getArrayLength()
@@ -650,10 +668,10 @@ int getArrayLength()
 inline bool isInteger(const std::string & s)
 {
     if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
-    
+
     char * p;
     strtol(s.c_str(), &p, 10);
-    
+
     return (*p == 0);
 }
 
@@ -665,14 +683,14 @@ Car* load()
     Car* list = new Car[getArrayLength()];
     string line;
     int index = 0;
-    
+
     int substr_start, offset;
-    
+
     string make, model, type, engine;
     int mpgcity, mpgfree, msrp;
-    
+
     char divider = '/';
-    
+
     ifstream in("Kars Data.txt");
     if (in.is_open())
     {
@@ -690,7 +708,7 @@ Car* load()
             make = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the model
             while (line[substr_start + offset] != divider)
             {
@@ -699,7 +717,7 @@ Car* load()
             model = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the mpgcity
             while (line[substr_start + offset] != divider)
             {
@@ -708,7 +726,7 @@ Car* load()
             mpgcity = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the mpgfree
             while (line[substr_start + offset] != divider)
             {
@@ -717,7 +735,7 @@ Car* load()
             mpgfree = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the engine
             while (line[substr_start + offset] != divider)
             {
@@ -726,7 +744,7 @@ Car* load()
             engine = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the price
             while (line[substr_start + offset] != NULL)
             {
@@ -735,7 +753,7 @@ Car* load()
             msrp = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //make << model << engine << mpgcity <<  mpgfree << msrp
             list[index] = Car(make, model, engine, mpgcity, mpgfree, msrp);
             index++;
@@ -754,14 +772,14 @@ Car* load()
 void loadReviewTable(HashTable<Review> &table)
 {
     string line;
-    
+
     int substr_start, offset;
-    
+
     string make, model, owner, description;
     int stars;
-    
+
     char divider = '/';
-    
+
     ifstream in("reviews.txt");
     if (in.is_open())
     {
@@ -779,7 +797,7 @@ void loadReviewTable(HashTable<Review> &table)
             make = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the model
             while (line[substr_start + offset] != divider)
             {
@@ -788,7 +806,7 @@ void loadReviewTable(HashTable<Review> &table)
             model = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the owner
             while (line[substr_start + offset] != divider)
             {
@@ -797,7 +815,7 @@ void loadReviewTable(HashTable<Review> &table)
             owner = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the stars
             while (line[substr_start + offset] != divider)
             {
@@ -806,7 +824,7 @@ void loadReviewTable(HashTable<Review> &table)
             stars = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the description
             while (line[substr_start + offset] != NULL)
             {
@@ -815,7 +833,7 @@ void loadReviewTable(HashTable<Review> &table)
             description = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //owner >> description >> stars >> make >> model
             Review review = Review(owner, description, stars, make, model);
             table.addItem(make, model, review);
@@ -870,32 +888,36 @@ void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst
 //May delete this function to be replaced by the Rating's Class member function.
 void raitingMenu()
 {
-    
+
     string description;
     int stars;
     string owner;
     int choice;
     Review newReview;
-    
+
     cout << "\n*************Reviews Menu*************" << endl;
     cout << "1. View list of reviews" << endl;
     cout << "2. Add a review" << endl;
     cout << "3. Delete a review" << endl;
     cout << "4. Quit" << endl;
-    
+
     cout << "What is your option? ";
     cin >> choice;
-    
+
     switch (choice)
     {
-        case 1 : cout << "Function to list reviews" << endl;
-            break;
-        case 2 : cout << "Function to add review" << endl;
-            break;
-        case 3 : cout << "Function to delete a review" << endl;
-            break;
-        case 4 : cout << "quit" << endl;
-            break;
+    case 1 :
+        cout << "Function to list reviews" << endl;
+        break;
+    case 2 :
+        cout << "Function to add review" << endl;
+        break;
+    case 3 :
+        cout << "Function to delete a review" << endl;
+        break;
+    case 4 :
+        cout << "quit" << endl;
+        break;
     }
 }
 
@@ -921,7 +943,7 @@ void searchForCarsMenu()
     cout << "What is your option? ";
     string choice;
     getline(cin, choice);
-    
+
     if (choice == "1")
     {
         searchForCarByNameMenu();
@@ -948,7 +970,7 @@ void searchForCarByNameMenu()
     cout << "Please input a car name (i.e. Honda Accord) ";
     string name;
     getline(cin, name);
-    
+
     // This is a linear search
     // TODO: Convert this to a binary search
     for (int i = 0; i < getArrayLength(); i++)
@@ -973,7 +995,7 @@ void searchForCarsByMakeMenu()
     cout << "Please input a car name (i.e. Tesla) ";
     string name;
     getline(cin, name);
-    
+
     // This is a linear search
     // TODO: Convert this to a binary search
     // TODO: Wait until Johnny creates the array of car makes
@@ -998,18 +1020,18 @@ void searchForCarsByPriceMenu()
         cout << "Please input the min price (25000) ";
         string min;
         getline(cin, min);
-        
+
         cout << "Please input the max price (50000) ";
         string max;
         getline(cin, max);
-        
+
         int minInt = convertStringToInt(min);
         int maxInt = convertStringToInt(max);
-        
+
         if (!(minInt > maxInt) && minInt != -1 && maxInt != -1)
         {
             vector<Car> cars;
-            
+
             // This is a linear search
             // TODO: Convert this to a binary search
             for (int i = 0; i < getArrayLength(); i++)
@@ -1020,7 +1042,7 @@ void searchForCarsByPriceMenu()
                     cars.push_back(carList[i]);
                 }
             }
-            
+
             if (cars.size() == 0)
             {
                 cout << "No cars found. Please try again." << endl;
@@ -1030,13 +1052,14 @@ void searchForCarsByPriceMenu()
         {
             cout << "Bad price range. Please try again." << endl;
         }
-        
-        
+
+
         cout << "Do you want to continue searching for cars by price? (y/n) ";
         string choice;
         getline(cin, choice);
-        
-        if (choice == "") {
+
+        if (choice == "")
+        {
             choice = "n";
         }
         // Check if the first character in the answer is a y or Y. If false, stop the loop.
@@ -1045,8 +1068,8 @@ void searchForCarsByPriceMenu()
             isGood = true;
         }
     }
-    
-    
+
+
 }
 
 void loadCarMake(vector<string>& makeList, Car* cList)
@@ -1055,19 +1078,19 @@ void loadCarMake(vector<string>& makeList, Car* cList)
     bool isDupe = true;
     int makeSize = 0;
     int size = getArrayLength();
-    
+
     //Reads car makes from clist
     for (int i = 0; i < size; i++)
     {
         Make = cList[i].getMake();
         makeSize = makeList.size();
-        
+
         // If carMake is empty then pushback Make
         if (makeSize == 0)
         {
             makeList.push_back(Make);
         }
-        
+
         // If carMake is not empty then check if Make is a duplicate
         // Duplicates are ignored, while new Makes are added
         else
@@ -1086,16 +1109,16 @@ void loadCarMake(vector<string>& makeList, Car* cList)
     }
 }
 
-void saveReviews(HashTable<Review> Table, Car* list)
+void saveReviews(HashTable<Review> &Table, Car* list)
 {
     // Make/Model/Owner/Stars/Description
-    
+
     int size = getArrayLength();
     int rSize = 0;
     string Make, Model;
     ofstream save("reviews.txt");
     List<Review> rList;
-    
+
     if (save.is_open())
     {
         // Checks every car for reviews
@@ -1103,22 +1126,22 @@ void saveReviews(HashTable<Review> Table, Car* list)
         {
             Make = list[i].getMake();
             Model = list[i].getModel();
-            rList = Table.getValue(Make, Model);
-            
+
             // If the car has no reviews, move to next car
             // Cars with reviews are outputted to 'reviews.txt'
-            if (!rList.empty())
+            if (Table.indexIsFilled(Make, Model))
             {
+                rList = Table.getValue(Make, Model);
                 rList.begin();
-                rSize = rList.get_size();
-                for (int j = 0; j < rSize; j++)
+                while (!rList.off_end())
                 {
                     save << rList.current().getMake() << "/" << rList.current().getModel() << "/" << rList.current().getOwner() << "/" << rList.current().getStars() << "/" << rList.current().getDescription() << endl;
                     rList.scroll();
                 }
             }
+
         }
-        
+
         save.close();
     }
     else
@@ -1126,4 +1149,5 @@ void saveReviews(HashTable<Review> Table, Car* list)
         cout << "Error : Unable to open file 'reviews.txt' ";
         exit(-1);
     }
+
 }

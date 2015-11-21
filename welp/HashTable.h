@@ -34,6 +34,7 @@ public:
     //removes the item with the given key
 
     bool indexIsFilled(int index);
+    bool indexIsFilled(string key, string identifier);
     //Returns true if the linked list at that index is not empty
 
     void printTable();
@@ -47,7 +48,7 @@ public:
     double getAverageRatingBucket(string key, string identifier);
     //Gets the average rating of a car
 
-    List<hashobj> getValue(string key, string identifier);
+    List<hashobj>& getValue(string key, string identifier);
     //Gets the list object at the index
 
 private:
@@ -102,6 +103,19 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 template <class hashobj>
 bool HashTable<hashobj>::indexIsFilled(int index)
 {
+    return !(Table[index].empty());
+}
+
+template <class hashobj>
+bool HashTable<hashobj>::indexIsFilled(string key, string identifier)
+{
+    int index = baseHash(key, identifier);
+    int jump = jumpHash(index);
+    while ( (string)Table[index] != identifier && indexIsFilled(index) )
+    {
+        index = (index + jump) % TABLE_SIZE;
+    }
+
     return !(Table[index].empty());
 }
 
@@ -201,7 +215,7 @@ double HashTable<hashobj>::getAverageRatingBucket(string key, string identifier)
 }
 
 template <class hashobj>
-List<hashobj> HashTable<hashobj>::getValue(string key, string identifier)
+List<hashobj>& HashTable<hashobj>::getValue(string key, string identifier)
 {
     int index = baseHash(key, identifier);
     int jump = jumpHash(index);
