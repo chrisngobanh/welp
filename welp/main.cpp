@@ -24,9 +24,7 @@ void searchForCarsByPriceMenu();
 void chooseCars();
 void listCars(string);
 void pickCar(int index);
-void displayCarPage();
 void displayCarPage(Car car);
-void displayCarPage(int index);
 void listAllCars();
 void raitingMenu();
 void sortByCategoryMenu();
@@ -488,7 +486,7 @@ void listAllCars()
 
 	if (intChoice >= 1 && intChoice < getArrayLength())
 	{
-		displayCarPage(intChoice - 1);
+		displayCarPage(carList[intChoice - 1]);
 	}
 
 }
@@ -515,24 +513,6 @@ void displayCarPage(Car car)
 	cout << "Rating: " << endl;
 
 	raitingMenu();
-}
-
-void displayCarPage(int index)
-{
-	clearScreen();
-	cout << "*************" << carList[index].getMake() << " " << carList[index].getModel() << "*************" << endl;
-	cout << "Engine Type: " << carList[index].getEngine() << endl;
-	cout << "MPG City: " << carList[index].getMPGCity() << endl;
-	cout << "MPG Freeway: " << carList[index].getMPGFreeway() << endl;
-	cout << "Price: " << carList[index].getPrice() << endl;
-	cout << "Rating: " << endl;
-
-	raitingMenu();
-
-	/* Another menu here or a line of code
-	 calling on enterRating() ?
-	 */
-
 }
 
 int getArrayLength()
@@ -872,7 +852,7 @@ void searchForCarByNameMenu()
 		// If the car's name is found, then render the car page for the user
 		if (name.compare(carList[i].getName()) == 0)
 		{
-			displayCarPage(i);
+			displayCarPage(carList[i]);
 		}
 	}
 }
