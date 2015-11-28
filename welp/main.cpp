@@ -540,37 +540,39 @@ void displayCarPage(Car car)
     string choice,  uChoice;
 
     cout << endl;
-//    cout << "Would you like to see the reviews' menu? (y/n): ";
-//    choice = getUserInput();
-//    if (choice == "y")
-//    {
-        cout << "1. View list of reviews" << endl;
-        cout << "2. Add a review" << endl;
-        cout << "3. Delete your previous review" << endl;
-        cout << "0. Quit" << endl;
-        cout << "What is your choice? ";
+    cout << "1. View list of reviews" << endl;
+    cout << "2. Add a review" << endl;
+    cout << "3. Delete your previous review" << endl;
+    cout << "0. Quit" << endl;
+    cout << "What is your choice? ";
 
-        uChoice = getUserInput();
-        if (uChoice == "1")
+    uChoice = getUserInput();
+    if (uChoice == "1")
+    {
+        clearScreen();
+        cout << "Printing out all reviews for the " << car.getMake() << " " << car.getModel() << ":" << endl << endl;
+        reviewTable.printBucket(car.getMake(), car.getModel());
+        system("PAUSE");
+    }
+    else if (uChoice == "2")
+    {
+        enterReview(car.getMake(), car.getModel());
+    }
+    else if (uChoice == "3")
+    {
+        clearScreen();
+        Review review = Review(userName);
+        if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
         {
-            clearScreen();
-            cout << "Printing out all reviews for the " << car.getMake() << " " << car.getModel() << ":" << endl << endl;
-            reviewTable.printBucket(car.getMake(), car.getModel());
-            system("PAUSE");
-        }
-        else if (uChoice == "2")
-        {
-            enterReview(car.getMake(), car.getModel());
-        }
-        else if (uChoice == "3")
-        {
-            //delete a previous review
-        }
-        else if (uChoice == "0")
-        {
-            return;
-        }
-//    }
+            cout << "Your review has successfully been deleted." << endl;
+        } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
+
+        system("PAUSE");
+    }
+    else if (uChoice == "0")
+    {
+        return;
+    }
 }
 
 int getArrayLength()

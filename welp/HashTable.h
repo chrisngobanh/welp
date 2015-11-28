@@ -30,8 +30,9 @@ public:
     // calls the hash function on the key title to determine the correct bucket
     //if the item already exists it is replaced with the newer entry
 
-    void removeItem(string key, string identifier, hashobj _data);
+    bool removeItem(string key, string identifier, hashobj _data);
     //removes the item with the given key
+    //returns true if successful
 
     bool indexIsFilled(int index);
     bool indexIsFilled(string key, string identifier);
@@ -177,7 +178,7 @@ void HashTable<hashobj>::printBucket(string key, string identifier)
 }
 
 template <class hashobj>
-void HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data)
+bool HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data)
 {
     //Calculate the index
     int index = baseHash(key, identifier);
@@ -188,7 +189,13 @@ void HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data
     }
 
     //If the data is found in the list, delete it
-    if (Table[index].scrollTo(index)) Table[index].remove();
+    if (Table[index].scrollTo(_data))
+    {
+        Table[index].remove();
+        return true;
+    }
+
+    return false;
 }
 
 template <class hashobj>
