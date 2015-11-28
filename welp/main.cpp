@@ -865,6 +865,7 @@ void searchForCarByNameMenu()
 		if (name.compare(carList[i].getName()) == 0)
 		{
 			displayCarPage(carList[i]);
+			break;
 		}
 	}
 }
@@ -884,17 +885,23 @@ void searchForCarsByMakeMenu()
 	// This is a linear search
 	// TODO: Convert this to a binary search
 	// TODO: Wait until Johnny creates the array of car makes
-	//for (int i = 0; i < getArrayLength(); i++)
-	//{
-	//	// If the car's name is found, then render the car page for the user
-	//	if (name.compare(carList[i].getMake()) == 0)
-	//	{
-	//		// README: Uncomment when we implement car ids
-	//		displayCarPage(i);
-	//	}
-	//}
+	for (int i = 0; i < getArrayLength(); i++)
+	{
+		// If the car's name is found, then render the car page for the user
+		if (name.compare(carList[i].getMake()) == 0)
+		{
+			// README: Uncomment when we implement car ids
+			filterCarsMenu(name);
+			break;
+		}
+	}
 }
 
+/**
+* Search for Car by Price Menu
+*
+* This is a part of the search feature
+*/
 void searchForCarsByPriceMenu()
 {
 	bool isGood = false;
