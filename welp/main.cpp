@@ -30,7 +30,7 @@ void sortByCategoryMenu();
 void sortByMpgMenu();
 void sortByMpgFreewayMenu();
 void sortByPriceMenu();
-void filterCarsMenu(string, Car*);
+void filterCarsMenu(string);
 
 Car* load();
 int getArrayLength();
@@ -395,48 +395,46 @@ void sortByPriceMenu()
 
 void listCars(string carType)
 {
-	Car filteredCars[30];
-
 	// This could be greatly improved with an array of car makes
 	if (carType == "1")
 	{
-		filterCarsMenu("Honda", filteredCars);
+		filterCarsMenu("Honda");
 	}
 	else if (carType == "2")
 	{
-		filterCarsMenu("Toyota", filteredCars);
+		filterCarsMenu("Toyota");
 	}
 	else if (carType == "3")
 	{
-		filterCarsMenu("Subaru", filteredCars);
+		filterCarsMenu("Subaru");
 	}
 	else if (carType == "4")
 	{
-		filterCarsMenu("Ford", filteredCars);
+		filterCarsMenu("Ford");
 	}
 	else if (carType == "5")
 	{
-		filterCarsMenu("Acura", filteredCars);
+		filterCarsMenu("Acura");
 	}
 	else if (carType == "6")
 	{
-		filterCarsMenu("Chevrolet", filteredCars);
+		filterCarsMenu("Chevrolet");
 	}
 	else if (carType == "7")
 	{
-		filterCarsMenu("Nissan", filteredCars);
+		filterCarsMenu("Nissan");
 	}
 	else if (carType == "8")
 	{
-		filterCarsMenu("Tesla", filteredCars);
+		filterCarsMenu("Tesla");
 	}
 	else if (carType == "9")
 	{
-		filterCarsMenu("BMW", filteredCars);
+		filterCarsMenu("BMW");
 	}
 	else if (carType == "10")
 	{
-		filterCarsMenu("Ford", filteredCars);
+		filterCarsMenu("Ford");
 	}
 	else if (carType == "11")
 	{
@@ -444,11 +442,12 @@ void listCars(string carType)
 	}
 }
 
-void filterCarsMenu(string carMake, Car* filteredCars)
+void filterCarsMenu(string carMake)
 {
 	clearScreen();
 	cout << "*************CAR LIST*************" << endl;
 	int count = 0;
+	Car filteredCars[30];
 	for (int i = 0; i < getArrayLength(); i++)
 	{
 		if (carList[i].getMake() == carMake)
@@ -477,7 +476,7 @@ void filterCarsMenu(string carMake, Car* filteredCars)
 	}
 	else
 	{
-		filterCarsMenu(carMake, filteredCars);
+		filterCarsMenu(carMake);
 	}
 
 

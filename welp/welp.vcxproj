@@ -72,6 +72,7 @@
   <ItemGroup>
     <ClInclude Include="BST.h" />
     <ClInclude Include="Car.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Rating.h" />
     <ClInclude Include="Review.h" />
