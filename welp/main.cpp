@@ -22,19 +22,17 @@ void searchForCarsMenu(); // This is the menu for the search function
 void searchForCarByNameMenu();
 void searchForCarsByMakeMenu();
 void searchForCarsByPriceMenu();
-void chooseCars();
+void browseForCarsMenu();
 void listCars(string);
 void pickCar(int index);
 void displayCarPage(Car car);
-void listAllCars();
+void listAllCarsMenu();
 void raitingMenu();
 void sortByCategoryMenu();
 void sortByMpgMenu();
 void sortByMpgFreewayMenu();
 void sortByPriceMenu();
-void filterCars(string, Car*);
-inline bool isInteger(const std::string & s);
-
+void filterCarsMenu(string, Car*);
 
 Car* load();
 int getArrayLength();
@@ -75,6 +73,23 @@ string getUserInput()
 	}
 	return input;
 }
+
+/**
+* Is Integer Handler
+*
+* This function takes a string and checks if it can be converted to an int
+* Returns true if the string can be an int, and false if the string cannot be an int
+*/
+inline bool isInteger(const std::string & s)
+{
+	if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
+
+	char * p;
+	strtol(s.c_str(), &p, 10);
+
+	return (*p == 0);
+}
+
 
 /**
  * Covert String To Int Handler
@@ -169,7 +184,7 @@ void mainMenu()
 
 		if (choice == "1")
 		{
-			chooseCars();
+			browseForCarsMenu();
 		}
 		else if (choice == "2")
 		{
@@ -186,7 +201,7 @@ void mainMenu()
 	} while (!isGood);
 }
 
-void chooseCars()
+void browseForCarsMenu()
 {
 	// TODO: Change this so the values arent fixed and it reads value from an array instead
 	clearScreen();
@@ -217,7 +232,7 @@ void chooseCars()
 	else
 	{
 		// If the user input is bad, recall the function.
-		chooseCars();
+		browseForCarsMenu();
 	}
 }
 
@@ -387,51 +402,51 @@ void listCars(string carType)
 	// This could be greatly improved with an array of car makes
 	if (carType == "1")
 	{
-		filterCars("Honda", filteredCars);
+		filterCarsMenu("Honda", filteredCars);
 	}
 	else if (carType == "2")
 	{
-		filterCars("Toyota", filteredCars);
+		filterCarsMenu("Toyota", filteredCars);
 	}
 	else if (carType == "3")
 	{
-		filterCars("Subaru", filteredCars);
+		filterCarsMenu("Subaru", filteredCars);
 	}
 	else if (carType == "4")
 	{
-		filterCars("Ford", filteredCars);
+		filterCarsMenu("Ford", filteredCars);
 	}
 	else if (carType == "5")
 	{
-		filterCars("Acura", filteredCars);
+		filterCarsMenu("Acura", filteredCars);
 	}
 	else if (carType == "6")
 	{
-		filterCars("Chevrolet", filteredCars);
+		filterCarsMenu("Chevrolet", filteredCars);
 	}
 	else if (carType == "7")
 	{
-		filterCars("Nissan", filteredCars);
+		filterCarsMenu("Nissan", filteredCars);
 	}
 	else if (carType == "8")
 	{
-		filterCars("Tesla", filteredCars);
+		filterCarsMenu("Tesla", filteredCars);
 	}
 	else if (carType == "9")
 	{
-		filterCars("BMW", filteredCars);
+		filterCarsMenu("BMW", filteredCars);
 	}
 	else if (carType == "10")
 	{
-		filterCars("Ford", filteredCars);
+		filterCarsMenu("Ford", filteredCars);
 	}
 	else if (carType == "11")
 	{
-		listAllCars();
+		listAllCarsMenu();
 	}
 }
 
-void filterCars(string carMake, Car* filteredCars)
+void filterCarsMenu(string carMake, Car* filteredCars)
 {
 	clearScreen();
 	cout << "*************CAR LIST*************" << endl;
@@ -464,13 +479,13 @@ void filterCars(string carMake, Car* filteredCars)
 	}
 	else
 	{
-		filterCars(carMake, filteredCars);
+		filterCarsMenu(carMake, filteredCars);
 	}
 
 
 }
 
-void listAllCars()
+void listAllCarsMenu()
 {
 	//	string finalIndex = getArrayLength();
 	clearScreen();
@@ -494,6 +509,10 @@ void listAllCars()
 	if (intChoice >= 1 && intChoice < getArrayLength())
 	{
 		displayCarPage(carList[intChoice - 1]);
+	}
+	else
+	{
+		listAllCarsMenu();
 	}
 
 }
@@ -543,17 +562,6 @@ int getArrayLength()
 		cout << "Error 1: Unable to open file \"Kars Data.txt\"" << endl << endl;
 		return -1;
 	}
-}
-
-
-inline bool isInteger(const std::string & s)
-{
-	if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
-
-	char * p;
-	strtol(s.c_str(), &p, 10);
-
-	return (*p == 0);
 }
 
 //Make/Model/MPG City/MPG Freeway/Car Type/Engine Type/Price
