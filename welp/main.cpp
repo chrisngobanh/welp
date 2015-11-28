@@ -23,8 +23,6 @@ void searchForCarByNameMenu();
 void searchForCarsByMakeMenu();
 void searchForCarsByPriceMenu();
 void browseForCarsMenu();
-void listCars(string);
-void pickCar(int index);
 void displayCarPage(Car car);
 void listAllCarsMenu();
 void raitingMenu();
@@ -43,7 +41,7 @@ void loadReviewTable(HashTable<Review> &table);
 void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst);
 void loadCarMake(vector<string>& makeList, Car* cList);
 void saveReviews(HashTable<Review> &Table, Car* list);
-
+void listCars(string);
 
 Car* carList;
 string userName;
