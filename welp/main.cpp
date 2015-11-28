@@ -803,7 +803,7 @@ void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst
     }
 }
 
-//May delete this function to be replaced by the Rating's Class member function.
+/* Function to get user's review on a vehicle */
 void enterReview(string make, string model)
 {
     string description,  temp;
