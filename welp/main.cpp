@@ -15,8 +15,9 @@
 
 using namespace std;
 
-// Menu Function
+// Menu Prototypes
 void splashMenu(); // This is the splash menu for our app
+void mainMenu();
 void searchForCarsMenu(); // This is the menu for the search function
 void searchForCarByNameMenu();
 void searchForCarsByMakeMenu();
@@ -120,6 +121,39 @@ int main()
 	loadAvgRatingBST(carList, reviewTable, avgRatingBST);
 	loadCarMake(carMakeVector, carList);
 
+	mainMenu();
+
+	saveReviews(reviewTable, carList);
+
+	system("PAUSE");
+	return 0;
+}
+
+void splashMenu()
+{
+	cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
+
+	cout << "                       ______________" << endl;
+	cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
+	cout << "  \\=====_..--'/'''    |    | Han Tint     ``-._     Carlos Quirarte" << endl;
+	cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
+	cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
+	cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
+	cout << "|.__  .'/ /     \\ \\`.      \\    Johnny Nguyen    | .'/ /     \\ \\`. ```-- `." << endl;
+	cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
+	cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
+	cout << "         `-.....-'                  Kevin Ngo         `-.....-'" << endl;
+	cout << endl << endl << endl;
+
+	cout << "What is your username? ";
+
+	// Check if user input is empty. If it isn't, then end loop
+	userName = getUserInput();
+}
+
+// This is the only menu that should have a loop
+void mainMenu()
+{
 	bool isGood = false;
 	do
 	{
@@ -150,33 +184,6 @@ int main()
 			isGood = true;
 		}
 	} while (!isGood);
-
-	saveReviews(reviewTable, carList);
-
-	system("PAUSE");
-	return 0;
-}
-
-void splashMenu()
-{
-	cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
-
-	cout << "                       ______________" << endl;
-	cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
-	cout << "  \\=====_..--'/'''    |    | Han Tint     ``-._     Carlos Quirarte" << endl;
-	cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
-	cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
-	cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
-	cout << "|.__  .'/ /     \\ \\`.      \\    Johnny Nguyen    | .'/ /     \\ \\`. ```-- `." << endl;
-	cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
-	cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
-	cout << "         `-.....-'                  Kevin Ngo         `-.....-'" << endl;
-	cout << endl << endl << endl;
-
-	cout << "What is your username? ";
-
-	// Check if user input is empty. If it isn't, then end loop
-	userName = getUserInput();
 }
 
 void chooseCars()
