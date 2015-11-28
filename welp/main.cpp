@@ -57,6 +57,7 @@ BST<int, Car> priceBST;
 BST<double, Car> avgRatingBST;
 vector<string> carMakeVector;
 
+// Handler Functions (Reusable Code)
 
 /**
  * Get User Input Handler
@@ -89,6 +90,19 @@ int convertStringToInt(string input)
 	return atoi(input.c_str());
 }
 
+/**
+* Clear Screen Handler
+* 
+* This function clears the screen by making a lot of empty new lines
+* This method is cross platform
+*/
+void clearScreen()
+{
+	if (system("CLS")) system("clear");
+}
+
+// The rest of the program
+
 int main()
 {
 	splashMenu();
@@ -108,12 +122,10 @@ int main()
 	loadAvgRatingBST(carList, reviewTable, avgRatingBST);
 	loadCarMake(carMakeVector, carList);
 
-	system("CLS");
-
 	bool isGood = false;
 	do
 	{
-		system("CLS");
+		clearScreen();
 		cout << "*************MAIN MENU*************" << endl;
 		cout << "1. Browse our list of cars" << endl;
 		cout << "2. Search for a car" << endl;
@@ -264,7 +276,7 @@ void splashMenu()
 void chooseCars()
 {
 	// TODO: Change this so the values arent fixed and it reads value from an array instead
-	system("CLS");
+	clearScreen();
 	cout << "*************BROWSE MENU*************" << endl;
 	cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
 	cout << "1) Honda" << endl;
@@ -299,7 +311,7 @@ void chooseCars()
 void sortByCategoryMenu()
 {
 	// TODO: Change this so the values arent fixed and it reads value from an array instead
-	system("CLS");
+	clearScreen();
 	cout << "*************CATEGORY MENU*************" << endl;
 	cout << "What would you like to sort cars by?" << endl;
 	cout << "1) MPG City" << endl;
@@ -337,7 +349,7 @@ void sortByCategoryMenu()
 
 void sortByMpgMenu()
 {
-	system("CLS");
+	clearScreen();
 	vector<Car> carVector;
 	int min = INT_MIN;
 	int max = INT_MAX;
@@ -377,7 +389,7 @@ void sortByMpgMenu()
 
 void sortByMpgFreewayMenu()
 {
-	system("CLS");
+	clearScreen();
 	vector<Car> carVector;
 	int min = INT_MIN;
 	int max = INT_MAX;
@@ -418,7 +430,7 @@ void sortByMpgFreewayMenu()
 
 void sortByPriceMenu()
 {
-	system("CLS");
+	clearScreen();
 	vector<Car> carVector;
 	int min = INT_MIN;
 	int max = INT_MAX;
@@ -508,8 +520,7 @@ void listCars(string carType)
 
 void filterCars(string carMake, Car* filteredCars)
 {
-	system("CLS");
-
+	clearScreen();
 	cout << "*************CAR LIST*************" << endl;
 	int count = 0;
 	for (int i = 0; i < getArrayLength(); i++)
@@ -549,7 +560,7 @@ void filterCars(string carMake, Car* filteredCars)
 void listAllCars()
 {
 	//	string finalIndex = getArrayLength();
-	system("CLS");
+	clearScreen();
 	cout << "*************ALL CARS MENU*************" << endl;
 	// Print out list of all cars
 	for (int i = 1; i < getArrayLength(); i++)
@@ -576,7 +587,7 @@ void listAllCars()
 
 void displayCarPage(Car car)
 {
-	system("CLS");
+	clearScreen();
 	cout << "*************" << car.getMake() << " " << car.getModel() << "*************" << endl;
 	cout << "                       ______________" << endl;
 	cout << "               __..=='|'   |         ``-._" << endl;
@@ -600,7 +611,7 @@ void displayCarPage(Car car)
 
 void displayCarPage(int index)
 {
-	system("CLS");
+	clearScreen();
 	cout << "*************" << carList[index].getMake() << " " << carList[index].getModel() << "*************" << endl;
 	cout << "Engine Type: " << carList[index].getEngine() << endl;
 	cout << "MPG City: " << carList[index].getMPGCity() << endl;
@@ -910,7 +921,7 @@ void raitingMenu()
  */
 void searchForCarsMenu()
 {
-	system("CLS");
+	clearScreen();
 	cout << "****Search for Cars*****" << endl;
 	cout << "1. Search by car name" << endl;
 	cout << "2. Search for cars by manufacturer" << endl;
@@ -941,7 +952,7 @@ void searchForCarsMenu()
  */
 void searchForCarByNameMenu()
 {
-	system("CLS");
+	clearScreen();
 	cout << "*****Search for Car by Car Name*****" << endl;
 	cout << "Please input a car name (i.e. Honda Accord) ";
 	string name = getUserInput();
@@ -965,7 +976,7 @@ void searchForCarByNameMenu()
  */
 void searchForCarsByMakeMenu()
 {
-	system("CLS");
+	clearScreen();
 	cout << "*****Search for Car by Car Manufacturer*****" << endl;
 	cout << "Please input a car name (i.e. Tesla) ";
 	string name = getUserInput();
@@ -989,7 +1000,7 @@ void searchForCarsByPriceMenu()
 	bool isGood = false;
 	while (!isGood)
 	{
-		system("CLS");
+		clearScreen();
 		cout << "*****Search for Car by Price Range*****" << endl;
 		cout << "Please input the min price (25000) ";
 		string min = getUserInput();
