@@ -909,10 +909,10 @@ void searchForCarsByPriceMenu()
 	{
 		clearScreen();
 		cout << "*****Search for Car by Price Range*****" << endl;
-		cout << "Please input the min price (25000) ";
+		cout << "Please input the min price (i.e. 25000) ";
 		string min = getUserInput();
 
-		cout << "Please input the max price (50000) ";
+		cout << "Please input the max price (i.e. 50000) ";
 		string max = getUserInput();
 
 		int minInt = convertStringToInt(min);
@@ -937,20 +937,36 @@ void searchForCarsByPriceMenu()
 			{
 				cout << "No cars found. Please try again." << endl;
 			}
+			else
+			{
+				for (int i = 0; i < cars.size(); i++)
+				{
+					cout << i + 1 << ". " << cars[i].getName() << " - $" << cars[i].getPrice() << endl;
+				}
+
+				cout << "0 - Quit" << endl;
+
+				cout << "What is your choice? ";
+				string choice = getUserInput();
+
+				if (choice == "0") return;
+
+				int intChoice = convertStringToInt(choice);
+				
+				if (intChoice >= 1 && intChoice <= cars.size()) 
+				{
+					displayCarPage(cars[intChoice]);
+				}				
+			}
 		}
 		else
 		{
 			cout << "Bad price range. Please try again." << endl;
 		}
 
-
 		cout << "Do you want to continue searching for cars by price? (y/n) ";
 		string choice = getUserInput();
 
-		if (choice == "")
-		{
-			choice = "n";
-		}
 		// Check if the first character in the answer is a y or Y. If false, stop the loop.
 		if (!(choice.at(0) == 'y' || choice.at(0) == 'Y'))
 		{
