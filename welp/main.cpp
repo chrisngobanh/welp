@@ -109,11 +109,20 @@ int convertStringToInt(string input)
  * This function clears the screen by making a lot of empty new lines
  * This method is cross platform
  */
+#ifdef _WIN32
 void clearScreen()
 {
-    if (system("CLS")) system("clear");
+    system("CLS");
 }
 
+#else
+
+void clearScreen()
+{
+    cout << string( 100, '\n' );
+}
+
+#endif
 // The rest of the program
 
 int main()
