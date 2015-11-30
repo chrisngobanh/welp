@@ -30,8 +30,9 @@ public:
     // calls the hash function on the key title to determine the correct bucket
     //if the item already exists it is replaced with the newer entry
 
-    void removeItem(string key, string identifier, hashobj _data);
+    bool removeItem(string key, string identifier, hashobj _data);
     //removes the item with the given key
+    //returns true if successful
 
     bool indexIsFilled(int index);
     bool indexIsFilled(string key, string identifier);
@@ -51,9 +52,14 @@ public:
     List<hashobj>& getValue(string key, string identifier);
     //Gets the list object at the index
 
+    int getNumAccesses(string key, string identifier);
+    //A test for efficiency. Returns the number of checks in order to find a key's value
+    int getTableSize();
+    //A getter to help test the efficiency
+
 private:
 
-    static const int TABLE_SIZE = 52;
+    static const int TABLE_SIZE = 47;
     List<hashobj> Table[TABLE_SIZE];
 
 };
@@ -72,6 +78,12 @@ template <class hashobj>
 HashTable<hashobj>::~HashTable()
 {
 
+}
+
+template <class hashobj>
+int HashTable<hashobj>::getTableSize()
+{
+    return TABLE_SIZE;
 }
 
 template <class hashobj>
@@ -177,7 +189,7 @@ void HashTable<hashobj>::printBucket(string key, string identifier)
 }
 
 template <class hashobj>
-void HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data)
+bool HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data)
 {
     //Calculate the index
     int index = baseHash(key, identifier);
@@ -188,7 +200,13 @@ void HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data
     }
 
     //If the data is found in the list, delete it
-    if (Table[index].scrollTo(index)) Table[index].remove();
+    if (Table[index].scrollTo(_data))
+    {
+        Table[index].remove();
+        return true;
+    }
+
+    return false;
 }
 
 template <class hashobj>
@@ -225,6 +243,20 @@ List<hashobj>& HashTable<hashobj>::getValue(string key, string identifier)
     }
 
     return Table[index];
+}
+
+template <class hashobj>
+int HashTable<hashobj>::getNumAccesses(string key, string identifier)
+{
+    int accesses = 1;
+    int index = baseHash(key, identifier);
+    int jump = jumpHash(index);
+    while ( (string)Table[index] != identifier && indexIsFilled(index) )
+    {
+        index = (index + jump) % TABLE_SIZE;
+        accesses++;
+    }
+    return accesses;
 }
 
 #endif /* HASHTABLE_H_ */

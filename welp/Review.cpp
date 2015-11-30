@@ -7,7 +7,16 @@ Review::Review()
     stars = 0;
     make = "";
     model = "";
-};
+}
+
+Review::Review(string _owner)
+{
+    owner = _owner;
+    description = "";
+    stars = 0;
+    make = "";
+    model = "";
+}
 
 Review::Review(string _owner, string _description, int _stars, string _make, string _model)
 {
@@ -16,7 +25,7 @@ Review::Review(string _owner, string _description, int _stars, string _make, str
     stars = _stars;
     make = _make;
     model = _model;
-};
+}
 
 string Review::getOwner()
 {

@@ -345,7 +345,6 @@ bstobj BST<bstvalue, bstobj>::minimum()
     {
         return findMin(root);
     }
-
 }
 
 #endif

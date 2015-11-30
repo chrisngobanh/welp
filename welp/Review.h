@@ -25,6 +25,7 @@ public:
 
     //Constructors
     Review();
+    Review(string _owner);
     Review(string _owner, string _description, int _stars, string _make, string _model);
 
     //Getters
