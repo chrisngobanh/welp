@@ -37,6 +37,8 @@
 		1AA271E51C0A4B7500D425DB /* Review.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Review.cpp; sourceTree = "<group>"; };
 		1AA271E61C0A4B7500D425DB /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		1AA271EC1C0A574C00D425DB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		EEB8B9931C0D08FF00040A10 /* reviews.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = reviews.txt; path = welp/reviews.txt; sourceTree = SOURCE_ROOT; };
+		EEB8B9941C0D092900040A10 /* KarsData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KarsData.txt; path = welp/KarsData.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,8 @@
 		1A2A16001BE1A7B800E36576 /* Welp */ = {
 			isa = PBXGroup;
 			children = (
+				EEB8B9941C0D092900040A10 /* KarsData.txt */,
+				EEB8B9931C0D08FF00040A10 /* reviews.txt */,
 				1AA271DC1C0A4B6C00D425DB /* BST.h */,
 				1AA271DD1C0A4B6C00D425DB /* Car.cpp */,
 				1AA271DE1C0A4B6C00D425DB /* Car.h */,
