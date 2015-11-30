@@ -52,9 +52,14 @@ public:
     List<hashobj>& getValue(string key, string identifier);
     //Gets the list object at the index
 
+    int getNumAccesses(string key, string identifier);
+    //A test for efficiency. Returns the number of checks in order to find a key's value
+    int getTableSize();
+    //A getter to help test the efficiency
+
 private:
 
-    static const int TABLE_SIZE = 52;
+    static const int TABLE_SIZE = 47;
     List<hashobj> Table[TABLE_SIZE];
 
 };
@@ -73,6 +78,12 @@ template <class hashobj>
 HashTable<hashobj>::~HashTable()
 {
 
+}
+
+template <class hashobj>
+int HashTable<hashobj>::getTableSize()
+{
+    return TABLE_SIZE;
 }
 
 template <class hashobj>
@@ -232,6 +243,20 @@ List<hashobj>& HashTable<hashobj>::getValue(string key, string identifier)
     }
 
     return Table[index];
+}
+
+template <class hashobj>
+int HashTable<hashobj>::getNumAccesses(string key, string identifier)
+{
+    int accesses = 1;
+    int index = baseHash(key, identifier);
+    int jump = jumpHash(index);
+    while ( (string)Table[index] != identifier && indexIsFilled(index) )
+    {
+        index = (index + jump) % TABLE_SIZE;
+        accesses++;
+    }
+    return accesses;
 }
 
 #endif /* HASHTABLE_H_ */

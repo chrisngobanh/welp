@@ -31,6 +31,7 @@ void sortByMpgMenu();
 void sortByMpgFreewayMenu();
 void sortByPriceMenu();
 void filterCarsMenu(string);
+void testHashEfficiency();
 
 Car* load();
 int getArrayLength();
@@ -175,6 +176,7 @@ void mainMenu()
         cout << "1. Browse our list of cars" << endl;
         cout << "2. Search for a car" << endl;
         cout << "3. Sort cars by category" << endl;
+        cout << "4. Test the efficicency of the hash table" << endl;
         cout << "0. Quit" << endl;
         cout << "Please select an option. ";
 
@@ -191,6 +193,10 @@ void mainMenu()
         else if (choice == "3")
         {
             sortByCategoryMenu();
+        }
+        else if (choice == "4")
+        {
+            testHashEfficiency();
         }
         else if (choice == "0")
         {
@@ -533,7 +539,7 @@ void displayCarPage(Car car)
     cout << "MPG City: " << car.getMPGCity() << endl;
     cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
     cout << "Price: " << car.getPrice() << endl;
-    cout << "Rating: " << endl;
+    cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << endl;
 
     ///////////////Reviews Menu////////////////
 
@@ -1078,4 +1084,29 @@ void saveReviews(HashTable<Review> &Table, Car* list)
         exit(-1);
     }
 
+}
+
+void testHashEfficiency()
+{
+    int min = 99999999;
+    int max = 0;
+    int sum = 0;
+    double size = getArrayLength();
+    for (int i = 0; i < size; i++)
+    {
+        Car car = carList[i];
+        int accesses = reviewTable.getNumAccesses(car.getMake(), car.getModel());
+        if (accesses < min) min = accesses;
+        if (accesses > max) max = accesses;
+        sum = sum + accesses;
+    }
+
+    clearScreen();
+
+    cout << "The load factor is: " << size/reviewTable.getTableSize() << endl;
+    cout << "The minimum amount of accesses before finding a key's value is: " << min << endl;
+    cout << "The maximum amount of accesses before finding a key's value is: " << max << endl;
+    cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl;
+
+    system("PAUSE");
 }
