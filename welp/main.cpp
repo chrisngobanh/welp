@@ -205,18 +205,18 @@ void browseForCarsMenu()
     clearScreen();
     cout << "*************BROWSE MENU*************" << endl;
     cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
-    cout << "1) Honda" << endl;
-    cout << "2) Toyota" << endl;
-    cout << "3) Subaru" << endl;
-    cout << "4) Ford" << endl;
-    cout << "5) Acura" << endl;
-    cout << "6) Chevrolet" << endl;
-    cout << "7) Nissan" << endl;
-    cout << "8) Tesla" << endl;
-    cout << "9) BMW" << endl;
-    cout << "10) Ford" << endl;
-    cout << "11) All" << endl;
-    cout << "0) Back" << endl;
+    cout << "1. Honda" << endl;
+    cout << "2. Toyota" << endl;
+    cout << "3. Subaru" << endl;
+    cout << "4. Ford" << endl;
+    cout << "5. Acura" << endl;
+    cout << "6. Chevrolet" << endl;
+    cout << "7. Nissan" << endl;
+    cout << "8. Tesla" << endl;
+    cout << "9. BMW" << endl;
+    cout << "10. Ford" << endl;
+    cout << "11. All" << endl;
+    cout << "0. Back" << endl;
 
     string choice = getUserInput();
     if (choice == "0") return;
@@ -240,11 +240,11 @@ void sortByCategoryMenu()
     clearScreen();
     cout << "*************CATEGORY MENU*************" << endl;
     cout << "What would you like to sort cars by?" << endl;
-    cout << "1) MPG City" << endl;
-    cout << "2) MPG Freeway" << endl;
-    cout << "3) Price" << endl;
-    cout << "4) Rating" << endl;
-    cout << "0) Back" << endl;
+    cout << "1. MPG City" << endl;
+    cout << "2. MPG Freeway" << endl;
+    cout << "3. Price" << endl;
+    cout << "4. Rating" << endl;
+    cout << "0. Back" << endl;
 
     string choice = getUserInput();
 
