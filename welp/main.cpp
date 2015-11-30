@@ -833,7 +833,7 @@ void enterReview(string make, string model)
  * 1. Search by Car Name
  * 2. Search by Car Manufacturer
  * 3. Search by Price Range
- * 4. Go Back
+ * 0. Go Back
  */
 void searchForCarsMenu()
 {
@@ -842,10 +842,12 @@ void searchForCarsMenu()
     cout << "1. Search by car name" << endl;
     cout << "2. Search for cars by manufacturer" << endl;
     cout << "3. Search cars in a price range" << endl;
-    cout << "4. Go Back.";
+    cout << "0. Back";
     cout << endl;
     cout << "What is your option? ";
     string choice = getUserInput();
+
+	if (choice == "0") return;
 
     if (choice == "1")
     {
@@ -859,6 +861,11 @@ void searchForCarsMenu()
     {
         searchForCarsByPriceMenu();
     }
+	else
+	{
+		// Redraw menu if input is bad
+		searchForCarsMenu();
+	}
 }
 
 /**
