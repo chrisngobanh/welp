@@ -565,7 +565,7 @@ void displayCarPage(Car car)
         }
         else if (uChoice == "4")
         {
-            exit();
+            exit(-1);
         }
     }
 }
