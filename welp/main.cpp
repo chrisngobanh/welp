@@ -575,64 +575,73 @@ void listAllCarsMenu()
 
 void displayCarPage(Car car)
 {
+    string uChoice;
+    
     clearScreen();
-    cout << "***************************** " << car.getMake() << " " << car.getModel() << " *****************************" << endl << endl;
-    cout << "                       ______________" << endl;
-    cout << "               __..=='|'   |         ``-._" << endl;
-    cout << "  \\=====_..--'/'''    |    |              ``-._" << endl;
-    cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
-    cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
-    cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
-    cout << "|.__  .'/ /     \\ \\`.      \\                     | .'/ /     \\ \\`. ```-- `." << endl;
-    cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
-    cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
-    cout << "         `-.....-'                                    `-.....-'" << endl;
-    cout << endl;
-    cout << "Engine Type: " << car.getEngine() << endl;
-    cout << "MPG City: " << car.getMPGCity() << endl;
-    cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
-    cout << "Price: $" << car.getPrice() << endl;
-    cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << endl;
-
-    ///////////////Reviews Menu////////////////
-
-    string choice,  uChoice;
-
-    cout << endl << endl << endl;
-    cout << "************* Review Menu *************" << endl << endl;
-    cout << "1. View list of reviews" << endl;
-    cout << "2. Add a review" << endl;
-    cout << "3. Delete your previous review" << endl;
-    cout << "0. Quit" << endl << endl;
-    cout << "What is your choice?  ";
-
-    uChoice = getUserInput();
-    if (uChoice == "1")
+    
+    do
     {
-        clearScreen();
-        cout << "Printing out all reviews for the " << car.getMake() << " " << car.getModel() << ":" << endl << endl;
-        reviewTable.printBucket(car.getMake(), car.getModel());
-        system("PAUSE");
-    }
-    else if (uChoice == "2")
-    {
-        enterReview(car.getMake(), car.getModel());
-    }
-    else if (uChoice == "3")
-    {
-        clearScreen();
-        Review review = Review(userName);
-        if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
+        
+        cout << "************************ " << car.getMake() << " " << car.getModel() << " ************************" << endl << endl;
+        cout << "                       ______________" << endl;
+        cout << "               __..=='|'   |         ``-._" << endl;
+        cout << "  \\=====_..--'/'''    |    |              ``-._" << endl;
+        cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
+        cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
+        cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
+        cout << "|.__  .'/ /     \\ \\`.      \\                     | .'/ /     \\ \\`. ```-- `." << endl;
+        cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
+        cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
+        cout << "         `-.....-'                                    `-.....-'" << endl;
+        cout << endl;
+        cout << "Engine Type: " << car.getEngine() << endl;
+        cout << "MPG City: " << car.getMPGCity() << endl;
+        cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
+        cout << "Price: $" << car.getPrice() << endl;
+        cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << endl;
+        
+        ///////////////Reviews Menu////////////////
+        
+        string choice;
+        
+        cout << endl << endl << endl;
+        cout << "************* Review Menu *************" << endl << endl;
+        cout << "1. View list of reviews" << endl;
+        cout << "2. Add a review" << endl;
+        cout << "3. Delete your previous review" << endl;
+        cout << "0. Return to main menu" << endl << endl;
+        cout << "What is your choice?  ";
+        
+        
+        uChoice = getUserInput();
+        if (uChoice == "1")
         {
-            cout << "Your review has successfully been deleted." << endl;
-        } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
-
-        system("PAUSE");
-    }
-    else if (uChoice == "0")
-    {
-        return;
-    }
+            clearScreen();
+            cout << "Printing out all reviews for the " << car.getMake() << " " << car.getModel() << ":" << endl << endl;
+            reviewTable.printBucket(car.getMake(), car.getModel());
+            system("PAUSE");
+        }
+        else if (uChoice == "2")
+        {
+            enterReview(car.getMake(), car.getModel());
+        }
+        else if (uChoice == "3")
+        {
+            clearScreen();
+            Review review = Review(userName);
+            if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
+            {
+                cout << "Your review has successfully been deleted." << endl;
+            } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
+            
+            system("PAUSE");
+        }
+        else if (uChoice == "0")
+        {
+            return;
+        }
+        
+    } while (uChoice != "0");
 }
 
 int getArrayLength()
