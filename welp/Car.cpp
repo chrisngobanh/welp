@@ -58,6 +58,6 @@ int Car::getPrice()
 
 ostream& operator<<(ostream &os, const Car &car)
 {
-	os << car.make << '/' << car.model << '/' << car.MPGCity << '/' << car.MPGFreeway << '/' << car.engine << '/' << car.price;
+	os << car.make << ' ' << car.model;
 	return os;
 }

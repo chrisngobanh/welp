@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -44,6 +45,8 @@ private:
     void deleteTree(Nodeptr root);
     bool containsValue(Nodeptr root, bstvalue value, bstobj obj);
     bstobj findMin(Nodeptr root);
+    void printLevelOrder(Nodeptr root);
+
 
 public:
     BST();
@@ -62,6 +65,7 @@ public:
     void getVectorInOrder(bstvalue min, bstvalue max, vector<bstobj> &list);
     bool contains(bstvalue value);
     bstobj minimum();
+    void levelOrderPrint();
 
 };
 
@@ -99,7 +103,7 @@ void BST<bstvalue, bstobj>::inOrderPrint(Nodeptr root)
     if (root != NULL)
     {
         inOrderPrint(root->left);
-        cout << root->obj << "\n";
+        cout << root->obj << endl;
         inOrderPrint(root->right);
     }
 }
@@ -133,9 +137,9 @@ void BST<bstvalue, bstobj>::inOrderPrint(Nodeptr root, bstvalue min, bstvalue ma
 {
     if (root != NULL)
     {
-        inOrderPrint(root->left, min, max);
-        if (root->value >= min && root->value <= max) cout << root->value << " ";
-        inOrderPrint(root->right, min, max);
+        if (root->obj > min) inOrderPrint(root->left, min, max);
+        if (root->value >= min && root->value <= max) cout << root->obj << endl;
+        if (root->obj < max) inOrderPrint(root->right, min, max);
     }
 }
 
@@ -285,6 +289,52 @@ void BST<bstvalue, bstobj>::printPostOrder()
 {
     if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
     else postOrderPrint(root);
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::printLevelOrder(Nodeptr root)
+{
+    queue<Nodeptr> nodeQ;
+    queue<int> levelQ;
+    Nodeptr iter;
+    int level = 0;
+
+    nodeQ.push(root);
+    levelQ.push(level);
+
+    while (!nodeQ.empty())
+    {
+        iter = nodeQ.front();
+        level = levelQ.front();
+
+        if (iter != NULL)
+        {
+            for (int i = 0; i < level; i++)
+            {
+                cout << "-";
+            }
+            cout << iter->obj << endl;
+            if (iter->left != NULL)
+            {
+                nodeQ.push(iter->left);
+                levelQ.push(level + 2);
+            }
+            if (iter->right != NULL)
+            {
+                nodeQ.push(iter->right);
+                levelQ.push(level + 2);
+            }
+        }
+        nodeQ.pop();
+        levelQ.pop();
+    }
+}
+
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::levelOrderPrint()
+{
+    if (isEmpty()) cout << "Error: The tree is empty.\n";
+    else printLevelOrder(root);
 }
 
 //------------------------------------------------
