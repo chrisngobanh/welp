@@ -30,6 +30,7 @@ void sortByCategoryMenu();
 void sortByMpgMenu();
 void sortByMpgFreewayMenu();
 void sortByPriceMenu();
+void sortByRatingMenu();
 void filterCarsMenu(string);
 void testHashEfficiency();
 
@@ -279,7 +280,7 @@ void sortByCategoryMenu()
     }
     else if (choice == "4")
     {
-        // TODO:
+		sortByRatingMenu();
     }
     else
     {
@@ -405,8 +406,49 @@ void sortByPriceMenu()
         // If user input is bad, recall the function.
         sortByPriceMenu();
     }
+}
+
+void sortByRatingMenu()
+{
+	clearScreen();
+	vector<Car> carVector;
+	int min = INT_MIN;
+	int max = INT_MAX;
+	avgRatingBST.getVectorInOrder(min, max, carVector);
+
+	cout << "*************SORTED RATING FREEWAY LIST*************" << endl;
+
+	int count = 0;
+	for (int i = 0; i < carVector.size(); i++)
+	{
+		count++;
+		cout << count << ". ";
+		cout << carVector[i].getMake() << " ";
+		cout << carVector[i].getModel() << "/ RATING: ";
+		cout << reviewTable.getAverageRatingBucket(carVector[i].getMake(), carVector[i].getModel()) << endl;
+	}
+
+	cout << "0. Back" << endl;
+
+	// Input Validation by checking if its an integer and within the range of teh array
+	string choice = getUserInput();
+
+	if (choice == "0") return;
+
+	int intChoice = convertStringToInt(choice);
+
+	if (intChoice >= 1 && intChoice <= count)
+	{
+		displayCarPage(carVector[intChoice - 1]);
+	}
+	else
+	{
+		// If the user input is bad, recall the function.
+		sortByRatingMenu();
+	}
 
 }
+
 
 void listCars(string carType)
 {
