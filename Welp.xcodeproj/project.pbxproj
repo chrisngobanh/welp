@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1AA271E01C0A4B6C00D425DB /* Car.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271DD1C0A4B6C00D425DB /* Car.cpp */; };
-		1AA271E81C0A4B7500D425DB /* Rating.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271E31C0A4B7500D425DB /* Rating.cpp */; };
 		1AA271E91C0A4B7500D425DB /* Review.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271E51C0A4B7500D425DB /* Review.cpp */; };
 		1AA271ED1C0A574C00D425DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271EC1C0A574C00D425DB /* main.cpp */; };
 /* End PBXBuildFile section */
@@ -32,8 +31,6 @@
 		1AA271DE1C0A4B6C00D425DB /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Car.h; sourceTree = "<group>"; };
 		1AA271DF1C0A4B6C00D425DB /* HashTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashTable.h; sourceTree = "<group>"; };
 		1AA271E11C0A4B7500D425DB /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
-		1AA271E31C0A4B7500D425DB /* Rating.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rating.cpp; sourceTree = "<group>"; };
-		1AA271E41C0A4B7500D425DB /* Rating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rating.h; sourceTree = "<group>"; };
 		1AA271E51C0A4B7500D425DB /* Review.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Review.cpp; sourceTree = "<group>"; };
 		1AA271E61C0A4B7500D425DB /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		1AA271EC1C0A574C00D425DB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -77,9 +74,7 @@
 				1AA271DE1C0A4B6C00D425DB /* Car.h */,
 				1AA271E11C0A4B7500D425DB /* List.h */,
 				EEAB56EA1C0D11B900618B72 /* Kars Data.txt */,
-				1AA271E31C0A4B7500D425DB /* Rating.cpp */,
 				1AA271EC1C0A574C00D425DB /* main.cpp */,
-				1AA271E41C0A4B7500D425DB /* Rating.h */,
 				1AA271E51C0A4B7500D425DB /* Review.cpp */,
 				1AA271E61C0A4B7500D425DB /* Review.h */,
 				1AA271DF1C0A4B6C00D425DB /* HashTable.h */,
@@ -146,7 +141,6 @@
 				1AA271E91C0A4B7500D425DB /* Review.cpp in Sources */,
 				1AA271E01C0A4B6C00D425DB /* Car.cpp in Sources */,
 				1AA271ED1C0A574C00D425DB /* main.cpp in Sources */,
-				1AA271E81C0A4B7500D425DB /* Rating.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

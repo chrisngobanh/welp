@@ -154,7 +154,8 @@ int main()
 
 void splashMenu()
 {
-    cout << "Welcome to Welp, Yelp for Cars!" << endl << endl;
+    cout << "******************* Welcome to Welp! ---> A 'Yelp' for Cars *********************;" << endl << endl;
+    cout <<  "*********************************************************************************!" << endl << endl << endl;
 
     cout << "                       ______________" << endl;
     cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
@@ -181,13 +182,13 @@ void mainMenu()
     do
     {
         clearScreen();
-        cout << "*************MAIN MENU*************" << endl;
+        cout << "********************* MAIN MENU *********************" << endl << endl;
         cout << "1. Browse our list of cars" << endl;
         cout << "2. Search for a car" << endl;
         cout << "3. Sort cars by category" << endl;
         cout << "4. Test the efficicency of the hash table" << endl;
-        cout << "0. Quit" << endl;
-        cout << "Please select an option. ";
+        cout << "0. Quit" << endl << endl;
+        cout << "Please, select an option:  ";
 
         string choice = getUserInput();
 
@@ -218,8 +219,8 @@ void browseForCarsMenu()
 {
     // TODO: Change this so the values arent fixed and it reads value from an array instead
     clearScreen();
-    cout << "*************BROWSE MENU*************" << endl;
-    cout << "Here is our selection of car makes. Pick a number to start browsing models" << endl;
+    cout << "********************* BROWSE MENU *********************" << endl << endl;
+    cout << "Here is our selection of car makes"  << endl << endl;
     cout << "1. Honda" << endl;
     cout << "2. Toyota" << endl;
     cout << "3. Subaru" << endl;
@@ -231,7 +232,8 @@ void browseForCarsMenu()
     cout << "9. BMW" << endl;
     cout << "10. Ford" << endl;
     cout << "11. All" << endl;
-    cout << "0. Back" << endl;
+    cout << "0. Back" << endl << endl;
+    cout << "Pick a number to start browsing models:  ";
 
     string choice = getUserInput();
     if (choice == "0") return;
@@ -253,13 +255,13 @@ void sortByCategoryMenu()
 {
     // TODO: Change this so the values arent fixed and it reads value from an array instead
     clearScreen();
-    cout << "*************CATEGORY MENU*************" << endl;
-    cout << "What would you like to sort cars by?" << endl;
+    cout << "********************* CATEGORY MENU *********************" << endl << endl;
     cout << "1. MPG City" << endl;
     cout << "2. MPG Freeway" << endl;
     cout << "3. Price" << endl;
     cout << "4. Rating" << endl;
-    cout << "0. Back" << endl;
+    cout << "0. Back" << endl << endl;
+    cout << "What would you like to sort cars by? ";
 
     string choice = getUserInput();
 
@@ -296,7 +298,7 @@ void sortByMpgMenu()
     int max = INT_MAX;
     mpgBST.getVectorInOrder(min, max, carVector);
 
-    cout << "*************SORTED MPG LIST*************" << endl;
+    cout << "******************* SORTED MPG LIST *******************" << endl << endl;
 
     int count = 0;
     for (int i = 0; i < carVector.size(); i++)
@@ -336,7 +338,7 @@ void sortByMpgFreewayMenu()
     int max = INT_MAX;
     mpgFreewayBST.getVectorInOrder(min, max, carVector);
 
-    cout << "*************SORTED MPG FREEWAY LIST*************" << endl;
+    cout << "****************** SORTED MPG FREEWAY LIST ******************" << endl << endl;
 
     int count = 0;
     for (int i = 0; i < carVector.size(); i++)
@@ -377,7 +379,7 @@ void sortByPriceMenu()
     int max = INT_MAX;
     priceBST.getVectorInOrder(min, max, carVector);
 
-    cout << "*************SORTED PRICE LIST*************" << endl;
+    cout << "******************* SORTED PRICE LIST *******************" << endl << endl;
     int count = 0;
     for (int i = 0; i < carVector.size(); i++)
     {
@@ -415,7 +417,7 @@ void sortByRatingMenu()
 	int max = INT_MAX;
 	avgRatingBST.getVectorInOrder(min, max, carVector);
 
-	cout << "*************SORTED RATING FREEWAY LIST*************" << endl;
+	cout << "****************** SORTED RATING FREEWAY LIST ******************" << endl << endl;
 
 	int count = 0;
 	for (int i = 0; i < carVector.size(); i++)
@@ -501,7 +503,7 @@ void listCars(string carType)
 void filterCarsMenu(string carMake)
 {
     clearScreen();
-    cout << "*************CAR LIST*************" << endl;
+    cout << "******************** CAR LIST ********************" << endl << endl;
     int count = 0;
     Car filteredCars[30];
     for (int i = 0; i < getArrayLength(); i++)
@@ -517,7 +519,8 @@ void filterCarsMenu(string carMake)
         }
     }
 
-    cout << "0. Back" << endl;
+    cout << "0. Back" << endl << endl;
+    cout << "Make a selection:  ";
 
     // Input Validation by checking if its an integer and within the range of teh array
     string choice = getUserInput();
@@ -542,7 +545,7 @@ void listAllCarsMenu()
 {
     //	string finalIndex = getArrayLength();
     clearScreen();
-    cout << "*************ALL CARS MENU*************" << endl;
+    cout << "******************* ALL CARS MENU ********************" << endl << endl;
     // Print out list of all cars
     for (int i = 1; i < getArrayLength(); i++)
     {
@@ -573,7 +576,7 @@ void listAllCarsMenu()
 void displayCarPage(Car car)
 {
     clearScreen();
-    cout << "*************" << car.getMake() << " " << car.getModel() << "*************" << endl;
+    cout << "***************************** " << car.getMake() << " " << car.getModel() << " *****************************" << endl << endl;
     cout << "                       ______________" << endl;
     cout << "               __..=='|'   |         ``-._" << endl;
     cout << "  \\=====_..--'/'''    |    |              ``-._" << endl;
@@ -584,7 +587,7 @@ void displayCarPage(Car car)
     cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
     cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
     cout << "         `-.....-'                                    `-.....-'" << endl;
-    cout << endl << endl << endl;
+    cout << endl;
     cout << "Engine Type: " << car.getEngine() << endl;
     cout << "MPG City: " << car.getMPGCity() << endl;
     cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
@@ -595,12 +598,13 @@ void displayCarPage(Car car)
 
     string choice,  uChoice;
 
-    cout << endl;
+    cout << endl << endl << endl;
+    cout << "************* Review Menu *************" << endl << endl;
     cout << "1. View list of reviews" << endl;
     cout << "2. Add a review" << endl;
     cout << "3. Delete your previous review" << endl;
-    cout << "0. Quit" << endl;
-    cout << "What is your choice? ";
+    cout << "0. Quit" << endl << endl;
+    cout << "What is your choice?  ";
 
     uChoice = getUserInput();
     if (uChoice == "1")
@@ -894,12 +898,11 @@ void enterReview(string make, string model)
 void searchForCarsMenu()
 {
     clearScreen();
-    cout << "****Search for Cars*****" << endl;
+    cout << "******************** Search for Cars *******************" << endl << endl;
     cout << "1. Search by car name" << endl;
     cout << "2. Search for cars by manufacturer" << endl;
     cout << "3. Search cars in a price range" << endl;
-    cout << "0. Back";
-    cout << endl;
+    cout << "0. Back" << endl << endl;
     cout << "What is your option? ";
     string choice = getUserInput();
 
@@ -932,8 +935,9 @@ void searchForCarsMenu()
 void searchForCarByNameMenu()
 {
     clearScreen();
-    cout << "*****Search for Car by Car Name*****" << endl;
-    cout << "Please input a car name (i.e. Honda Accord) ";
+    cout << "*************** Search for Car by Car Name ***************" << endl << endl;
+    cout << "Please input a car name (i.e. Honda Accord)" << endl;
+    cout << ": ";
     string name = getUserInput();
 
     // This is a linear search
@@ -957,7 +961,7 @@ void searchForCarByNameMenu()
 void searchForCarsByMakeMenu()
 {
     clearScreen();
-    cout << "*****Search for Car by Car Manufacturer*****" << endl;
+    cout << "*************** Search for Car by Car Manufacturer ***************" << endl << endl;
     cout << "Please input a car name (i.e. Tesla) ";
     string name = getUserInput();
 
@@ -987,7 +991,7 @@ void searchForCarsByPriceMenu()
     while (!isGood)
     {
         clearScreen();
-        cout << "*****Search for Car by Price Range*****" << endl;
+        cout << "**************** Search for Car by Price Range ****************" << endl << endl;
         cout << "Please input the min price (i.e. $25000) $";
         string min = getUserInput();
 
