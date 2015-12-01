@@ -876,8 +876,10 @@ void enterReview(string make, string model)
 
     clearScreen();
     cout << "Give us your thoughts on the " << make << " " << model << "." << endl;
+    cout << ": ";
     description = getUserInput();
-    cout << "How many stars does the vehicle deserve?" << endl;
+    cout << endl;
+    cout << "How many stars does the vehicle deserve? ";
     temp = getUserInput();
     stars = convertStringToInt(temp);
 
