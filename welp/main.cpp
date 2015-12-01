@@ -1036,7 +1036,17 @@ void searchForCarsByPriceMenu()
 
         if (cars.size() == 0)
         {
-            cout << "No cars found. Please try again." << endl;
+            cout << "No cars found." << endl;
+            
+            cout << "Do you want to try again? (y/n) ";
+            
+            string choice = getUserInput();
+            
+            // Check if the first character in the answer is a y or Y. If false, stop the loop.
+            if (choice.at(0) == 'y' || choice.at(0) == 'Y')
+            {
+                searchForCarsByPriceMenu();
+            }
         }
         else
         {
