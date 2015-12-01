@@ -384,7 +384,7 @@ void sortByPriceMenu()
         count++;
         cout << count << ". ";
         cout << carVector[i].getMake() << " ";
-        cout << carVector[i].getModel() << "/ Price: ";
+        cout << carVector[i].getModel() << "/ Price: $";
         cout << carVector[i].getPrice() << endl;
     }
 
@@ -588,7 +588,7 @@ void displayCarPage(Car car)
     cout << "Engine Type: " << car.getEngine() << endl;
     cout << "MPG City: " << car.getMPGCity() << endl;
     cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
-    cout << "Price: " << car.getPrice() << endl;
+    cout << "Price: $" << car.getPrice() << endl;
     cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << endl;
 
     ///////////////Reviews Menu////////////////
@@ -988,10 +988,10 @@ void searchForCarsByPriceMenu()
     {
         clearScreen();
         cout << "*****Search for Car by Price Range*****" << endl;
-        cout << "Please input the min price (i.e. 25000) ";
+        cout << "Please input the min price (i.e. $25000) $";
         string min = getUserInput();
 
-        cout << "Please input the max price (i.e. 50000) ";
+        cout << "Please input the max price (i.e. $50000) $";
         string max = getUserInput();
 
         int minInt = convertStringToInt(min);
@@ -1159,4 +1159,5 @@ void testHashEfficiency()
     cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl;
 
     system("PAUSE");
+    
 }
