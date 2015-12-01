@@ -48,6 +48,7 @@ Nissan/Leaf/Big Brother/3/Leaf blower converted into city travel
 Nissan/Altima/MrUltrapieman/5/My car is white, just like me
 Tesla/Model S/Pardho/4/Do I even have a license
 Tesla/Model S/Nikolai/5/Aside from the roadster, the only good looking electric cars on the market right now
+Tesla/Model S/carlos/5/It's a nice Car
 BMW/M4/Wolfdog/3/Execute the plan
 BMW/M4/seungla/4/Very compact but perfect for a washboard
 BMW/M4/Nurnberg Ring GP/3/The car your dentist would drive, yet still has well preformance, though lesser of the BMWs
