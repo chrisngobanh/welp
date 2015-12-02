@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <climits>
 
 using namespace std;
 
@@ -61,12 +62,19 @@ public:
     //Gets the number of objects inside all the lists
 
     int getNumObjects(string key, string identifier);
+    //Gets the number of objects stored at an index
+
+    string getObjMostElements();
+    string getObjLeastElements();
+    //Returns (string)List at the index with the biggest/smallest amount of elements
 
 private:
 
     static const int TABLE_SIZE = 48;
     List<hashobj> Table[TABLE_SIZE];
     int numObjects;
+    int indexMostElements;
+    int indexLeastElements;
 
 };
 
@@ -98,12 +106,26 @@ HashTable<hashobj>::HashTable()
         Table[i] = list;
     }
     numObjects = 0;
+    indexMostElements = INT_MIN;
+    indexLeastElements = INT_MAX;
 }
 
 template <class hashobj>
 HashTable<hashobj>::~HashTable()
 {
 
+}
+
+template <class hashobj>
+string HashTable<hashobj>::getObjMostElements()
+{
+    return (string)Table[indexMostElements];
+}
+
+template <class hashobj>
+string HashTable<hashobj>::getObjLeastElements()
+{
+    return (string)Table[indexLeastElements];
 }
 
 template <class hashobj>
@@ -135,6 +157,10 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 	    if (Table[index].empty()) Table[index].setIdentifier(identifier);
 		Table[index].push_back(_data);
 		numObjects++;
+		//Make this the index with the most elements if it has more elements than the record holder
+		if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
+		//Make this the index with the lease elements if it has less elements than the record holder
+		if (Table[index].get_size() < Table[indexLeastElements].get_size()) indexLeastElements = index;
 	}
 
 }
@@ -231,6 +257,10 @@ bool HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data
     {
         Table[index].remove();
         numObjects--;
+        //Make this the index with the most elements if it has more elements than the record holder
+		if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
+		//Make this the index with the lease elements if it has less elements than the record holder
+		if (Table[index].get_size() < Table[indexLeastElements].get_size()) indexLeastElements = index;
         return true;
     }
 

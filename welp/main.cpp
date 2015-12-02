@@ -22,7 +22,7 @@ void searchForCarByNameMenu();
 void searchForCarsByMakeMenu();
 void searchForCarsByPriceMenu();
 void browseForCarsMenu();
-void displayCarPage(Car car);
+void displayCarPage(Car &car);
 void listAllCarsMenu();
 void enterReview(string make, string model);
 void sortByCategoryMenu();
@@ -577,18 +577,17 @@ void listAllCarsMenu()
 
 }
 
-void displayCarPage(Car car)
+void displayCarPage(Car &car)
 {
     string uChoice;
 
-    clearScreen();
-
     //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
+
     car.setViews(car.getViews() + 1);
 
     do
     {
-
+        clearScreen();
         cout << "************************ " << car.getMake() << " " << car.getModel() << " ************************" << endl << endl;
         cout << "                       ______________" << endl;
         cout << "               __..=='|'   |         ``-._" << endl;
@@ -1275,11 +1274,11 @@ void statsMenu()
     cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
     cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
 
-    cout << "Most viewed car: " << carList[0].getName() <<endl;
-    cout << "Least viewed car: " << carList[getArrayLength()-1].getName() << endl << endl;
+    cout << "Most viewed car: " << carList[getArrayLength()-1].getModel() <<endl;
+    cout << "Least viewed car: " << carList[0].getModel() << endl << endl;
 
-    cout << "Most reviewed car: " << endl;
-    cout << "Least reviewed car: " << endl << endl;
+    cout << "Most reviewed car: " << reviewTable.getObjMostElements() << endl;
+//    cout << "Least reviewed car: " << reviewTable.getObjLeastElements() << endl << endl;
 
     cout << "Highest rated car: " << avgRatingBST.maximum().getName() <<endl;
 	cout << "Least rated car: " << avgRatingBST.minimum().getName() << endl << endl;
