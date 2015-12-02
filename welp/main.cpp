@@ -47,7 +47,7 @@ void loadReviewTable(HashTable<Review> &table);
 void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst);
 void loadCarMake(vector<string>& makeList, Car* cList);
 void saveReviews(HashTable<Review> &Table, Car* list);
-void listCars(string);
+void listCars(int);
 
 Car* carList;
 string userName;
@@ -158,8 +158,15 @@ int main()
 
 void splashMenu()
 {
-    cout << "*************** Welcome to Welp! ---> A 'Yelp' for Cars *****************;" << endl << endl;
-    cout <<  "*************************************************************************!" << endl << endl << endl;
+	cout << "*************************************************************************" << endl;
+	cout <<  " __    __     _ " << endl;
+	cout <<  "/ / /\\ \\ \\___| |_ __  "<< endl;
+	cout <<  "\\ \\/ \\ / / _ \\ | '_ \\ " << endl;
+	cout <<  " \\  /\\  /  __/ | |_) |" << endl;
+	cout <<  "  \\/  \\/ \\___|_| .__/ " << endl;
+	cout <<  "               |_|    " << endl;
+	cout << endl << "A 'Yelp' for Cars" << endl;
+	cout << "*************************************************************************" << endl << endl;
 
     cout << "                       ______________" << endl;
     cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
@@ -186,7 +193,7 @@ void mainMenu()
     do
     {
         clearScreen();
-        cout << "********************* MAIN MENU *********************" << endl << endl;
+		cout << "********************* MAIN MENU *********************" << endl << endl;
         cout << "1. Browse our list of cars" << endl;
         cout << "2. Search for a car" << endl;
         cout << "3. Sort cars by category" << endl;
@@ -225,18 +232,14 @@ void browseForCarsMenu()
     clearScreen();
     cout << "********************* BROWSE MENU *********************" << endl << endl;
     cout << "Here is our selection of car makes"  << endl << endl;
-    cout << "1. Honda" << endl;
-    cout << "2. Toyota" << endl;
-    cout << "3. Subaru" << endl;
-    cout << "4. Ford" << endl;
-    cout << "5. Acura" << endl;
-    cout << "6. Chevrolet" << endl;
-    cout << "7. Nissan" << endl;
-    cout << "8. Tesla" << endl;
-    cout << "9. BMW" << endl;
-    cout << "10. Ford" << endl;
-    cout << "11. All" << endl;
+	for (int i = 0; i < carMakeVector.size(); i++)
+	{
+		cout << i + 1 << ". " << carMakeVector[i] << endl;
+	}
+	cout << carMakeVector.size() + 1 << ". All" << endl;
     cout << "0. Back" << endl << endl;
+
+
     cout << "Pick a number to start browsing models:  ";
 
     string choice = getUserInput();
@@ -246,7 +249,7 @@ void browseForCarsMenu()
 
     if (intChoice >= 1 && intChoice <= 11)
     {
-        listCars(choice);
+        listCars(intChoice);
     }
     else
     {
@@ -455,53 +458,13 @@ void sortByRatingMenu()
 }
 
 
-void listCars(string carType)
+void listCars(int carType)
 {
     // This could be greatly improved with an array of car makes
-    if (carType == "1")
-    {
-        filterCarsMenu("Honda");
-    }
-    else if (carType == "2")
-    {
-        filterCarsMenu("Toyota");
-    }
-    else if (carType == "3")
-    {
-        filterCarsMenu("Subaru");
-    }
-    else if (carType == "4")
-    {
-        filterCarsMenu("Ford");
-    }
-    else if (carType == "5")
-    {
-        filterCarsMenu("Acura");
-    }
-    else if (carType == "6")
-    {
-        filterCarsMenu("Chevrolet");
-    }
-    else if (carType == "7")
-    {
-        filterCarsMenu("Nissan");
-    }
-    else if (carType == "8")
-    {
-        filterCarsMenu("Tesla");
-    }
-    else if (carType == "9")
-    {
-        filterCarsMenu("BMW");
-    }
-    else if (carType == "10")
-    {
-        filterCarsMenu("Ford");
-    }
-    else if (carType == "11")
-    {
+	if (carType > 0 && carType < carMakeVector.size() + 1)
+		filterCarsMenu(carMakeVector[carType - 1]);
+    else if (carType == carMakeVector.size() + 1)
         listAllCarsMenu();
-    }
 }
 
 void filterCarsMenu(string carMake)
@@ -551,7 +514,7 @@ void listAllCarsMenu()
     clearScreen();
     cout << "******************* ALL CARS MENU ********************" << endl << endl;
     // Print out list of all cars
-    for (int i = 1; i < getArrayLength(); i++)
+    for (int i = 1; i < getArrayLength() + 1; i++)
     {
         cout << i << ". ";
         cout << carList[i - 1].getMake() << " ";
@@ -566,7 +529,7 @@ void listAllCarsMenu()
 
     int intChoice = convertStringToInt(choice);
 
-    if (intChoice >= 1 && intChoice < getArrayLength())
+    if (intChoice >= 1 && intChoice < getArrayLength() + 1)
     {
         displayCarPage(carList[intChoice - 1]);
     }
