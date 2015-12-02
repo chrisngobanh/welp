@@ -52,6 +52,7 @@ void listCars(string);
 Car* carList;
 string userName;
 HashTable<Review> reviewTable;
+HashTable<int> viewTable;
 BST<int, Car> mpgBST;
 BST<int, Car> mpgFreewayBST;
 BST<int, Car> priceBST;
@@ -135,6 +136,7 @@ int main()
     splashMenu();
 
     reviewTable = HashTable<Review>();
+	viewTable = HashTable<int>();
     mpgBST = BST<int, Car>();
     priceBST = BST<int, Car>();
     avgRatingBST = BST<double, Car>();
@@ -151,6 +153,7 @@ int main()
     mainMenu();
 
     saveReviews(reviewTable, carList);
+	saveCars(carList);
 
     system("PAUSE");
     return 0;
@@ -583,7 +586,9 @@ void displayCarPage(Car &car)
 
     //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
 
-    car.setViews(car.getViews() + 1);
+	int views = viewTable.getFront(car.getMake(), car.getModel());
+	viewTable.clearIndex(car.getMake(), car.getModel());
+	viewTable.addItem(car.getMake(), car.getModel(), views + 1);
 
     do
     {
@@ -763,7 +768,8 @@ Car* load()
 
             //make << model << engine << mpgcity <<  mpgfree << msrp
             list[index] = Car(make, model, engine, mpgcity, mpgfree, msrp);
-            list[index].setViews(views);
+           
+			viewTable.addItem(make, model, views);
             index++;
             // << "Added successfully" << endl;
         }
@@ -1269,16 +1275,14 @@ void statsMenu()
 {
     clearScreen();
 
-    quickSort(0, getArrayLength() - 1);
-
     cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
     cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
 
-    cout << "Most viewed car: " << carList[getArrayLength()-1].getModel() <<endl;
-    cout << "Least viewed car: " << carList[0].getModel() << endl << endl;
+    cout << "Most viewed car: " << viewTable.getMax() << endl;
+    cout << "Least viewed car: " << viewTable.getMin() << endl << endl;
 
     cout << "Most reviewed car: " << reviewTable.getObjMostElements() << endl;
-//    cout << "Least reviewed car: " << reviewTable.getObjLeastElements() << endl << endl;
+    cout << "Least reviewed car: " << reviewTable.getObjLeastElements() << endl << endl;
 
     cout << "Highest rated car: " << avgRatingBST.maximum().getName() <<endl;
 	cout << "Least rated car: " << avgRatingBST.minimum().getName() << endl << endl;
@@ -1337,7 +1341,7 @@ void saveCars(Car* cList)
 		// Checks every car for reviews
 		for (int i = 0; i < size; i++)
 		{
-			save << cList[i].getMake() << "/" << cList[i].getModel() << "/" << cList[i].getMPGCity() << "/" << cList[i].getMPGFreeway() << "/" << cList[i].getEngine() << "/" << cList[i].getPrice() << "/" << cList[i].getViews() << endl;
+			save << cList[i].getMake() << "/" << cList[i].getModel() << "/" << cList[i].getMPGCity() << "/" << cList[i].getMPGFreeway() << "/" << cList[i].getEngine() << "/" << cList[i].getPrice() << "/" << viewTable.getFront(cList[i].getMake(), cList[i].getModel()) << endl;
 		}
 		save.close();
 	}

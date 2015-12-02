@@ -68,6 +68,17 @@ public:
     string getObjLeastElements();
     //Returns (string)List at the index with the biggest/smallest amount of elements
 
+	void clearIndex(string key, string identifier);
+	//Makes the list at that index empty
+
+	hashobj getFront(string key, string identifier);
+	hashobj getFront(int index);
+	//Returns the element at the front of the list at that index
+
+	string getMax();
+	string getMin();
+	//Returns the list whose front element is the highest or lowest inside the table
+
 private:
 
     static const int TABLE_SIZE = 48;
@@ -75,8 +86,63 @@ private:
     int numObjects;
     int indexMostElements;
     int indexLeastElements;
+	int indexMax;
+	int indexMin;
 
 };
+
+template <class hashobj>
+string HashTable<hashobj>::getMax()
+{
+	return (string)Table[indexMax];
+}
+
+template <class hashobj>
+string HashTable<hashobj>::getMin()
+{
+	return (string)Table[indexMin];
+}
+
+
+template <class hashobj>
+void HashTable<hashobj>::clearIndex(string key, string identifier)
+{
+	int index = baseHash(key, identifier);
+	int jump = jumpHash(index);
+	while ((string)Table[index] != identifier && indexIsFilled(index))
+	{
+		index = (index + jump) % TABLE_SIZE;
+	}
+
+	while (!Table[index].empty())
+	{
+		Table[index].pop_back();
+		numObjects--;
+	}
+}
+
+template <class hashobj>
+hashobj HashTable<hashobj>::getFront(string key, string identifier)
+{
+	int index = baseHash(key, identifier);
+	int jump = jumpHash(index);
+	while ((string)Table[index] != identifier && indexIsFilled(index))
+	{
+		index = (index + jump) % TABLE_SIZE;
+	}
+
+	Table[index].begin();
+
+	return Table[index].current();
+}
+
+template <class hashobj>
+hashobj HashTable<hashobj>::getFront(int index)
+{
+	Table[index].begin();
+
+	return Table[index].current();
+}
 
 template <class hashobj>
 int HashTable<hashobj>::getTotalNumObjects()
@@ -108,6 +174,8 @@ HashTable<hashobj>::HashTable()
     numObjects = 0;
     indexMostElements = INT_MIN;
     indexLeastElements = INT_MAX;
+	indexMax = INT_MIN;
+	indexMin = INT_MAX;
 }
 
 template <class hashobj>
@@ -161,6 +229,20 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 		if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
 		//Make this the index with the lease elements if it has less elements than the record holder
 		if (Table[index].get_size() < Table[indexLeastElements].get_size()) indexLeastElements = index;
+
+		//Make this the index with the most elements if it has more elements than the record holder
+		if (indexMostElements == INT_MIN) indexMostElements = index;
+		else if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
+		//Make this the index with the lease elements if it has less elements than the record holder
+		if (indexLeastElements == INT_MAX) indexLeastElements = index;
+		else if (Table[index].get_size() < Table[indexLeastElements].get_size()) indexLeastElements = index;
+
+		//Make this the index with the biggest front element if its bigger than the record holder
+		if (indexMax == INT_MIN) indexMax = index;
+		else if (getFront(key, identifier) > getFront(indexMax)) indexMax = index;
+		//Make this the index with the smallest front element if its smaller than the record holder
+		if (indexMin == INT_MAX) indexMin = index;
+		else if (getFront(key, identifier) < getFront(indexMin)) indexMin = index;
 	}
 
 }
