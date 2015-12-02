@@ -1275,14 +1275,14 @@ void statsMenu()
     cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
     cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
 
-    cout << "Most viewed car: " << endl;
-    cout << "Least viewed car: " << endl << endl;
+    cout << "Most viewed car: " << carList[0].getName() <<endl;
+    cout << "Least viewed car: " << carList[getArrayLength()-1].getName() << endl << endl;
 
     cout << "Most reviewed car: " << endl;
     cout << "Least reviewed car: " << endl << endl;
 
-    cout << "Highest rated car: " << endl;
-    cout << "Least rated car: " << endl << endl;
+    cout << "Highest rated car: " << avgRatingBST.maximum().getName() <<endl;
+	cout << "Least rated car: " << avgRatingBST.minimum().getName() << endl << endl;
 
 //  cout << "The number of cars inside the database is: " << getArrayLength() << endl;
 //	cout << "The number of reviews inside the database is: " << reviewTable.getNumObjects() << endl;
