@@ -35,6 +35,7 @@ void testHashEfficiency();
 void specialPrintMenu();
 void miscMenu();
 void statsMenu();
+void quickSort(int low, int high);
 
 
 Car* load();
@@ -581,6 +582,9 @@ void displayCarPage(Car car)
     string uChoice;
 
     clearScreen();
+
+    //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
+    car.setViews(car.getViews() + 1);
 
     do
     {
@@ -1266,11 +1270,13 @@ void statsMenu()
 {
     clearScreen();
 
+    quickSort(0, getArrayLength() - 1);
+
     cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
     cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
 
-    cout << "Most searched car: " << endl;
-    cout << "Least searched car: " << endl << endl;
+    cout << "Most viewed car: " << endl;
+    cout << "Least viewed car: " << endl << endl;
 
     cout << "Most reviewed car: " << endl;
     cout << "Least reviewed car: " << endl << endl;
@@ -1288,4 +1294,33 @@ void statsMenu()
 //	cout << "The lowest rated car is: " << endl;
 
     system("PAUSE");
+}
+
+void quickSort(int low, int high)
+{
+    int pivot = low + (high-low)/2;
+    int value_of_pivot = carList[pivot].getViews();
+    int left = low;
+    int right = high;
+    while (left <= right)
+    {
+        while (carList[left].getViews() < value_of_pivot)
+        {
+            left++;
+        }
+        while (carList[right].getViews() > value_of_pivot)
+        {
+            right--;
+        }
+        if (left <= right)
+        {
+            Car temp = carList[left];
+            carList[left] = carList[right];
+            carList[right] = temp;
+            left++;
+            right--;
+        }
+    }
+    if (low < right) quickSort(low, right);
+    if (left < high) quickSort(left, high);
 }

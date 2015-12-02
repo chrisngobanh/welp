@@ -45,6 +45,7 @@ private:
     void deleteTree(Nodeptr root);
     bool containsValue(Nodeptr root, bstvalue value, bstobj obj);
     bstobj findMin(Nodeptr root);
+    bstobj findMax(Nodeptr root);
     void printLevelOrder(Nodeptr root);
 
 
@@ -65,6 +66,7 @@ public:
     void getVectorInOrder(bstvalue min, bstvalue max, vector<bstobj> &list);
     bool contains(bstvalue value);
     bstobj minimum();
+    bstobj maximum();
     void levelOrderPrint();
 
 };
@@ -212,6 +214,16 @@ bool BST<bstvalue, bstobj>::containsValue(Nodeptr root, bstvalue value, bstobj o
 
 template <class bstvalue, class bstobj>
 bstobj BST<bstvalue, bstobj>::findMin(Nodeptr root)
+{
+    if (root != NULL)
+    {
+        if (root->left != NULL) return findMin(root->left);
+        else return root->obj;
+    }
+}
+
+template <class bstvalue, class bstobj>
+bstobj BST<bstvalue, bstobj>::findMax(Nodeptr root)
 {
     if (root != NULL)
     {
@@ -394,6 +406,21 @@ bstobj BST<bstvalue, bstobj>::minimum()
     else
     {
         return findMin(root);
+    }
+}
+
+template <class bstvalue, class bstobj>
+bstobj BST<bstvalue, bstobj>::maximum()
+{
+    if (root->value == NULL)
+    {
+        cout << "Minimum: Tree is empty" << endl;
+        //will need to include cstdlib for exit below
+        exit(-1); //you can also use assert here if desired
+    }
+    else
+    {
+        return findMax(root);
     }
 }
 
