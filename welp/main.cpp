@@ -135,9 +135,7 @@ int main()
     avgRatingBST = BST<double, Car>();
     mpgFreewayBST = BST<int, Car>();
 
-cout << "!";
     carList = load();
-    cout << "!";
     loadMpgBST(carList, mpgBST);
     loadPriceBST(carList, priceBST);
     loadMpgFreewayBST(carList, mpgFreewayBST);

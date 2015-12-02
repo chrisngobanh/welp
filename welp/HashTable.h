@@ -57,12 +57,22 @@ public:
     int getTableSize();
     //A getter to help test the efficiency
 
+    int getNumObjects();
+    //Gets the number of objects inside all the lists
+
 private:
 
     static const int TABLE_SIZE = 47;
     List<hashobj> Table[TABLE_SIZE];
+    int numObjects;
 
 };
+
+template <class hashobj>
+int HashTable<hashobj>::getNumObjects()
+{
+    return numObjects;
+}
 
 template <class hashobj>
 HashTable<hashobj>::HashTable()
@@ -72,6 +82,7 @@ HashTable<hashobj>::HashTable()
         List<hashobj> list = List<hashobj>();
         Table[i] = list;
     }
+    numObjects = 0;
 }
 
 template <class hashobj>
@@ -108,6 +119,7 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 	{
 	    if (Table[index].empty()) Table[index].setIdentifier(identifier);
 		Table[index].push_back(_data);
+		numObjects++;
 	}
 
 }
@@ -203,6 +215,7 @@ bool HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data
     if (Table[index].scrollTo(_data))
     {
         Table[index].remove();
+        numObjects--;
         return true;
     }
 
