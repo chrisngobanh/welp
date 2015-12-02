@@ -1,26 +1,26 @@
-Honda/Civic/31/41/Gas/18290
-Honda/Pilot/20/27/Gas/29995
-Honda/Accord/27/37/Gas/22105
-Honda/CR-V/26/33/Gas/23595
-Toyota/Corolla/30/42/Gas/17230
-Toyota/Camry/25/35/Gas/23070
-Toyota/RAV4/24/31/Gas/23680
-Toyota/Prius/51/48/Hybrid/24200
-Subaru/Impreza/28/38/Gas/18295
-Subaru/WRX/20/27/Gas/26595
-Subaru/Outback/25/33/Gas/24995
-Ford/Focus/30/42/Gas/17225
-Ford/Fiesta/31/43/Gas/14580
-Ford/Fusion Hybrid/44/41/Hybrid/25675
-Ford/Mustang/22/31/Gas/23895
-Ford/F-150/19/26/Gas/26615
-Acura/TLX/24/34/Gas/31695
-Chevrolet/Volt/35/40/Hybrid/33170
-Chevrolet/Camaro/17/28/Gas/23705
-Chevrolet/Corvette/17/29/Gas/55400
-Nissan/Leaf/126/101/Electric/29010
-Nissan/Altima/27/38/Gas/22300
-Tesla/Model S/101/102/Electric/69900
-BMW/M4/17/26/Gas/65400
-Dodge/Challenger/19/30/Gas/26995
-Dodge/Charger/19/31/Gas/27995
+Honda/Civic/31/41/Gas/18290/0
+Honda/Pilot/20/27/Gas/29995/0
+Honda/Accord/27/37/Gas/22105/0
+Honda/CR-V/26/33/Gas/23595/0
+Toyota/Corolla/30/42/Gas/17230/0
+Toyota/Camry/25/35/Gas/23070/0
+Toyota/RAV4/24/31/Gas/23680/0
+Toyota/Prius/51/48/Hybrid/24200/0
+Subaru/Impreza/28/38/Gas/18295/0
+Subaru/WRX/20/27/Gas/26595/0
+Subaru/Outback/25/33/Gas/24995/0
+Ford/Focus/30/42/Gas/17225/0
+Ford/Fiesta/31/43/Gas/14580/0
+Ford/Fusion Hybrid/44/41/Hybrid/25675/0
+Ford/Mustang/22/31/Gas/23895/0
+Ford/F-150/19/26/Gas/26615/0
+Acura/TLX/24/34/Gas/31695/0
+Chevrolet/Volt/35/40/Hybrid/33170/0
+Chevrolet/Camaro/17/28/Gas/23705/0
+Chevrolet/Corvette/17/29/Gas/55400/0
+Nissan/Leaf/126/101/Electric/29010/0
+Nissan/Altima/27/38/Gas/22300/0
+Tesla/Model S/101/102/Electric/69900/0
+BMW/M4/17/26/Gas/65400/0
+Dodge/Challenger/19/30/Gas/26995/0
+Dodge/Charger/19/31/Gas/27995/0
