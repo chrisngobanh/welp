@@ -33,10 +33,11 @@ public:
 	int getMPGCity();
 	int getMPGFreeway();
 	int getPrice();
+	int getViews();
+
+	void setViews(int _views);
 
 	friend ostream& operator<<(ostream &os, const Car &car);
-
-	//List<Rating> ratings[5];
 };
 
 #endif

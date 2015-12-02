@@ -135,8 +135,9 @@ int main()
     avgRatingBST = BST<double, Car>();
     mpgFreewayBST = BST<int, Car>();
 
-
+cout << "!";
     carList = load();
+    cout << "!";
     loadMpgBST(carList, mpgBST);
     loadPriceBST(carList, priceBST);
     loadMpgFreewayBST(carList, mpgFreewayBST);
@@ -679,7 +680,7 @@ Car* load()
     int substr_start, offset;
 
     string make, model, type, engine;
-    int mpgcity, mpgfree, msrp;
+    int mpgcity, mpgfree, msrp, views;
 
     char divider = '/';
 
