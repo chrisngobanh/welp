@@ -36,7 +36,7 @@ void specialPrintMenu();
 void miscMenu();
 void statsMenu();
 void quickSort(int low, int high);
-
+void saveCars(Car* cList);
 
 Car* load();
 int getArrayLength();
@@ -1323,4 +1323,29 @@ void quickSort(int low, int high)
     }
     if (low < right) quickSort(low, right);
     if (left < high) quickSort(left, high);
+}
+
+
+void saveCars(Car* cList)
+{
+	// Make/Model/MPGe City/MPGe Highway/Type/Price/Views
+
+	int size = getArrayLength();
+	ofstream save("Kars Data.txt");
+
+	if (save.is_open())
+	{
+		// Checks every car for reviews
+		for (int i = 0; i < size; i++)
+		{
+			save << cList[i].getMake() << "/" << cList[i].getModel() << "/" << cList[i].getMPGCity() << "/" << cList[i].getMPGFreeway() << "/" << cList[i].getEngine() << "/" << cList[i].getPrice() << "/" << cList[i].getViews() << endl;
+		}
+		save.close();
+	}
+	else
+	{
+		cout << "Error : Unable to open file 'Kars Data.txt' ";
+		exit(-1);
+	}
+
 }
