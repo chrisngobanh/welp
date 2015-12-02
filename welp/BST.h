@@ -227,7 +227,7 @@ bstobj BST<bstvalue, bstobj>::findMax(Nodeptr root)
 {
     if (root != NULL)
     {
-        if (root->left != NULL) return findMin(root->left);
+        if (root->right != NULL) return findMin(root->right);
         else return root->obj;
     }
 }
