@@ -161,8 +161,8 @@ int main()
 
 void splashMenu()
 {
-    cout << "*************** Welcome to Welp! ---> A 'Yelp' for Cars *****************;" << endl << endl;
-    cout <<  "*************************************************************************!" << endl << endl << endl;
+    cout << "*************************** Welcome to Welp! ***************************;" << endl;
+    cout << "*************************** A 'Yelp for Cars ****************************" << endl << endl << endl;
 
     cout << "                       ______________" << endl;
     cout << "   Chris Banh  __..=='|'   |         ``-._" << endl;
