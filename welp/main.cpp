@@ -1195,7 +1195,16 @@ void testHashEfficiency()
     cout << "The load factor is: " << size/reviewTable.getTableSize() << endl;
     cout << "The minimum amount of accesses before finding a key's value is: " << min << endl;
     cout << "The maximum amount of accesses before finding a key's value is: " << max << endl;
-    cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl;
+    cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl << endl;
+
+	cout << "The number of cars inside the database is: " << getArrayLength() << endl;
+	cout << "The number of reviews inside the database is: " << reviewTable.getNumObjects() << endl;
+	cout << "The most viewed car is: " << endl;
+	cout << "The least viewed car is: " << endl;
+	cout << "The most reviewed car is: " << endl;
+	cout << "The least reviewed car is: " << endl;
+	cout << "The highest rated car is: " << endl;
+	cout << "The lowest rated car is: " << endl;
 
     system("PAUSE");
 
