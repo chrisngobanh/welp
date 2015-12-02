@@ -576,12 +576,12 @@ void listAllCarsMenu()
 void displayCarPage(Car car)
 {
     string uChoice;
-    
+
     clearScreen();
-    
+
     do
     {
-        
+
         cout << "************************ " << car.getMake() << " " << car.getModel() << " ************************" << endl << endl;
         cout << "                       ______________" << endl;
         cout << "               __..=='|'   |         ``-._" << endl;
@@ -599,11 +599,11 @@ void displayCarPage(Car car)
         cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
         cout << "Price: $" << car.getPrice() << endl;
         cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << endl;
-        
+
         ///////////////Reviews Menu////////////////
-        
+
         string choice;
-        
+
         cout << endl << endl << endl;
         cout << "************* Review Menu *************" << endl << endl;
         cout << "1. View list of reviews" << endl;
@@ -611,8 +611,8 @@ void displayCarPage(Car car)
         cout << "3. Delete your previous review" << endl;
         cout << "0. Return to main menu" << endl << endl;
         cout << "What is your choice?  ";
-        
-        
+
+
         uChoice = getUserInput();
         if (uChoice == "1")
         {
@@ -633,14 +633,14 @@ void displayCarPage(Car car)
             {
                 cout << "Your review has successfully been deleted." << endl;
             } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
-            
+
             system("PAUSE");
         }
         else if (uChoice == "0")
         {
             return;
         }
-        
+
     } while (uChoice != "0");
 }
 
@@ -738,7 +738,7 @@ Car* load()
             offset = 0;
 
             //Get the price
-            while (line[substr_start + offset] != NULL)
+            while (line[substr_start + offset] != divider)
             {
                 offset++;
             }
@@ -746,8 +746,18 @@ Car* load()
             substr_start = substr_start + offset + 1;
             offset = 0;
 
+            //Get the views
+            while (line[substr_start + offset] != NULL)
+            {
+                offset++;
+            }
+            views = atoi(line.substr(substr_start, offset).c_str());
+            substr_start = substr_start + offset + 1;
+            offset = 0;
+
             //make << model << engine << mpgcity <<  mpgfree << msrp
             list[index] = Car(make, model, engine, mpgcity, mpgfree, msrp);
+            list[index].setViews(views);
             index++;
             // << "Added successfully" << endl;
         }
@@ -909,7 +919,7 @@ void enterReview(string make, string model)
 void searchForCarsMenu()
 {
     clearScreen();
-    
+
     cout << "******************** Search for Cars *******************" << endl << endl;
     cout << "1. Search by car name" << endl;
     cout << "2. Search for cars by manufacturer" << endl;
@@ -932,7 +942,7 @@ void searchForCarsMenu()
     {
         searchForCarsByPriceMenu();
     }
-    
+
     searchForCarsMenu();
 }
 
@@ -961,11 +971,11 @@ void searchForCarByNameMenu()
             return;
         }
     }
-    
+
     cout << "Car not found!" << endl;
     cout << "Do you want to try again? (y/n) ";
     string choice = getUserInput();
-    
+
     // Check if the first character in the answer is a y or Y. If false, stop the loop.
     if (choice.at(0) == 'y' || choice.at(0) == 'Y')
     {
@@ -1037,11 +1047,11 @@ void searchForCarsByPriceMenu()
         if (cars.size() == 0)
         {
             cout << "No cars found." << endl;
-            
+
             cout << "Do you want to try again? (y/n) ";
-            
+
             string choice = getUserInput();
-            
+
             // Check if the first character in the answer is a y or Y. If false, stop the loop.
             if (choice.at(0) == 'y' || choice.at(0) == 'Y')
             {
@@ -1073,11 +1083,11 @@ void searchForCarsByPriceMenu()
     else
     {
         cout << "Bad price range." << endl;
-        
+
         cout << "Do you want to try again? (y/n) ";
-        
+
         string choice = getUserInput();
-        
+
         // Check if the first character in the answer is a y or Y. If false, stop the loop.
         if (choice.at(0) == 'y' || choice.at(0) == 'Y')
         {
@@ -1189,5 +1199,5 @@ void testHashEfficiency()
     cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl;
 
     system("PAUSE");
-    
+
 }

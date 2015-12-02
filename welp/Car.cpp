@@ -8,6 +8,7 @@ Car::Car()
 	MPGCity = 0;
 	MPGFreeway = 0;
 	price = 0;
+	views = 0;
 }
 
 Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFreeway, int _price)
@@ -18,6 +19,17 @@ Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFree
 	MPGCity = _MPGCity;
 	MPGFreeway = _MPGFreeway;
 	price = _price;
+	views = 0;
+}
+
+int Car::getViews()
+{
+    return views;
+}
+
+void Car::setViews(int _views)
+{
+    views = _views;
 }
 
 string Car::getMake() {

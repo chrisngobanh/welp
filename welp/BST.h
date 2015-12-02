@@ -311,18 +311,18 @@ void BST<bstvalue, bstobj>::printLevelOrder(Nodeptr root)
         {
             for (int i = 0; i < level; i++)
             {
-                cout << "-";
+                cout << "--";
             }
             cout << iter->obj << endl;
             if (iter->left != NULL)
             {
                 nodeQ.push(iter->left);
-                levelQ.push(level + 2);
+                levelQ.push(level + 1);
             }
             if (iter->right != NULL)
             {
                 nodeQ.push(iter->right);
-                levelQ.push(level + 2);
+                levelQ.push(level + 1);
             }
         }
         nodeQ.pop();
