@@ -57,21 +57,36 @@ public:
     int getTableSize();
     //A getter to help test the efficiency
 
-    int getNumObjects();
+    int getTotalNumObjects();
     //Gets the number of objects inside all the lists
+
+    int getNumObjects(string key, string identifier);
 
 private:
 
-    static const int TABLE_SIZE = 47;
+    static const int TABLE_SIZE = 48;
     List<hashobj> Table[TABLE_SIZE];
     int numObjects;
 
 };
 
 template <class hashobj>
-int HashTable<hashobj>::getNumObjects()
+int HashTable<hashobj>::getTotalNumObjects()
 {
     return numObjects;
+}
+
+template <class hashobj>
+int HashTable<hashobj>::getNumObjects(string key, string identifier)
+{
+    int index = baseHash(key, identifier);
+    int jump = jumpHash(index);
+    while ( (string)Table[index] != identifier && indexIsFilled(index) )
+    {
+        index = (index + jump) % TABLE_SIZE;
+    }
+
+    return Table[index].get_size();
 }
 
 template <class hashobj>

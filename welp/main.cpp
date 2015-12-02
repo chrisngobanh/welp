@@ -32,6 +32,10 @@ void sortByPriceMenu();
 void sortByRatingMenu();
 void filterCarsMenu(string);
 void testHashEfficiency();
+void specialPrintMenu();
+void miscMenu();
+void statsMenu();
+
 
 Car* load();
 int getArrayLength();
@@ -185,7 +189,7 @@ void mainMenu()
         cout << "1. Browse our list of cars" << endl;
         cout << "2. Search for a car" << endl;
         cout << "3. Sort cars by category" << endl;
-        cout << "4. Test the efficicency of the hash table" << endl;
+        cout << "4. Misc" << endl;
         cout << "0. Quit" << endl << endl;
         cout << "Please, select an option:  ";
 
@@ -205,7 +209,7 @@ void mainMenu()
         }
         else if (choice == "4")
         {
-            testHashEfficiency();
+            miscMenu();
         }
         else if (choice == "0")
         {
@@ -897,12 +901,16 @@ void enterReview(string make, string model)
     cout << ": ";
     description = getUserInput();
     cout << endl;
-    cout << "How many stars does the vehicle deserve? ";
+    cout << "How many stars does the vehicle deserve? " << endl;
+    cout << ": ";
     temp = getUserInput();
     stars = convertStringToInt(temp);
 
     Review newReview(userName, description, stars, make, model);
     reviewTable.addItem(make, model, newReview);
+
+    cout << "Your review has successfully been added." << endl;
+    system("PAUSE");
 }
 
 /**
@@ -1197,15 +1205,87 @@ void testHashEfficiency()
     cout << "The maximum amount of accesses before finding a key's value is: " << max << endl;
     cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl << endl;
 
-	cout << "The number of cars inside the database is: " << getArrayLength() << endl;
-	cout << "The number of reviews inside the database is: " << reviewTable.getNumObjects() << endl;
-	cout << "The most viewed car is: " << endl;
-	cout << "The least viewed car is: " << endl;
-	cout << "The most reviewed car is: " << endl;
-	cout << "The least reviewed car is: " << endl;
-	cout << "The highest rated car is: " << endl;
-	cout << "The lowest rated car is: " << endl;
+    system("PAUSE");
+
+}
+
+void miscMenu()
+{
+    clearScreen();
+
+    cout << "******************** Misc *******************" << endl << endl;
+    cout << "1. Special print cars" << endl;
+    cout << "2. View statistics" << endl;
+    cout << "3. Test hash table efficiency" << endl;
+    cout << "0. Back" << endl << endl;
+    cout << "What is your option? ";
+    string choice = getUserInput();
+
+	if (choice == "0") return;
+
+    if (choice == "1")
+    {
+        specialPrintMenu();
+    }
+    else if (choice == "2")
+    {
+        statsMenu();
+    }
+    else if (choice == "3")
+    {
+        testHashEfficiency();
+    }
+
+    miscMenu();
+}
+
+void specialPrintMenu()
+{
+    clearScreen();
+
+    cout << "Special print cars with which parameter?" << endl;
+    cout << "1. Print by MPG" << endl;
+    cout << "2. Print by price" << endl;
+    cout << "0. Return to misc" << endl;
+    cout << ": ";
+
+    int choice = convertStringToInt(getUserInput());
+
+    if (choice == 0) return;
+    if (choice == 1) mpgBST.levelOrderPrint();
+    else if (choice == 2) priceBST.levelOrderPrint();
+
+    cout << endl;
 
     system("PAUSE");
 
+    specialPrintMenu();
+}
+
+void statsMenu()
+{
+    clearScreen();
+
+    cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
+    cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
+
+    cout << "Most searched car: " << endl;
+    cout << "Least searched car: " << endl << endl;
+
+    cout << "Most reviewed car: " << endl;
+    cout << "Least reviewed car: " << endl << endl;
+
+    cout << "Highest rated car: " << endl;
+    cout << "Least rated car: " << endl << endl;
+
+//  cout << "The number of cars inside the database is: " << getArrayLength() << endl;
+//	cout << "The number of reviews inside the database is: " << reviewTable.getNumObjects() << endl;
+//	cout << "The most viewed car is: " << endl;
+//	cout << "The least viewed car is: " << endl;
+//	cout << "The most reviewed car is: " << endl;
+//	cout << "The least reviewed car is: " << endl;
+//	cout << "The highest rated car is: " << endl;
+//	cout << "The lowest rated car is: " << endl;
+
+    system("PAUSE");
 }
