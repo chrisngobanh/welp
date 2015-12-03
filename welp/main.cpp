@@ -627,55 +627,66 @@ void testHashEfficiency()
 
 void miscMenu()
 {
-    clearScreen();
-
-    cout << "******************** Misc *******************" << endl << endl;
-    cout << "1. Special print cars" << endl;
-    cout << "2. View statistics" << endl;
-    cout << "3. Test hash table efficiency" << endl;
-    cout << "0. Back" << endl << endl;
-    cout << "What is your option? ";
-    string choice = getUserInputAsString();
-
-	if (choice == "0") return;
-
-    if (choice == "1")
+    bool isGood = false;
+    while (!isGood)
     {
-        specialPrintMenu();
+        clearScreen();
+        cout << "******************** Misc *******************" << endl << endl;
+        cout << "1. Special print cars" << endl;
+        cout << "2. View statistics" << endl;
+        cout << "3. Test hash table efficiency" << endl;
+        cout << "0. Back" << endl << endl;
+        cout << "What is your option? ";
+        
+        int choice = getUserInputAsInt(0, 3);
+        
+        switch (choice)
+        {
+            case 0:
+                isGood = true;
+                break;
+            case 1:
+                specialPrintMenu();
+                break;
+            case 2:
+                statsMenu();
+                break;
+            case 3:
+                testHashEfficiency();
+                break;
+        }
     }
-    else if (choice == "2")
-    {
-        statsMenu();
-    }
-    else if (choice == "3")
-    {
-        testHashEfficiency();
-    }
-
-    miscMenu();
 }
 
 void specialPrintMenu()
 {
-    clearScreen();
-
-    cout << "Special print cars with which parameter?" << endl;
-    cout << "1. Print by MPG" << endl;
-    cout << "2. Print by price" << endl;
-    cout << "0. Return to misc" << endl;
-    cout << ": ";
-
-    int choice = convertStringToInt(getUserInputAsString());
-
-    if (choice == 0) return;
-    if (choice == 1) mpgBST.levelOrderPrint();
-    else if (choice == 2) priceBST.levelOrderPrint();
-
-    cout << endl;
-
-    system("PAUSE");
-
-    specialPrintMenu();
+    bool isGood = false;
+    while (!isGood)
+    {
+        clearScreen();
+        cout << "Special print cars with which parameter?" << endl;
+        cout << "1. Print by MPG" << endl;
+        cout << "2. Print by price" << endl;
+        cout << "0. Return to misc" << endl;
+        cout << ": ";
+        
+        int choice = getUserInputAsInt(0, 2);
+        
+        switch (choice)
+        {
+            case 0:
+                isGood = true;
+                break;
+            case 1:
+                mpgBST.levelOrderPrint();
+                system("PAUSE");
+                break;
+            case 2:
+                priceBST.levelOrderPrint();
+                system("PAUSE");
+                break;
+        }
+    }
 }
 
 void statsMenu()
