@@ -31,7 +31,6 @@ void testHashEfficiency();
 void specialPrintMenu();
 void miscMenu();
 void statsMenu();
-void quickSort(int low, int high);
 void saveCars(Car* cList);
 void enterReviewMenu(string make, string model);
 
@@ -141,18 +140,6 @@ void mainMenu()
     }
 }
 
-void enterReviewMenu(string make, string model)
-{
-	Review review = Review(userName);
-	if (reviewTable.isInTable(make, model, review))
-	{
-		cout << "Would you like to overwrite your exisiting review?" << endl;
-		
-		
-	}
-	enterReview(make, model);
-	system("PAUSE");
-}
 
 int getArrayLength()
 {

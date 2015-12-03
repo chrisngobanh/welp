@@ -99,3 +99,16 @@ void enterReview(string make, string model)
     cout << "Your review has successfully been added." << endl;
     system("PAUSE");
 }
+
+void enterReviewMenu(string make, string model)
+{
+    Review review = Review(userName);
+    if (reviewTable.isInTable(make, model, review))
+    {
+        cout << "Would you like to overwrite your exisiting review?" << endl;
+        
+        
+    }
+    enterReview(make, model);
+    system("PAUSE");
+}

@@ -9,10 +9,6 @@
 
 using namespace std;
 
-extern string userName;
-extern HashTable<int> viewTable;
-extern HashTable<Review> reviewTable;
-
 // Car Objects will never be manipulated after its creation.
 class Car
 {
@@ -51,3 +47,7 @@ public:
 };
 
 #endif
+
+extern string userName;
+extern HashTable<int> viewTable;
+extern HashTable<Review> reviewTable;

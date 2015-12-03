@@ -11,10 +11,6 @@
 
 using namespace std;
 
-extern string userName;
-
-void enterReview(string make, string model);
-
 //A review from a user for a specific car. Can be edited by the user (stars and description)
 class Review
 {
@@ -64,6 +60,10 @@ public:
     //int cast for getting the average stars
 
 };
-
-extern HashTable<Review> reviewTable;
 #endif // REVIEW_H
+
+extern string userName;
+extern HashTable<Review> reviewTable;
+
+void enterReview(string make, string model);
+void enterReviewMenu(string make, string model);
