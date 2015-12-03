@@ -62,24 +62,6 @@ vector<string> carMakeVector;
 // Handler Functions (Reusable Code)
 
 /**
- * Get User Input Handler
- *
- * This function gets user input when called.
- * It returns the user input.
- * Ignores empty lines
- */
-string getUserInput()
-{
-    string input;
-    // Check if user input is empty. If it isn't, then end loop
-    while (getline(cin, input))
-    {
-        if (input.size()) break;
-    }
-    return input;
-}
-
-/**
  * Is Integer Handler
  *
  * This function takes a string and checks if it can be converted to an int
@@ -107,6 +89,87 @@ int convertStringToInt(string input)
 {
     if (!isInteger(input)) return -1;
     return atoi(input.c_str());
+}
+
+/**
+ * Get User Input Handler (String)
+ *
+ * This function gets user input when called.
+ * It returns the user input as string.
+ * Ignores empty lines
+ */
+string getUserInputAsString()
+{
+    string input;
+    // Check if user input is empty. If it isn't, then end loop
+    while (getline(cin, input))
+    {
+        if (input.size()) break;
+    }
+    return input;
+}
+
+/**
+ * Get User Input Handler (Int)
+ *
+ * This function gets user input when called.
+ * It returns the user input as int.
+ * Ignores empty lines and bad input
+ */
+int getUserInputAsInt()
+{
+    while (true) {
+        string input = getUserInputAsString();
+        int intInput = convertStringToInt(input);
+        
+        if (intInput == -1)
+        {
+            cout << "Invalid Input. Try again: ";
+        }
+        else
+        {
+            return intInput;
+        }
+    }
+}
+
+/**
+ * Get User Input Handler (Int)
+ *
+ * This function gets user input when called.
+ * First parameter (int) is the min value that the input can be
+ * Second parameter (int) is the max value that the input can be
+ * It returns the user input as int.
+ * Ignores empty lines and bad input
+ */
+int getUserInputAsInt(int min, int max)
+{
+    while (true) {
+        int intInput = getUserInputAsInt();
+        
+        if (intInput < min || intInput > max)
+        {
+            cout << "Invalid Input. Try again: ";
+        }
+        else
+        {
+            return intInput;
+        }
+    }
+}
+
+/**
+ * Get User Input Handler (Int)
+ *
+ * This function gets user input when called.
+ * First parameter (int) is the min value that the input can be
+ * Second parameter (size_t) is the max value that the input can be
+ * It returns the user input as int.
+ * Ignores empty lines and bad input
+ */
+int getUserInputAsInt(int min, size_t max)
+{
+    return getUserInputAsInt(min, (int)max);
 }
 
 /**
@@ -185,16 +248,14 @@ void splashMenu()
 
     cout << "What is your username? ";
 
-    // Check if user input is empty. If it isn't, then end loop
-    userName = getUserInput();
+    userName = getUserInputAsString();
 }
 
 // This is the only menu that should have a loop
 void mainMenu()
 {
     bool isGood = false;
-    do
-    {
+    while (!isGood) {
         clearScreen();
 		cout << "********************* MAIN MENU *********************" << endl << endl;
         cout << "1. Browse our list of cars" << endl;
@@ -202,112 +263,107 @@ void mainMenu()
         cout << "3. Sort cars by category" << endl;
         cout << "4. Misc" << endl;
         cout << "0. Quit" << endl << endl;
-        cout << "Please, select an option:  ";
+        cout << "Please select an option: ";
 
-        string choice = getUserInput();
-
-        if (choice == "1")
+        int choice = getUserInputAsInt(0, 4);
+        
+        switch (choice)
         {
-            browseForCarsMenu();
+            case 0:
+                isGood = true;
+                break;
+            case 1:
+                browseForCarsMenu();
+                break;
+            case 2:
+                searchForCarsMenu();
+                break;
+            case 3:
+                sortByCategoryMenu();
+                break;
+            case 4:
+                miscMenu();
+                break;
         }
-        else if (choice == "2")
-        {
-            searchForCarsMenu();
-        }
-        else if (choice == "3")
-        {
-            sortByCategoryMenu();
-        }
-        else if (choice == "4")
-        {
-            miscMenu();
-        }
-        else if (choice == "0")
-        {
-            isGood = true;
-        }
-    } while (!isGood);
+    }
 }
 
 void browseForCarsMenu()
 {
-    // TODO: Change this so the values arent fixed and it reads value from an array instead
-    clearScreen();
-    cout << "********************* BROWSE MENU *********************" << endl << endl;
-    cout << "Here is our selection of car makes"  << endl << endl;
-	for (int i = 0; i < carMakeVector.size(); i++)
-	{
-		cout << i + 1 << ". " << carMakeVector[i] << endl;
-	}
-	cout << carMakeVector.size() + 1 << ". All" << endl;
-    cout << "0. Back" << endl << endl;
-
-
-    cout << "Pick a number to start browsing models:  ";
-
-    string choice = getUserInput();
-    if (choice == "0") return;
-
-    int intChoice = convertStringToInt(choice);
-
-    if (intChoice >= 1 && intChoice <= 11)
+    bool isGood = false;
+    while (!isGood)
     {
-        listCars(intChoice);
-    }
-    else
-    {
-        // If the user input is bad, recall the function.
-        browseForCarsMenu();
+        clearScreen();
+        cout << "********************* BROWSE MENU *********************" << endl << endl;
+        cout << "Here is our selection of car makes"  << endl << endl;
+        for (int i = 0; i < carMakeVector.size(); i++)
+        {
+            cout << i + 1 << ". " << carMakeVector[i] << endl;
+        }
+        cout << carMakeVector.size() + 1 << ". All" << endl;
+        cout << "0. Back" << endl << endl;
+        
+        
+        cout << "Pick a number to start browsing models: ";
+        
+        int choice = getUserInputAsInt(0, carMakeVector.size() + 1);
+        
+        switch (choice)
+        {
+            case 0:
+                isGood = true;
+                break;
+            default:
+                listCars(choice);
+        }
     }
 }
 
 void sortByCategoryMenu()
 {
-    // TODO: Change this so the values arent fixed and it reads value from an array instead
-    clearScreen();
-    cout << "********************* CATEGORY MENU *********************" << endl << endl;
-    cout << "1. MPG City" << endl;
-    cout << "2. MPG Freeway" << endl;
-    cout << "3. Price" << endl;
-    cout << "4. Rating" << endl;
-    cout << "0. Back" << endl << endl;
-    cout << "What would you like to sort cars by? ";
+    bool isGood = false;
+    while (!isGood)
+    {
+        clearScreen();
+        cout << "********************* CATEGORY MENU *********************" << endl << endl;
+        cout << "1. MPG City" << endl;
+        cout << "2. MPG Freeway" << endl;
+        cout << "3. Price" << endl;
+        cout << "4. Rating" << endl;
+        cout << "0. Back" << endl << endl;
+        cout << "What would you like to sort cars by? ";
 
-    string choice = getUserInput();
-
-    if (choice == "0") return;
-
-    if (choice == "1")
-    {
-        sortByMpgMenu();
-    }
-    else if (choice == "2")
-    {
-        sortByMpgFreewayMenu();
-    }
-    else if (choice == "3")
-    {
-        sortByPriceMenu();
-    }
-    else if (choice == "4")
-    {
-		sortByRatingMenu();
-    }
-    else
-    {
-        // If the user input is bad, recall the function.
-        sortByCategoryMenu();
+        int choice = getUserInputAsInt(0, 4);
+        
+        switch (choice)
+        {
+            case 0:
+                isGood = true;
+                break;
+            case 1:
+                sortByMpgMenu();
+                break;
+            case 2:
+                sortByMpgFreewayMenu();
+                break;
+            case 3:
+                sortByPriceMenu();
+                break;
+            case 4:
+                sortByRatingMenu();
+                break;
+        }
     }
 }
 
 void sortByMpgMenu()
 {
-    clearScreen();
     vector<Car> carVector;
     int min = INT_MIN;
     int max = INT_MAX;
     mpgBST.getVectorInOrder(min, max, carVector);
-
+    
+    clearScreen();
     cout << "******************* SORTED MPG LIST *******************" << endl << endl;
 
     int count = 0;
@@ -322,32 +378,19 @@ void sortByMpgMenu()
 
     cout << "0. Back" << endl;
 
-    // Input Validation by checking if its an integer and within the range of teh array
-    string choice = getUserInput();
-
-    if (choice == "0") return;
-
-    int intChoice = convertStringToInt(choice);
-    if (intChoice >= 1 && intChoice <= count)
-    {
-        displayCarPage(carVector[intChoice - 1]);
-    }
-    else
-    {
-        // If the user input is bad, recall the function.
-        sortByMpgMenu();
-    }
-
+    int choice = getUserInputAsInt(0, count);
+    
+    if (choice != 0) displayCarPage(carVector[choice - 1]);
 }
 
 void sortByMpgFreewayMenu()
 {
-    clearScreen();
     vector<Car> carVector;
     int min = INT_MIN;
     int max = INT_MAX;
     mpgFreewayBST.getVectorInOrder(min, max, carVector);
 
+    clearScreen();
     cout << "****************** SORTED MPG FREEWAY LIST ******************" << endl << endl;
 
     int count = 0;
@@ -362,33 +405,19 @@ void sortByMpgFreewayMenu()
 
     cout << "0. Back" << endl;
 
-    // Input Validation by checking if its an integer and within the range of teh array
-    string choice = getUserInput();
-
-    if (choice == "0") return;
-
-    int intChoice = convertStringToInt(choice);
-
-    if (intChoice >= 1 && intChoice <= count)
-    {
-        displayCarPage(carVector[intChoice - 1]);
-    }
-    else
-    {
-        // If the user input is bad, recall the function.
-        sortByMpgFreewayMenu();
-    }
-
+    int choice = getUserInputAsInt(0, count);
+    
+    if (choice != 0) displayCarPage(carVector[choice - 1]);
 }
 
 void sortByPriceMenu()
 {
-    clearScreen();
     vector<Car> carVector;
     int min = INT_MIN;
     int max = INT_MAX;
     priceBST.getVectorInOrder(min, max, carVector);
-
+    
+    clearScreen();
     cout << "******************* SORTED PRICE LIST *******************" << endl << endl;
     int count = 0;
     for (int i = 0; i < carVector.size(); i++)
@@ -402,31 +431,19 @@ void sortByPriceMenu()
 
     cout << "0. Back" << endl;
 
-    // Input Validation by checking if its an integer and within the range of teh array
-    string choice = getUserInput();
-
-    if (choice == "0") return;
-
-    int intChoice = convertStringToInt(choice);
-    if (intChoice >= 1 && intChoice <= count)
-    {
-        displayCarPage(carVector[intChoice - 1]);
-    }
-    else
-    {
-        // If user input is bad, recall the function.
-        sortByPriceMenu();
-    }
+    int choice = getUserInputAsInt(0, count);
+    
+    if (choice != 0) displayCarPage(carVector[choice - 1]);
 }
 
 void sortByRatingMenu()
 {
-	clearScreen();
 	vector<Car> carVector;
 	int min = INT_MIN;
 	int max = INT_MAX;
 	avgRatingBST.getVectorInOrder(min, max, carVector);
 
+    clearScreen();
 	cout << "****************** SORTED RATING FREEWAY LIST ******************" << endl << endl;
 
 	int count = 0;
@@ -441,29 +458,14 @@ void sortByRatingMenu()
 
 	cout << "0. Back" << endl;
 
-	// Input Validation by checking if its an integer and within the range of teh array
-	string choice = getUserInput();
-
-	if (choice == "0") return;
-
-	int intChoice = convertStringToInt(choice);
-
-	if (intChoice >= 1 && intChoice <= count)
-	{
-		displayCarPage(carVector[intChoice - 1]);
-	}
-	else
-	{
-		// If the user input is bad, recall the function.
-		sortByRatingMenu();
-	}
-
+    int choice = getUserInputAsInt(0, count);
+    
+    if (choice != 0) displayCarPage(carVector[choice - 1]);
 }
 
 
 void listCars(int carType)
 {
-    // This could be greatly improved with an array of car makes
 	if (carType > 0 && carType < carMakeVector.size() + 1)
 		filterCarsMenu(carMakeVector[carType - 1]);
     else if (carType == carMakeVector.size() + 1)
@@ -482,7 +484,6 @@ void filterCarsMenu(string carMake)
         {
             count++;
             filteredCars[count - 1] = carList[i];
-            filteredCars[1];
             cout << count << ". ";
             cout << carList[i].getMake() << " ";
             cout << carList[i].getModel() << endl;
@@ -490,30 +491,15 @@ void filterCarsMenu(string carMake)
     }
 
     cout << "0. Back" << endl << endl;
-    cout << "Make a selection:  ";
+    cout << "Make a selection: ";
 
-    // Input Validation by checking if its an integer and within the range of teh array
-    string choice = getUserInput();
-
-    if (choice == "0") return;
-
-    int intChoice = convertStringToInt(choice);
-
-    if (intChoice >= 1 && intChoice <= count)
-    {
-        displayCarPage(filteredCars[intChoice - 1]);
-    }
-    else
-    {
-        filterCarsMenu(carMake);
-    }
-
-
+    int choice = getUserInputAsInt(0, count);
+    
+    if (choice != 0) displayCarPage(filteredCars[choice - 1]);
 }
 
 void listAllCarsMenu()
 {
-    //	string finalIndex = getArrayLength();
     clearScreen();
     cout << "******************* ALL CARS MENU ********************" << endl << endl;
     // Print out list of all cars
@@ -526,34 +512,21 @@ void listAllCarsMenu()
     cout << "0. Quit" << endl;
 
     // Input validation by checking for integer and range
-    string choice = getUserInput();
+    int choice = getUserInputAsInt(0, getArrayLength());
 
-    if (choice == "0") return;
-
-    int intChoice = convertStringToInt(choice);
-
-    if (intChoice >= 1 && intChoice < getArrayLength() + 1)
-    {
-        displayCarPage(carList[intChoice - 1]);
-    }
-    else
-    {
-        listAllCarsMenu();
-    }
-
+    if (choice != 0) displayCarPage(carList[choice - 1]);
 }
 
 void displayCarPage(Car &car)
 {
-    string uChoice;
-
     //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
 
 	int views = viewTable.getFront(car.getMake(), car.getModel());
 	viewTable.clearIndex(car.getMake(), car.getModel());
 	viewTable.addItem(car.getMake(), car.getModel(), views + 1);
-
-    do
+    
+    bool isGood = false;
+    while (!isGood)
     {
         clearScreen();
         cout << "************************ " << car.getMake() << " " << car.getModel() << " ************************" << endl << endl;
@@ -576,46 +549,42 @@ void displayCarPage(Car &car)
 
         ///////////////Reviews Menu////////////////
 
-        string choice;
-
         cout << endl << endl << endl;
         cout << "************* Review Menu *************" << endl << endl;
         cout << "1. View list of reviews" << endl;
         cout << "2. Add a review" << endl;
         cout << "3. Delete your previous review" << endl;
-        cout << "0. Return to main menu" << endl << endl;
+        cout << "0. Back" << endl << endl;
         cout << "What is your choice?  ";
 
 
-        uChoice = getUserInput();
-        if (uChoice == "1")
+        int choice = getUserInputAsInt(0, 3);
+        
+        switch (choice)
         {
-            clearScreen();
-            cout << "Printing out all reviews for the " << car.getMake() << " " << car.getModel() << ":" << endl << endl;
-            reviewTable.printBucket(car.getMake(), car.getModel());
-            system("PAUSE");
+            case 0:
+                isGood = true;
+                break;
+            case 1:
+                clearScreen();
+                cout << "Printing out all reviews for the " << car.getMake() << " " << car.getModel() << ":" << endl << endl;
+                reviewTable.printBucket(car.getMake(), car.getModel());
+                system("PAUSE");
+                break;
+            case 2:
+                enterReview(car.getMake(), car.getModel());
+                break;
+            case 3:
+                Review review = Review(userName);
+                if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
+                {
+                    cout << "Your review has successfully been deleted." << endl;
+                } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
+                
+                system("PAUSE");
+                break;
         }
-        else if (uChoice == "2")
-        {
-            enterReview(car.getMake(), car.getModel());
-        }
-        else if (uChoice == "3")
-        {
-            clearScreen();
-            Review review = Review(userName);
-            if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
-            {
-                cout << "Your review has successfully been deleted." << endl;
-            } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
-
-            system("PAUSE");
-        }
-        else if (uChoice == "0")
-        {
-            return;
-        }
-
-    } while (uChoice != "0");
+    }
 }
 
 int getArrayLength()
@@ -865,18 +834,14 @@ void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst
 /* Function to get user's review on a vehicle */
 void enterReview(string make, string model)
 {
-    string description,  temp;
-    int stars;
-
     clearScreen();
     cout << "Give us your thoughts on the " << make << " " << model << "." << endl;
     cout << ": ";
-    description = getUserInput();
+    string description = getUserInputAsString();
     cout << endl;
     cout << "How many stars does the vehicle deserve? " << endl;
     cout << ": ";
-    temp = getUserInput();
-    stars = convertStringToInt(temp);
+    int stars = getUserInputAsInt(0, 5);
 
     Review newReview(userName, description, stars, make, model);
     reviewTable.addItem(make, model, newReview);
@@ -897,32 +862,35 @@ void enterReview(string make, string model)
  */
 void searchForCarsMenu()
 {
-    clearScreen();
-
-    cout << "******************** Search for Cars *******************" << endl << endl;
-    cout << "1. Search by car name" << endl;
-    cout << "2. Search for cars by manufacturer" << endl;
-    cout << "3. Search cars in a price range" << endl;
-    cout << "0. Back" << endl << endl;
-    cout << "What is your option? ";
-    string choice = getUserInput();
-
-	if (choice == "0") return;
-
-    if (choice == "1")
+    bool isGood = false;
+    while (!isGood)
     {
-        searchForCarByNameMenu();
-    }
-    else if (choice == "2")
-    {
-        searchForCarsByMakeMenu();
-    }
-    else if (choice == "3")
-    {
-        searchForCarsByPriceMenu();
-    }
+        clearScreen();
+        cout << "******************** Search for Cars *******************" << endl << endl;
+        cout << "1. Search by car name" << endl;
+        cout << "2. Search for cars by manufacturer" << endl;
+        cout << "3. Search cars in a price range" << endl;
+        cout << "0. Back" << endl << endl;
+        cout << "What is your option? ";
+        
+        int choice = getUserInputAsInt(0, 3);
 
-    searchForCarsMenu();
+        switch (choice)
+        {
+            case 0:
+                isGood = true;
+                break;
+            case 1:
+                searchForCarByNameMenu();
+                break;
+            case 2:
+                searchForCarsByMakeMenu();
+                break;
+            case 3:
+                searchForCarsByPriceMenu();
+                break;
+        }
+    }
 }
 
 /**
@@ -933,34 +901,37 @@ void searchForCarsMenu()
 
 void searchForCarByNameMenu()
 {
-    clearScreen();
-    cout << "*************** Search for Car by Car Name ***************" << endl << endl;
-    cout << "Please input a car name (i.e. Honda Accord)" << endl;
-    cout << ": ";
-    string name = getUserInput();
-
-    // This is a linear search
-    // TODO: Convert this to a binary search
-    for (int i = 0; i < getArrayLength(); i++)
+    bool isGood = false;
+    while (!isGood)
     {
-        // If the car's name is found, then render the car page for the user
-        if (name.compare(carList[i].getName()) == 0)
+        clearScreen();
+        cout << "*************** Search for Car by Car Name ***************" << endl << endl;
+        cout << "Please input a car name (i.e. Honda Accord)" << endl;
+        cout << ": ";
+        string name = getUserInputAsString();
+        
+        // This is a linear search
+        // TODO: Convert this to a binary search
+        for (int i = 0; i < getArrayLength(); i++)
         {
-            displayCarPage(carList[i]);
-            return;
+            // If the car's name is found, then render the car page for the user
+            if (name.compare(carList[i].getName()) == 0)
+            {
+                displayCarPage(carList[i]);
+                return;
+            }
+        }
+        
+        cout << "Car not found!" << endl;
+        cout << "Do you want to try again? (y/n) ";
+        string choice = getUserInputAsString();
+        
+        // Check if the first character in the answer is a y or Y. If false, stop the loop.
+        if (!(choice.at(0) == 'y' || choice.at(0) == 'Y'))
+        {
+            isGood = true;
         }
     }
-
-    cout << "Car not found!" << endl;
-    cout << "Do you want to try again? (y/n) ";
-    string choice = getUserInput();
-
-    // Check if the first character in the answer is a y or Y. If false, stop the loop.
-    if (choice.at(0) == 'y' || choice.at(0) == 'Y')
-    {
-        searchForCarByNameMenu();
-    }
-
 }
 
 /**
@@ -970,22 +941,34 @@ void searchForCarByNameMenu()
  */
 void searchForCarsByMakeMenu()
 {
-    clearScreen();
-    cout << "*************** Search for Car by Car Manufacturer ***************" << endl << endl;
-    cout << "Please input a car name (i.e. Tesla) ";
-    string name = getUserInput();
-
-    // This is a linear search
-    // TODO: Convert this to a binary search
-    // TODO: Wait until Johnny creates the array of car makes
-    for (int i = 0; i < getArrayLength(); i++)
+    bool isGood = false;
+    while (!isGood)
     {
-        // If the car's name is found, then render the car page for the user
-        if (name.compare(carList[i].getMake()) == 0)
+        clearScreen();
+        cout << "*************** Search for Car by Car Manufacturer ***************" << endl << endl;
+        cout << "Please input a car name (i.e. Tesla) ";
+        string name = getUserInputAsString();
+
+        // This is a linear search
+        // TODO: Convert this to a binary search
+        for (int i = 0; i < carMakeVector.size(); i++)
         {
-            // README: Uncomment when we implement car ids
-            filterCarsMenu(name);
-            break;
+            // If the car's make exists, then call the list cars menu
+            if (name.compare(carMakeVector[i]) == 0)
+            {
+                filterCarsMenu(name);
+                return;
+            }
+        }
+        
+        cout << "Manufacturer not found!" << endl;
+        cout << "Do you want to try again? (y/n) ";
+        string choice = getUserInputAsString();
+        
+        // Check if the first character in the answer is a y or Y. If false, stop the loop.
+        if (!(choice.at(0) == 'y' || choice.at(0) == 'Y'))
+        {
+            isGood = true;
         }
     }
 }
@@ -997,19 +980,18 @@ void searchForCarsByMakeMenu()
  */
 void searchForCarsByPriceMenu()
 {
-    clearScreen();
-    cout << "**************** Search for Car by Price Range ****************" << endl << endl;
-    cout << "Please input the min price (i.e. $25000) $";
-    string min = getUserInput();
-
-    cout << "Please input the max price (i.e. $50000) $";
-    string max = getUserInput();
-
-    int minInt = convertStringToInt(min);
-    int maxInt = convertStringToInt(max);
-
-    if (!(minInt > maxInt) && minInt != -1 && maxInt != -1)
+    bool isGood = false;
+    while (!isGood)
     {
+        clearScreen();
+        cout << "**************** Search for Car by Price Range ****************" << endl << endl;
+        cout << "Please input the min price (i.e. $25000) $";
+        int min = getUserInputAsInt(0, INT_MAX);
+
+        cout << "Please input the max price (i.e. $50000) $";
+        // Max can't be less than min
+        int max = getUserInputAsInt(min, INT_MAX);
+
         vector<Car> cars;
 
         // This is a linear search
@@ -1017,7 +999,7 @@ void searchForCarsByPriceMenu()
         for (int i = 0; i < getArrayLength(); i++)
         {
             // If car price is in range
-            if (carList[i].getPrice() >= minInt && carList[i].getPrice() <= maxInt)
+            if (carList[i].getPrice() >= min && carList[i].getPrice() <= max)
             {
                 cars.push_back(carList[i]);
             }
@@ -1029,12 +1011,12 @@ void searchForCarsByPriceMenu()
 
             cout << "Do you want to try again? (y/n) ";
 
-            string choice = getUserInput();
+            string choice = getUserInputAsString();
 
             // Check if the first character in the answer is a y or Y. If false, stop the loop.
-            if (choice.at(0) == 'y' || choice.at(0) == 'Y')
+            if (!(choice.at(0) == 'y' || choice.at(0) == 'Y'))
             {
-                searchForCarsByPriceMenu();
+                isGood = true;
             }
         }
         else
@@ -1047,30 +1029,11 @@ void searchForCarsByPriceMenu()
             cout << "0 - Quit" << endl;
 
             cout << "What is your choice? ";
-            string choice = getUserInput();
+            int choice = getUserInputAsInt(0, cars.size());
 
-            if (choice == "0") return;
-
-            int intChoice = convertStringToInt(choice);
-
-            if (intChoice >= 1 && intChoice <= cars.size())
-            {
-                displayCarPage(cars[intChoice - 1]);
-            }
-        }
-    }
-    else
-    {
-        cout << "Bad price range." << endl;
-
-        cout << "Do you want to try again? (y/n) ";
-
-        string choice = getUserInput();
-
-        // Check if the first character in the answer is a y or Y. If false, stop the loop.
-        if (choice.at(0) == 'y' || choice.at(0) == 'Y')
-        {
-            searchForCarsByPriceMenu();
+            if (choice != 0) displayCarPage(cars[choice - 1]);
+            
+            isGood = true;
         }
     }
 }
@@ -1191,7 +1154,7 @@ void miscMenu()
     cout << "3. Test hash table efficiency" << endl;
     cout << "0. Back" << endl << endl;
     cout << "What is your option? ";
-    string choice = getUserInput();
+    string choice = getUserInputAsString();
 
 	if (choice == "0") return;
 
@@ -1221,7 +1184,7 @@ void specialPrintMenu()
     cout << "0. Return to misc" << endl;
     cout << ": ";
 
-    int choice = convertStringToInt(getUserInput());
+    int choice = convertStringToInt(getUserInputAsString());
 
     if (choice == 0) return;
     if (choice == 1) mpgBST.levelOrderPrint();
