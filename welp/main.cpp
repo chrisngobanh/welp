@@ -444,10 +444,16 @@ void displayCarPage(Car &car)
                 break;
             case 3:
                 Review review = Review(userName);
-                if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
+                
+                cout << "Are you sure you want to delete your review? (y/n) ";
+                string dReview = getUserInputAsString();
+                if (dReview == "y")
                 {
-                    cout << "Your review has successfully been deleted." << endl;
-                } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
+                    if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
+                    {
+                        cout << "Your review has successfully been deleted." << endl;
+                    } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
+                }
                 
                 system("PAUSE");
                 break;
