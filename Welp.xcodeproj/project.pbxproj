@@ -10,6 +10,7 @@
 		1AA271E01C0A4B6C00D425DB /* Car.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271DD1C0A4B6C00D425DB /* Car.cpp */; };
 		1AA271E91C0A4B7500D425DB /* Review.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271E51C0A4B7500D425DB /* Review.cpp */; };
 		1AA271ED1C0A574C00D425DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271EC1C0A574C00D425DB /* main.cpp */; };
+		EE764E7B1C10E8340044EA7C /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E7A1C10E8340044EA7C /* Util.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		1AA271E51C0A4B7500D425DB /* Review.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Review.cpp; sourceTree = "<group>"; };
 		1AA271E61C0A4B7500D425DB /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		1AA271EC1C0A574C00D425DB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		EE764E791C10E8060044EA7C /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = ../welp/Util.h; sourceTree = "<group>"; };
+		EE764E7A1C10E8340044EA7C /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Util.cpp; path = welp/Util.cpp; sourceTree = SOURCE_ROOT; };
 		EEAB56EA1C0D11B900618B72 /* Kars Data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Kars Data.txt"; path = "welp/Kars Data.txt"; sourceTree = SOURCE_ROOT; };
 		EEB8B9931C0D08FF00040A10 /* reviews.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = reviews.txt; path = welp/reviews.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -68,6 +71,8 @@
 		1A2A16001BE1A7B800E36576 /* Welp */ = {
 			isa = PBXGroup;
 			children = (
+				EE764E7A1C10E8340044EA7C /* Util.cpp */,
+				EE764E791C10E8060044EA7C /* Util.h */,
 				EEB8B9931C0D08FF00040A10 /* reviews.txt */,
 				1AA271DC1C0A4B6C00D425DB /* BST.h */,
 				1AA271DD1C0A4B6C00D425DB /* Car.cpp */,
@@ -141,6 +146,7 @@
 				1AA271E91C0A4B7500D425DB /* Review.cpp in Sources */,
 				1AA271E01C0A4B6C00D425DB /* Car.cpp in Sources */,
 				1AA271ED1C0A574C00D425DB /* main.cpp in Sources */,
+				EE764E7B1C10E8340044EA7C /* Util.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
