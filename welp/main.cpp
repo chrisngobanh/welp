@@ -420,7 +420,8 @@ void displayCarPage(Car &car)
 
 
         int choice = getUserInputAsInt(0, 3);
-        
+		Review review = Review(userName);
+
         switch (choice)
         {
             case 0:
@@ -433,10 +434,9 @@ void displayCarPage(Car &car)
                 system("PAUSE");
                 break;
             case 2:
-                enterReview(car.getMake(), car.getModel());
+				enterReviewMenu(car.getMake(), car.getModel());
                 break;
             case 3:
-                Review review = Review(userName);
                 if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
                 {
                     cout << "Your review has successfully been deleted." << endl;
@@ -446,6 +446,16 @@ void displayCarPage(Car &car)
                 break;
         }
     }
+}
+
+void enterReviewMenu(string make, string model)
+{
+	Review review = Review(userName);
+	if (reviewTable.isInTable(make, model, review))
+	{
+		cout << "Would you like to overwrite your exisiting review?" << endl;
+
+	}
 }
 
 int getArrayLength()
@@ -776,15 +786,6 @@ void statsMenu()
 
     cout << "Highest rated car: " << avgRatingBST.maximum().getName() <<endl;
 	cout << "Least rated car: " << avgRatingBST.minimum().getName() << endl << endl;
-
-//  cout << "The number of cars inside the database is: " << getArrayLength() << endl;
-//	cout << "The number of reviews inside the database is: " << reviewTable.getNumObjects() << endl;
-//	cout << "The most viewed car is: " << endl;
-//	cout << "The least viewed car is: " << endl;
-//	cout << "The most reviewed car is: " << endl;
-//	cout << "The least reviewed car is: " << endl;
-//	cout << "The highest rated car is: " << endl;
-//	cout << "The lowest rated car is: " << endl;
 
     system("PAUSE");
 }

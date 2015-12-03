@@ -79,6 +79,8 @@ public:
 	string getMin();
 	//Returns the list whose front element is the highest or lowest inside the table
 
+	bool isInTable(string key, string identifier, hashobj _data);
+
 private:
 
     static const int TABLE_SIZE = 48;
@@ -399,6 +401,23 @@ int HashTable<hashobj>::getNumAccesses(string key, string identifier)
         accesses++;
     }
     return accesses;
+}
+
+template <class hashobj>
+bool HashTable<hashobj>::isInTable(string key, string identifier, hashobj _data)
+{
+	//Calculate the index
+	int index = baseHash(key, identifier);
+	int jump = jumpHash(index);
+	while ((string)Table[index] != identifier && indexIsFilled(index))
+	{
+		index = (index + jump) % TABLE_SIZE;
+	}
+
+	//If the data is found in the list, delete it
+	if (Table[index].scrollTo(_data)) return true;
+
+	return false;
 }
 
 #endif /* HASHTABLE_H_ */
