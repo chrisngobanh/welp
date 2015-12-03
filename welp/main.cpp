@@ -63,6 +63,7 @@ vector<string> carMakeVector;
 
 /**
  * Is Integer Handler
+ * Author(s): Johnny
  *
  * This function takes a string and checks if it can be converted to an int
  * Returns true if the string can be an int, and false if the string cannot be an int
@@ -80,6 +81,7 @@ inline bool isInteger(const std::string & s)
 
 /**
  * Covert String To Int Handler
+ * Author(s): Chris
  *
  * This function converts a string to an int
  * If the string is not an int, then it returns -1
@@ -93,6 +95,7 @@ int convertStringToInt(string input)
 
 /**
  * Get User Input Handler (String)
+ * Author(s): Chris
  *
  * This function gets user input when called.
  * It returns the user input as string.
@@ -111,6 +114,7 @@ string getUserInputAsString()
 
 /**
  * Get User Input Handler (Int)
+ * Author(s): Chris
  *
  * This function gets user input when called.
  * It returns the user input as int.
@@ -135,6 +139,7 @@ int getUserInputAsInt()
 
 /**
  * Get User Input Handler (Int)
+ * Author(s): Chris
  *
  * This function gets user input when called.
  * First parameter (int) is the min value that the input can be
@@ -160,6 +165,7 @@ int getUserInputAsInt(int min, int max)
 
 /**
  * Get User Input Handler (Int)
+ * Author(s): Chris
  *
  * This function gets user input when called.
  * First parameter (int) is the min value that the input can be
@@ -174,6 +180,7 @@ int getUserInputAsInt(int min, size_t max)
 
 /**
  * Clear Screen Handler
+ * Author(s): Chris
  *
  * This function clears the screen by making a lot of empty new lines
  * This method is cross platform
@@ -852,6 +859,7 @@ void enterReview(string make, string model)
 
 /**
  * Search For Cars Menu
+ * Author(s): Chris
  *
  * This is the menu for the searching feature
  * There are 4 menu options:
@@ -895,6 +903,7 @@ void searchForCarsMenu()
 
 /**
  * Search for Car by Car Name Menu
+ * Author(s): Chris
  *
  * This is a part of the search feature
  */
@@ -936,6 +945,7 @@ void searchForCarByNameMenu()
 
 /**
  * Search for Car by Car Make Menu
+ * Author(s): Chris
  *
  * This is a part of the search feature
  */
@@ -975,6 +985,7 @@ void searchForCarsByMakeMenu()
 
 /**
  * Search for Car by Price Menu
+ * Author(s): Chris
  *
  * This is a part of the search feature
  */
