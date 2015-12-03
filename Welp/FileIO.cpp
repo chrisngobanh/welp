@@ -1,5 +1,6 @@
 #include "FileIO.h"
 
+// Authors(s): Kevin, Han
 Car* load()
 {
     Car* list = new Car[getArrayLength()];
@@ -93,6 +94,7 @@ Car* load()
             // << "Added successfully" << endl;
         }
         in.close();
+        
         return list;
     }
     else
@@ -102,6 +104,7 @@ Car* load()
     }
 }
 
+// Authors(s): Kevin, Han
 void loadReviewTable(HashTable<Review> &table)
 {
     string line;
@@ -180,6 +183,7 @@ void loadReviewTable(HashTable<Review> &table)
     }
 }
 
+// Authors(s): Kevin, Han
 void loadMpgBST(Car* list, BST<int, Car> &bst)
 {
     int size = getArrayLength();
@@ -189,6 +193,7 @@ void loadMpgBST(Car* list, BST<int, Car> &bst)
     }
 }
 
+// Authors(s): Kevin, Han
 void loadMpgFreewayBST(Car* list, BST<int, Car> &bst)
 {
     int size = getArrayLength();
@@ -198,6 +203,7 @@ void loadMpgFreewayBST(Car* list, BST<int, Car> &bst)
     }
 }
 
+// Authors(s): Kevin, Han
 void loadPriceBST(Car* list, BST<int, Car> &bst)
 {
     int size = getArrayLength();
@@ -207,6 +213,7 @@ void loadPriceBST(Car* list, BST<int, Car> &bst)
     }
 }
 
+// Authors(s): Kevin, Han
 void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst)
 {
     int size = getArrayLength();
@@ -218,6 +225,7 @@ void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst
     }
 }
 
+// Authors(s): Kevin, Han
 void loadCarMake(vector<string>& makeList, Car* cList)
 {
     string Make;
@@ -255,6 +263,7 @@ void loadCarMake(vector<string>& makeList, Car* cList)
     }
 }
 
+// Authors(s): Kevin, Han
 void saveReviews(HashTable<Review> &Table, Car* list)
 {
     // Make/Model/Owner/Stars/Description
@@ -297,6 +306,7 @@ void saveReviews(HashTable<Review> &Table, Car* list)
     
 }
 
+// Authors(s): Kevin, Han
 void saveCars(Car* cList)
 {
     // Make/Model/MPGe City/MPGe Highway/Type/Price/Views

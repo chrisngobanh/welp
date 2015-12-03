@@ -1,3 +1,5 @@
+// Authors(s): Chris, Kevin
+
 #ifndef HASHTABLE_H_
 #define HASHTABLE_H_
 #include "List.h"

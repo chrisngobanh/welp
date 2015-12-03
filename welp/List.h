@@ -1,3 +1,4 @@
+// Authors(s): Chris, Kevin
 // Doubly Linked List
 #ifndef LIST_H
 #define LIST_H

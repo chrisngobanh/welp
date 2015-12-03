@@ -1,10 +1,19 @@
+// Authors(s): Chris, Kevin, Han, Carlos
+
 #ifndef REVIEW_H
 #define REVIEW_H
 #include <string>
 #include <iostream>
 #include <iomanip>
 
+#include "Util.h"
+#include "HashTable.h"
+
 using namespace std;
+
+extern string userName;
+
+void enterReview(string make, string model);
 
 //A review from a user for a specific car. Can be edited by the user (stars and description)
 class Review
@@ -56,4 +65,5 @@ public:
 
 };
 
+extern HashTable<Review> reviewTable;
 #endif // REVIEW_H

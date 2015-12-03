@@ -15,6 +15,7 @@
 
 #include "Util.h"
 #include "FileIO.h"
+#include "Browse.h"
 
 using namespace std;
 
@@ -25,16 +26,13 @@ void searchForCarsMenu(); // This is the menu for the search function
 void searchForCarByNameMenu();
 void searchForCarsByMakeMenu();
 void searchForCarsByPriceMenu();
-void browseForCarsMenu();
 void displayCarPage(Car &car);
-void listAllCarsMenu();
 void enterReview(string make, string model);
 void sortByCategoryMenu();
 void sortByMpgMenu();
 void sortByMpgFreewayMenu();
 void sortByPriceMenu();
 void sortByRatingMenu();
-void filterCarsMenu(string);
 void testHashEfficiency();
 void specialPrintMenu();
 void miscMenu();
@@ -43,10 +41,9 @@ void quickSort(int low, int high);
 void saveCars(Car* cList);
 void enterReviewMenu(string make, string model);
 
+string userName;
 Car* carList;
 vector<string> carMakeVector;
-string userName;
-
 HashTable<Review> reviewTable;
 HashTable<int> viewTable;
 BST<int, Car> mpgBST;
@@ -146,37 +143,6 @@ void mainMenu()
             case 4:
                 miscMenu();
                 break;
-        }
-    }
-}
-
-void browseForCarsMenu()
-{
-    bool isGood = false;
-    while (!isGood)
-    {
-        clearScreen();
-        cout << "********************* BROWSE MENU *********************" << endl << endl;
-        cout << "Here is our selection of car makes"  << endl << endl;
-        for (int i = 0; i < carMakeVector.size(); i++)
-        {
-            cout << i + 1 << ". " << carMakeVector[i] << endl;
-        }
-        cout << carMakeVector.size() + 1 << ". All" << endl;
-        cout << "0. Back" << endl << endl;
-        
-        
-        cout << "Pick a number to start browsing models: ";
-        
-        int choice = getUserInputAsInt(0, carMakeVector.size() + 1);
-        
-        switch (choice)
-        {
-            case 0:
-                isGood = true;
-                break;
-            default:
-                listCars(choice);
         }
     }
 }
@@ -325,60 +291,6 @@ void sortByRatingMenu()
     if (choice != 0) displayCarPage(carVector[choice - 1]);
 }
 
-
-void listCars(int carType)
-{
-	if (carType > 0 && carType < carMakeVector.size() + 1)
-		filterCarsMenu(carMakeVector[carType - 1]);
-    else if (carType == carMakeVector.size() + 1)
-        listAllCarsMenu();
-}
-
-void filterCarsMenu(string carMake)
-{
-    clearScreen();
-    cout << "******************** CAR LIST ********************" << endl << endl;
-    int count = 0;
-    Car filteredCars[30];
-    for (int i = 0; i < getArrayLength(); i++)
-    {
-        if (carList[i].getMake() == carMake)
-        {
-            count++;
-            filteredCars[count - 1] = carList[i];
-            cout << count << ". ";
-            cout << carList[i].getMake() << " ";
-            cout << carList[i].getModel() << endl;
-        }
-    }
-
-    cout << "0. Back" << endl << endl;
-    cout << "Make a selection: ";
-
-    int choice = getUserInputAsInt(0, count);
-    
-    if (choice != 0) displayCarPage(filteredCars[choice - 1]);
-}
-
-void listAllCarsMenu()
-{
-    clearScreen();
-    cout << "******************* ALL CARS MENU ********************" << endl << endl;
-    // Print out list of all cars
-    for (int i = 1; i < getArrayLength() + 1; i++)
-    {
-        cout << i << ". ";
-        cout << carList[i - 1].getMake() << " ";
-        cout << carList[i - 1].getModel() << endl;
-    }
-    cout << "0. Quit" << endl;
-
-    // Input validation by checking for integer and range
-    int choice = getUserInputAsInt(0, getArrayLength());
-
-    if (choice != 0) displayCarPage(carList[choice - 1]);
-}
-
 void displayCarPage(Car &car)
 {
     //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
@@ -493,25 +405,6 @@ int getArrayLength()
         cout << "Error 1: Unable to open file \"Kars Data.txt\"" << endl << endl;
         return -1;
     }
-}
-
-/* Function to get user's review on a vehicle */
-void enterReview(string make, string model)
-{
-    clearScreen();
-    cout << "Give us your thoughts on the " << make << " " << model << "." << endl;
-    cout << ": ";
-    string description = getUserInputAsString();
-    cout << endl;
-    cout << "How many stars does the vehicle deserve? " << endl;
-    cout << ": ";
-    int stars = getUserInputAsInt(0, 5);
-
-    Review newReview(userName, description, stars, make, model);
-    reviewTable.addItem(make, model, newReview);
-
-    cout << "Your review has successfully been added." << endl;
-    system("PAUSE");
 }
 
 /**

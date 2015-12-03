@@ -80,3 +80,22 @@ ostream& operator<<(ostream &os, const Review &review)
     os << review.description;
 	return os;
 }
+
+/* Function to get user's review on a vehicle */
+void enterReview(string make, string model)
+{
+    clearScreen();
+    cout << "Give us your thoughts on the " << make << " " << model << "." << endl;
+    cout << ": ";
+    string description = getUserInputAsString();
+    cout << endl;
+    cout << "How many stars does the vehicle deserve? " << endl;
+    cout << ": ";
+    int stars = getUserInputAsInt(0, 5);
+    
+    Review newReview(userName, description, stars, make, model);
+    reviewTable.addItem(make, model, newReview);
+    
+    cout << "Your review has successfully been added." << endl;
+    system("PAUSE");
+}

@@ -19,6 +19,7 @@ void loadCarMake(vector<string>& makeList, Car* cList);
 void saveReviews(HashTable<Review> &Table, Car* list);
 void listCars(int);
 
+extern vector<string> carMakeVector;
 extern HashTable<Review> reviewTable;
 extern HashTable<int> viewTable;
 extern BST<int, Car> mpgBST;

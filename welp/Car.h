@@ -1,9 +1,17 @@
+// Authors(s): Chris, Kevin, Han
 #ifndef CAR_H
 #define CAR_H
 #include <string>
 #include "List.h"
+#include "Util.h"
+#include "HashTable.h"
+#include "Review.h"
 
 using namespace std;
+
+extern string userName;
+extern HashTable<int> viewTable;
+extern HashTable<Review> reviewTable;
 
 // Car Objects will never be manipulated after its creation.
 class Car
@@ -36,6 +44,8 @@ public:
 	int getViews();
 
 	void setViews(int _views);
+    
+    void displayCarPage();
 
 	friend ostream& operator<<(ostream &os, const Car &car);
 };
