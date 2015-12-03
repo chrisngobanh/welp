@@ -215,20 +215,28 @@ bool BST<bstvalue, bstobj>::containsValue(Nodeptr root, bstvalue value, bstobj o
 template <class bstvalue, class bstobj>
 bstobj BST<bstvalue, bstobj>::findMin(Nodeptr root)
 {
-    if (root != NULL)
+    if (root->left == NULL)
     {
-        if (root->left != NULL) return findMin(root->left);
-        else return root->obj;
+        return root->obj;
     }
+    else
+    {
+        return findMin(root->left);
+    }
+
 }
 
 template <class bstvalue, class bstobj>
 bstobj BST<bstvalue, bstobj>::findMax(Nodeptr root)
 {
-    if (root != NULL)
+    if (root->right == NULL)
     {
-        if (root->right != NULL) return findMin(root->right);
-        else return root->obj;
+        return root->obj;
+    }
+    else
+    {
+        return findMin(root->left);
+        
     }
 }
 

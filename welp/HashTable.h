@@ -172,8 +172,8 @@ HashTable<hashobj>::HashTable()
         Table[i] = list;
     }
     numObjects = 0;
-    indexMostElements = INT_MIN;
-    indexLeastElements = INT_MAX;
+    indexMostElements = 0;
+    indexLeastElements = 0;
 	indexMax = INT_MIN;
 	indexMin = INT_MAX;
 }
@@ -225,6 +225,7 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 	    if (Table[index].empty()) Table[index].setIdentifier(identifier);
 		Table[index].push_back(_data);
 		numObjects++;
+
 		//Make this the index with the most elements if it has more elements than the record holder
 		if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
 		//Make this the index with the lease elements if it has less elements than the record holder
@@ -243,6 +244,7 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 		//Make this the index with the smallest front element if its smaller than the record holder
 		if (indexMin == INT_MAX) indexMin = index;
 		else if (getFront(key, identifier) < getFront(indexMin)) indexMin = index;
+        
 	}
 
 }
