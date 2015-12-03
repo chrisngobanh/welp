@@ -11,6 +11,7 @@
 		1AA271E91C0A4B7500D425DB /* Review.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271E51C0A4B7500D425DB /* Review.cpp */; };
 		1AA271ED1C0A574C00D425DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AA271EC1C0A574C00D425DB /* main.cpp */; };
 		EE764E7B1C10E8340044EA7C /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E7A1C10E8340044EA7C /* Util.cpp */; };
+		EE764E7D1C10EFAA0044EA7C /* FileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E7C1C10EFAA0044EA7C /* FileIO.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		1AA271EC1C0A574C00D425DB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EE764E791C10E8060044EA7C /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = ../welp/Util.h; sourceTree = "<group>"; };
 		EE764E7A1C10E8340044EA7C /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Util.cpp; path = welp/Util.cpp; sourceTree = SOURCE_ROOT; };
+		EE764E7C1C10EFAA0044EA7C /* FileIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileIO.cpp; sourceTree = "<group>"; };
+		EE764E7E1C10EFB70044EA7C /* FileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileIO.h; sourceTree = "<group>"; };
 		EEAB56EA1C0D11B900618B72 /* Kars Data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Kars Data.txt"; path = "welp/Kars Data.txt"; sourceTree = SOURCE_ROOT; };
 		EEB8B9931C0D08FF00040A10 /* reviews.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = reviews.txt; path = welp/reviews.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -80,6 +83,8 @@
 				1AA271E11C0A4B7500D425DB /* List.h */,
 				EEAB56EA1C0D11B900618B72 /* Kars Data.txt */,
 				1AA271EC1C0A574C00D425DB /* main.cpp */,
+				EE764E7C1C10EFAA0044EA7C /* FileIO.cpp */,
+				EE764E7E1C10EFB70044EA7C /* FileIO.h */,
 				1AA271E51C0A4B7500D425DB /* Review.cpp */,
 				1AA271E61C0A4B7500D425DB /* Review.h */,
 				1AA271DF1C0A4B6C00D425DB /* HashTable.h */,
@@ -143,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE764E7D1C10EFAA0044EA7C /* FileIO.cpp in Sources */,
 				1AA271E91C0A4B7500D425DB /* Review.cpp in Sources */,
 				1AA271E01C0A4B6C00D425DB /* Car.cpp in Sources */,
 				1AA271ED1C0A574C00D425DB /* main.cpp in Sources */,
