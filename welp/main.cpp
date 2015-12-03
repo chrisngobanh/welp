@@ -558,7 +558,7 @@ Car* load()
             offset = 0;
 
             //Get the views
-            while (line[substr_start + offset] != NULL)
+            while (line[substr_start + offset] != '\0')
             {
                 offset++;
             }
@@ -640,7 +640,7 @@ void loadReviewTable(HashTable<Review> &table)
             offset = 0;
 
             //Get the description
-            while (line[substr_start + offset] != NULL)
+            while (line[substr_start + offset] != '\0')
             {
                 offset++;
             }
@@ -921,7 +921,7 @@ void loadCarMake(vector<string>& makeList, Car* cList)
     for (int i = 0; i < size; i++)
     {
         Make = cList[i].getMake();
-        makeSize = makeList.size();
+        makeSize = static_cast<int>(makeList.size());
 
         // If carMake is empty then pushback Make
         if (makeSize == 0)
@@ -952,7 +952,6 @@ void saveReviews(HashTable<Review> &Table, Car* list)
     // Make/Model/Owner/Stars/Description
 
     int size = getArrayLength();
-    int rSize = 0;
     string Make, Model;
     ofstream save("reviews.txt");
     List<Review> rList;

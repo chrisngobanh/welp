@@ -405,7 +405,7 @@ bool BST<bstvalue, bstobj>::contains(bstvalue value)
 template <class bstvalue, class bstobj>
 bstobj BST<bstvalue, bstobj>::minimum()
 {
-    if (root->value == NULL)
+    if (root == NULL)
     {
         cout << "Minimum: Tree is empty" << endl;
         //will need to include cstdlib for exit below
@@ -420,7 +420,7 @@ bstobj BST<bstvalue, bstobj>::minimum()
 template <class bstvalue, class bstobj>
 bstobj BST<bstvalue, bstobj>::maximum()
 {
-    if (root->value == NULL)
+    if (root == NULL)
     {
         cout << "Minimum: Tree is empty" << endl;
         //will need to include cstdlib for exit below

@@ -74,7 +74,7 @@ bool Review::operator!=(const Review &review)
 
 ostream& operator<<(ostream &os, const Review &review)
 {
-    int width = 18 - review.make.size();
+    int width = 18 - static_cast<int>(review.make.size());
     os << review.make << " " << setw(width) << left << review.model << "  Rating: " << review.stars << endl;
     os << review.owner << " comments:" << endl;
     os << review.description;
