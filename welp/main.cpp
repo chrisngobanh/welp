@@ -408,7 +408,10 @@ void displayCarPage(Car &car)
         cout << "Price: $" << car.getPrice() << endl;
         cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << " stars" << endl;
 
-        ///////////////Reviews Menu////////////////
+        /** Reviews Menu
+         *
+         * User can make selections based on Menu's options
+         **/
 
         cout << endl << endl << endl;
         cout << "************* Review Menu *************" << endl << endl;
