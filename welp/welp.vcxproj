@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Browse.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="main.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Browse.h" />
     <ClInclude Include="BST.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="FileIO.h" />

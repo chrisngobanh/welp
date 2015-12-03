@@ -86,7 +86,7 @@ void Car::displayCarPage()
     while (!isGood)
     {
         clearScreen();
-        cout << "************************ " << make << " " << model << " ************************" << endl << endl;
+        cout << "************************ " << make << " " << model << " ************************" << endl;
         cout << "                       ______________" << endl;
         cout << "               __..=='|'   |         ``-._" << endl;
         cout << "  \\=====_..--'/'''    |    |              ``-._" << endl;
@@ -104,9 +104,7 @@ void Car::displayCarPage()
         cout << "Price: $" << price << endl;
         cout << "Rating: " << reviewTable.getAverageRatingBucket(make, model) << " stars" << endl;
         
-        ///////////////Reviews Menu////////////////
-        
-        cout << endl << endl << endl;
+        ///////////////Reviews Menu///////////////
         cout << "************* Review Menu *************" << endl << endl;
         cout << "1. View list of reviews" << endl;
         cout << "2. Add a review" << endl;
