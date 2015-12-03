@@ -41,6 +41,7 @@ void miscMenu();
 void statsMenu();
 void quickSort(int low, int high);
 void saveCars(Car* cList);
+void enterReviewMenu(string make, string model);
 
 Car* carList;
 vector<string> carMakeVector;
@@ -408,7 +409,10 @@ void displayCarPage(Car &car)
         cout << "Price: $" << car.getPrice() << endl;
         cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << " stars" << endl;
 
-        ///////////////Reviews Menu////////////////
+        /** Reviews Menu
+         *
+         * User can make selections based on Menu's options
+         **/
 
         cout << endl << endl << endl;
         cout << "************* Review Menu *************" << endl << endl;
@@ -437,10 +441,17 @@ void displayCarPage(Car &car)
 				enterReviewMenu(car.getMake(), car.getModel());
                 break;
             case 3:
-                if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
+                Review review = Review(userName);
+                
+                cout << "Are you sure you want to delete your review? (y/n) ";
+                string dReview = getUserInputAsString();
+                if (dReview == "y")
                 {
-                    cout << "Your review has successfully been deleted." << endl;
-                } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
+                    if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
+                    {
+                        cout << "Your review has successfully been deleted." << endl;
+                    } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
+                }
                 
                 system("PAUSE");
                 break;
@@ -454,8 +465,11 @@ void enterReviewMenu(string make, string model)
 	if (reviewTable.isInTable(make, model, review))
 	{
 		cout << "Would you like to overwrite your exisiting review?" << endl;
-
+		
+		
 	}
+	enterReview(make, model);
+	system("PAUSE");
 }
 
 int getArrayLength()
