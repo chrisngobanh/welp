@@ -16,6 +16,7 @@
 #include "Util.h"
 #include "FileIO.h"
 #include "Browse.h"
+#include "Sort.h"
 
 using namespace std;
 
@@ -26,13 +27,6 @@ void searchForCarsMenu(); // This is the menu for the search function
 void searchForCarByNameMenu();
 void searchForCarsByMakeMenu();
 void searchForCarsByPriceMenu();
-void displayCarPage(Car &car);
-void enterReview(string make, string model);
-void sortByCategoryMenu();
-void sortByMpgMenu();
-void sortByMpgFreewayMenu();
-void sortByPriceMenu();
-void sortByRatingMenu();
 void testHashEfficiency();
 void specialPrintMenu();
 void miscMenu();
@@ -147,230 +141,6 @@ void mainMenu()
     }
 }
 
-void sortByCategoryMenu()
-{
-    bool isGood = false;
-    while (!isGood)
-    {
-        clearScreen();
-        cout << "********************* CATEGORY MENU *********************" << endl << endl;
-        cout << "1. MPG City" << endl;
-        cout << "2. MPG Freeway" << endl;
-        cout << "3. Price" << endl;
-        cout << "4. Rating" << endl;
-        cout << "0. Back" << endl << endl;
-        cout << "What would you like to sort cars by? ";
-
-        int choice = getUserInputAsInt(0, 4);
-        
-        switch (choice)
-        {
-            case 0:
-                isGood = true;
-                break;
-            case 1:
-                sortByMpgMenu();
-                break;
-            case 2:
-                sortByMpgFreewayMenu();
-                break;
-            case 3:
-                sortByPriceMenu();
-                break;
-            case 4:
-                sortByRatingMenu();
-                break;
-        }
-    }
-}
-
-void sortByMpgMenu()
-{
-    vector<Car> carVector;
-    int min = INT_MIN;
-    int max = INT_MAX;
-    mpgBST.getVectorInOrder(min, max, carVector);
-    
-    clearScreen();
-    cout << "******************* SORTED MPG LIST *******************" << endl << endl;
-
-    int count = 0;
-    for (int i = 0; i < carVector.size(); i++)
-    {
-        count++;
-        cout << count << ". ";
-        cout << carVector[i].getMake() << " ";
-        cout << carVector[i].getModel() << "/ MPG: ";
-        cout << carVector[i].getMPGCity() << endl;
-    }
-
-    cout << "0. Back" << endl;
-
-    int choice = getUserInputAsInt(0, count);
-    
-    if (choice != 0) displayCarPage(carVector[choice - 1]);
-}
-
-void sortByMpgFreewayMenu()
-{
-    vector<Car> carVector;
-    int min = INT_MIN;
-    int max = INT_MAX;
-    mpgFreewayBST.getVectorInOrder(min, max, carVector);
-
-    clearScreen();
-    cout << "****************** SORTED MPG FREEWAY LIST ******************" << endl << endl;
-
-    int count = 0;
-    for (int i = 0; i < carVector.size(); i++)
-    {
-        count++;
-        cout << count << ". ";
-        cout << carVector[i].getMake() << " ";
-        cout << carVector[i].getModel() << "/ MPG Freeway: ";
-        cout << carVector[i].getMPGFreeway() << endl;
-    }
-
-    cout << "0. Back" << endl;
-
-    int choice = getUserInputAsInt(0, count);
-    
-    if (choice != 0) displayCarPage(carVector[choice - 1]);
-}
-
-void sortByPriceMenu()
-{
-    vector<Car> carVector;
-    int min = INT_MIN;
-    int max = INT_MAX;
-    priceBST.getVectorInOrder(min, max, carVector);
-    
-    clearScreen();
-    cout << "******************* SORTED PRICE LIST *******************" << endl << endl;
-    int count = 0;
-    for (int i = 0; i < carVector.size(); i++)
-    {
-        count++;
-        cout << count << ". ";
-        cout << carVector[i].getMake() << " ";
-        cout << carVector[i].getModel() << "/ Price: $";
-        cout << carVector[i].getPrice() << endl;
-    }
-
-    cout << "0. Back" << endl;
-
-    int choice = getUserInputAsInt(0, count);
-    
-    if (choice != 0) displayCarPage(carVector[choice - 1]);
-}
-
-void sortByRatingMenu()
-{
-	vector<Car> carVector;
-	int min = INT_MIN;
-	int max = INT_MAX;
-	avgRatingBST.getVectorInOrder(min, max, carVector);
-
-    clearScreen();
-	cout << "****************** SORTED RATING FREEWAY LIST ******************" << endl << endl;
-
-	int count = 0;
-	for (int i = 0; i < carVector.size(); i++)
-	{
-		count++;
-		cout << count << ". ";
-		cout << carVector[i].getMake() << " ";
-		cout << carVector[i].getModel() << "/ ";
-		cout << reviewTable.getAverageRatingBucket(carVector[i].getMake(), carVector[i].getModel()) << " stars" << endl;
-	}
-
-	cout << "0. Back" << endl;
-
-    int choice = getUserInputAsInt(0, count);
-    
-    if (choice != 0) displayCarPage(carVector[choice - 1]);
-}
-
-void displayCarPage(Car &car)
-{
-    //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
-
-	int views = viewTable.getFront(car.getMake(), car.getModel());
-	viewTable.clearIndex(car.getMake(), car.getModel());
-	viewTable.addItem(car.getMake(), car.getModel(), views + 1);
-    
-    bool isGood = false;
-    while (!isGood)
-    {
-        clearScreen();
-        cout << "************************ " << car.getMake() << " " << car.getModel() << " ************************" << endl << endl;
-        cout << "                       ______________" << endl;
-        cout << "               __..=='|'   |         ``-._" << endl;
-        cout << "  \\=====_..--'/'''    |    |              ``-._" << endl;
-        cout << "  |'''''      ```---..|____|_______________[)>.``-.._____" << endl;
-        cout << "  |\\_______.....__________|____________     ''  \\      __````---.._" << endl;
-        cout << "./'     /.-'_'_`-.\\       |  ' '       ```````---|---/.-'_'_`=.-.__```-._" << endl;
-        cout << "|.__  .'/ /     \\ \\`.      \\                     | .'/ /     \\ \\`. ```-- `." << endl;
-        cout << " \\  ``|| |   o   | ||-------\\-------------------/--|| |   o   | ||--------|" << endl;
-        cout << "  \"`--' \\ \\ _ _ / / |______________________________| \\ \\ _ _ / / |..----```" << endl;
-        cout << "         `-.....-'                                    `-.....-'" << endl;
-        cout << endl;
-        cout << "Engine Type: " << car.getEngine() << endl;
-        cout << "MPG City: " << car.getMPGCity() << endl;
-        cout << "MPG Freeway: " << car.getMPGFreeway() << endl;
-        cout << "Price: $" << car.getPrice() << endl;
-        cout << "Rating: " << reviewTable.getAverageRatingBucket(car.getMake(), car.getModel()) << " stars" << endl;
-
-        /** Reviews Menu
-         *
-         * User can make selections based on Menu's options
-         **/
-
-        cout << endl << endl << endl;
-        cout << "************* Review Menu *************" << endl << endl;
-        cout << "1. View list of reviews" << endl;
-        cout << "2. Add a review" << endl;
-        cout << "3. Delete your previous review" << endl;
-        cout << "0. Back" << endl << endl;
-        cout << "What is your choice?  ";
-
-
-        int choice = getUserInputAsInt(0, 3);
-		Review review = Review(userName);
-
-        switch (choice)
-        {
-            case 0:
-                isGood = true;
-                break;
-            case 1:
-                clearScreen();
-                cout << "Printing out all reviews for the " << car.getMake() << " " << car.getModel() << ":" << endl << endl;
-                reviewTable.printBucket(car.getMake(), car.getModel());
-                system("PAUSE");
-                break;
-            case 2:
-				enterReviewMenu(car.getMake(), car.getModel());
-                break;
-            case 3:
-                Review review = Review(userName);
-                
-                cout << "Are you sure you want to delete your review? (y/n) ";
-                string dReview = getUserInputAsString();
-                if (dReview == "y")
-                {
-                    if ( reviewTable.removeItem(car.getMake(), car.getModel(), review) )
-                    {
-                        cout << "Your review has successfully been deleted." << endl;
-                    } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
-                }
-                
-                system("PAUSE");
-                break;
-        }
-    }
-}
-
 void enterReviewMenu(string make, string model)
 {
 	Review review = Review(userName);
@@ -476,7 +246,7 @@ void searchForCarByNameMenu()
             // If the car's name is found, then render the car page for the user
             if (name.compare(carList[i].getName()) == 0)
             {
-                displayCarPage(carList[i]);
+                carList[i].displayCarPage();
                 return;
             }
         }
@@ -592,7 +362,7 @@ void searchForCarsByPriceMenu()
             cout << "What is your choice? ";
             int choice = getUserInputAsInt(0, cars.size());
 
-            if (choice != 0) displayCarPage(cars[choice - 1]);
+            if (choice != 0) cars[choice - 1].displayCarPage();
             
             isGood = true;
         }
