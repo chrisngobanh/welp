@@ -12,6 +12,7 @@
 #include "BST.h"
 #include "HashTable.h"
 #include "Review.h"
+#include "MaxHeap.h"
 
 #include "Util.h"
 #include "FileIO.h"
@@ -43,6 +44,7 @@ BST<int, Car> mpgBST;
 BST<int, Car> mpgFreewayBST;
 BST<int, Car> priceBST;
 BST<double, Car> avgRatingBST;
+MaxHeap<int, Car> viewHeap;
 
 // The rest of the program
 
@@ -56,6 +58,7 @@ int main()
     priceBST = BST<int, Car>();
     avgRatingBST = BST<double, Car>();
     mpgFreewayBST = BST<int, Car>();
+    viewHeap = MaxHeap<int, Car>(getArrayLength());
 
     carList = load();
     loadMpgBST(carList, mpgBST);
@@ -64,6 +67,7 @@ int main()
     loadReviewTable(reviewTable);
     loadAvgRatingBST(carList, reviewTable, avgRatingBST);
     loadCarMake(carMakeVector, carList);
+    loadViewHeap();
 
     mainMenu();
 
@@ -118,7 +122,7 @@ void mainMenu()
         cout << "Please select an option: ";
 
         int choice = getUserInputAsInt(0, 4);
-        
+
         switch (choice)
         {
             case 0:
@@ -187,7 +191,7 @@ void searchForCarsMenu()
         cout << "3. Search cars in a price range" << endl;
         cout << "0. Back" << endl << endl;
         cout << "What is your option? ";
-        
+
         int choice = getUserInputAsInt(0, 3);
 
         switch (choice)
@@ -225,7 +229,7 @@ void searchForCarByNameMenu()
         cout << "Please input a car name (i.e. Honda Accord)" << endl;
         cout << ": ";
         string name = getUserInputAsString();
-        
+
         // This is a linear search
         // TODO: Convert this to a binary search
         for (int i = 0; i < getArrayLength(); i++)
@@ -237,11 +241,11 @@ void searchForCarByNameMenu()
                 return;
             }
         }
-        
+
         cout << "Car not found!" << endl;
         cout << "Do you want to try again? (y/n) ";
         string choice = getUserInputAsString();
-        
+
         // Check if the first character in the answer is a y or Y. If false, stop the loop.
         if (!(choice.at(0) == 'y' || choice.at(0) == 'Y'))
         {
@@ -277,11 +281,11 @@ void searchForCarsByMakeMenu()
                 return;
             }
         }
-        
+
         cout << "Manufacturer not found!" << endl;
         cout << "Do you want to try again? (y/n) ";
         string choice = getUserInputAsString();
-        
+
         // Check if the first character in the answer is a y or Y. If false, stop the loop.
         if (!(choice.at(0) == 'y' || choice.at(0) == 'Y'))
         {
@@ -350,7 +354,7 @@ void searchForCarsByPriceMenu()
             int choice = getUserInputAsInt(0, cars.size());
 
             if (choice != 0) cars[choice - 1].displayCarPage();
-            
+
             isGood = true;
         }
     }
@@ -394,9 +398,9 @@ void miscMenu()
         cout << "3. Test hash table efficiency" << endl;
         cout << "0. Back" << endl << endl;
         cout << "What is your option? ";
-        
+
         int choice = getUserInputAsInt(0, 3);
-        
+
         switch (choice)
         {
             case 0:
@@ -426,9 +430,9 @@ void specialPrintMenu()
         cout << "2. Print by price" << endl;
         cout << "0. Return to misc" << endl;
         cout << ": ";
-        
+
         int choice = getUserInputAsInt(0, 2);
-        
+
         switch (choice)
         {
             case 0:
@@ -453,8 +457,7 @@ void statsMenu()
     cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
     cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
 
-    cout << "Most viewed car: " << viewTable.getMax() << endl;
-    cout << "Least viewed car: " << viewTable.getMin() << endl << endl;
+    cout << "Most viewed car: " << viewHeap.getMaxObject() << endl;
 
     cout << "Most reviewed car: " << reviewTable.getObjMostElements() << endl;
     cout << "Least reviewed car: " << reviewTable.getObjLeastElements() << endl << endl;

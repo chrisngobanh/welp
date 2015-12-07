@@ -8,7 +8,6 @@ Car::Car()
 	MPGCity = 0;
 	MPGFreeway = 0;
 	price = 0;
-	views = 0;
 }
 
 Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFreeway, int _price)
@@ -19,17 +18,6 @@ Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFree
 	MPGCity = _MPGCity;
 	MPGFreeway = _MPGFreeway;
 	price = _price;
-	views = 0;
-}
-
-int Car::getViews()
-{
-    return views;
-}
-
-void Car::setViews(int _views)
-{
-    views = _views;
 }
 
 string Car::getMake() {
@@ -45,8 +33,6 @@ string Car::getName()
 {
 	return make + " " + model;
 }
-
-
 
 string Car::getEngine()
 {
@@ -74,14 +60,25 @@ ostream& operator<<(ostream &os, const Car &car)
 	return os;
 }
 
+bool Car::operator==(const Car &car)
+{
+    return (car.model == this->model);
+}
+
+bool Car::operator!=(const Car &car)
+{
+    return !(*this == car);
+}
+
 void Car::displayCarPage()
 {
     //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
-    
+
     int views = viewTable.getFront(make, model);
     viewTable.clearIndex(make, model);
-    viewTable.addItem(make, model, views++);
-    
+    viewTable.addItem(make, model, views + 1);
+    viewHeap.iterateValue(*this, 1);
+
     bool isGood = false;
     while (!isGood)
     {
@@ -103,18 +100,19 @@ void Car::displayCarPage()
         cout << "MPG Freeway: " << MPGFreeway << endl;
         cout << "Price: $" << price << endl;
         cout << "Rating: " << reviewTable.getAverageRatingBucket(make, model) << " stars" << endl;
-        
+        cout << "Views: " << viewTable.getFront(make, model) << endl;
+
         ///////////////Reviews Menu///////////////
-        cout << "************* Review Menu *************" << endl << endl;
+        cout << "************* Review Menu *************" << endl;
         cout << "1. View list of reviews" << endl;
         cout << "2. Add a review" << endl;
         cout << "3. Delete your previous review" << endl;
         cout << "0. Back" << endl << endl;
         cout << "What is your choice?  ";
-        
-        
+
+
         int choice = getUserInputAsInt(0, 3);
-        
+
         switch (choice)
         {
             case 0:
@@ -135,7 +133,7 @@ void Car::displayCarPage()
                 {
                     cout << "Your review has successfully been deleted." << endl;
                 } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
-                
+
                 system("PAUSE");
                 break;
         }

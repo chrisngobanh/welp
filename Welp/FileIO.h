@@ -1,3 +1,5 @@
+//Author(s): Kevin, Han
+
 #include <string>
 #include <fstream>
 
@@ -5,6 +7,7 @@
 #include "Review.h"
 #include "HashTable.h"
 #include "BST.h"
+#include "MaxHeap.h"
 
 using namespace std;
 
@@ -18,7 +21,9 @@ void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst
 void loadCarMake(vector<string>& makeList, Car* cList);
 void saveReviews(HashTable<Review> &Table, Car* list);
 void listCars(int);
+void loadViewHeap();
 
+extern Car* carList;
 extern vector<string> carMakeVector;
 extern HashTable<Review> reviewTable;
 extern HashTable<int> viewTable;
@@ -26,3 +31,4 @@ extern BST<int, Car> mpgBST;
 extern BST<int, Car> mpgFreewayBST;
 extern BST<int, Car> priceBST;
 extern BST<double, Car> avgRatingBST;
+extern MaxHeap<int, Car> viewHeap;

@@ -6,6 +6,7 @@
 #include "Util.h"
 #include "HashTable.h"
 #include "Review.h"
+#include "MaxHeap.h"
 
 using namespace std;
 
@@ -21,7 +22,6 @@ private:
 	int MPGCity; // i.e. 22
 	int MPGFreeway; // i.e. 31
 	int price; // i.e. 23895
-	int views; //Number times viewed on car page
 
 public:
 	// Constructor
@@ -37,13 +37,12 @@ public:
 	int getMPGCity();
 	int getMPGFreeway();
 	int getPrice();
-	int getViews();
 
-	void setViews(int _views);
-    
     void displayCarPage();
 
 	friend ostream& operator<<(ostream &os, const Car &car);
+	bool operator==(const Car &car);
+    bool operator!=(const Car &car);
 };
 
 #endif
@@ -51,3 +50,4 @@ public:
 extern string userName;
 extern HashTable<int> viewTable;
 extern HashTable<Review> reviewTable;
+extern MaxHeap<int, Car> viewHeap;

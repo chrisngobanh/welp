@@ -6,14 +6,14 @@ Car* load()
     Car* list = new Car[getArrayLength()];
     string line;
     int index = 0;
-    
+
     int substr_start, offset;
-    
+
     string make, model, type, engine;
     int mpgcity, mpgfree, msrp, views;
-    
+
     char divider = '/';
-    
+
     ifstream in("Kars Data.txt");
     if (in.is_open())
     {
@@ -31,7 +31,7 @@ Car* load()
             make = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the model
             while (line[substr_start + offset] != divider)
             {
@@ -40,7 +40,7 @@ Car* load()
             model = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the mpgcity
             while (line[substr_start + offset] != divider)
             {
@@ -49,7 +49,7 @@ Car* load()
             mpgcity = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the mpgfree
             while (line[substr_start + offset] != divider)
             {
@@ -58,7 +58,7 @@ Car* load()
             mpgfree = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the engine
             while (line[substr_start + offset] != divider)
             {
@@ -67,7 +67,7 @@ Car* load()
             engine = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the price
             while (line[substr_start + offset] != divider)
             {
@@ -76,7 +76,7 @@ Car* load()
             msrp = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the views
             while (line[substr_start + offset] != '\0')
             {
@@ -85,16 +85,16 @@ Car* load()
             views = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //make << model << engine << mpgcity <<  mpgfree << msrp
             list[index] = Car(make, model, engine, mpgcity, mpgfree, msrp);
-            
+
             viewTable.addItem(make, model, views);
             index++;
             // << "Added successfully" << endl;
         }
         in.close();
-        
+
         return list;
     }
     else
@@ -108,14 +108,14 @@ Car* load()
 void loadReviewTable(HashTable<Review> &table)
 {
     string line;
-    
+
     int substr_start, offset;
-    
+
     string make, model, owner, description;
     int stars;
-    
+
     char divider = '/';
-    
+
     ifstream in("reviews.txt");
     if (in.is_open())
     {
@@ -133,7 +133,7 @@ void loadReviewTable(HashTable<Review> &table)
             make = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the model
             while (line[substr_start + offset] != divider)
             {
@@ -142,7 +142,7 @@ void loadReviewTable(HashTable<Review> &table)
             model = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the owner
             while (line[substr_start + offset] != divider)
             {
@@ -151,7 +151,7 @@ void loadReviewTable(HashTable<Review> &table)
             owner = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the stars
             while (line[substr_start + offset] != divider)
             {
@@ -160,7 +160,7 @@ void loadReviewTable(HashTable<Review> &table)
             stars = atoi(line.substr(substr_start, offset).c_str());
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //Get the description
             while (line[substr_start + offset] != '\0')
             {
@@ -169,7 +169,7 @@ void loadReviewTable(HashTable<Review> &table)
             description = line.substr(substr_start, offset);
             substr_start = substr_start + offset + 1;
             offset = 0;
-            
+
             //owner >> description >> stars >> make >> model
             Review review = Review(owner, description, stars, make, model);
             table.addItem(make, model, review);
@@ -232,19 +232,19 @@ void loadCarMake(vector<string>& makeList, Car* cList)
     bool isDupe = true;
     int makeSize = 0;
     int size = getArrayLength();
-    
+
     //Reads car makes from clist
     for (int i = 0; i < size; i++)
     {
         Make = cList[i].getMake();
         makeSize = static_cast<int>(makeList.size());
-        
+
         // If carMake is empty then pushback Make
         if (makeSize == 0)
         {
             makeList.push_back(Make);
         }
-        
+
         // If carMake is not empty then check if Make is a duplicate
         // Duplicates are ignored, while new Makes are added
         else
@@ -267,12 +267,12 @@ void loadCarMake(vector<string>& makeList, Car* cList)
 void saveReviews(HashTable<Review> &Table, Car* list)
 {
     // Make/Model/Owner/Stars/Description
-    
+
     int size = getArrayLength();
     string Make, Model;
     ofstream save("reviews.txt");
     List<Review> rList;
-    
+
     if (save.is_open())
     {
         // Checks every car for reviews
@@ -280,7 +280,7 @@ void saveReviews(HashTable<Review> &Table, Car* list)
         {
             Make = list[i].getMake();
             Model = list[i].getModel();
-            
+
             // If the car has no reviews, move to next car
             // Cars with reviews are outputted to 'reviews.txt'
             if (Table.indexIsFilled(Make, Model))
@@ -293,9 +293,9 @@ void saveReviews(HashTable<Review> &Table, Car* list)
                     rList.scroll();
                 }
             }
-            
+
         }
-        
+
         save.close();
     }
     else
@@ -303,17 +303,17 @@ void saveReviews(HashTable<Review> &Table, Car* list)
         cout << "Error : Unable to open file 'reviews.txt' ";
         exit(-1);
     }
-    
+
 }
 
 // Authors(s): Kevin, Han
 void saveCars(Car* cList)
 {
     // Make/Model/MPGe City/MPGe Highway/Type/Price/Views
-    
+
     int size = getArrayLength();
     ofstream save("Kars Data.txt");
-    
+
     if (save.is_open())
     {
         // Checks every car for reviews
@@ -328,5 +328,17 @@ void saveCars(Car* cList)
         cout << "Error : Unable to open file 'Kars Data.txt' ";
         exit(-1);
     }
-    
+
+}
+
+// Author : Kevin
+void loadViewHeap()
+{
+    for (int i = 0; i < getArrayLength(); i++)
+    {
+        Car car = carList[i];
+        int views = viewTable.getFront(car.getMake(), car.getModel());
+        viewHeap.addObject(car, views);
+    }
+    viewHeap.build();
 }
