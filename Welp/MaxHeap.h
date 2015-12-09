@@ -51,8 +51,12 @@ public:
 
     void iterateValue(heap_obj obj, heap_val count);
     //the value at obj will increase by count ex. value = value + count. heapify() is used for you already
+    void replaceValue(heap_obj obj, heap_val value);
+    //replaces the value of an obj with the new one. heapify is used for you already
     void addObject(heap_obj obj, heap_val value);
-    //adds an object to the heap. if the max number of objects is reached nothing happens. needs to build() again after use
+    //adds an object to the heap. if the max number of objects is reached nothing happens.
+    //needs manual build() again after use
+    //you can call this multiple times in a row before you build() for slight efficiency
 
     void heapify(int index);
     //swaps an index with its biggest child if its not the biggest
@@ -112,6 +116,20 @@ void MaxHeap<heap_val, heap_obj>::iterateValue(heap_obj obj, heap_val count)
         if (obj == Heap[i].object)
         {
             Heap[i].value = Heap[i].value + count;
+            heapify(i);
+            return;
+        }
+    }
+}
+
+template <class heap_val, class heap_obj>
+void MaxHeap<heap_val, heap_obj>::replaceValue(heap_obj obj, heap_val value)
+{
+    for (int i = 1; i <= HEAP_SIZE; i++)
+    {
+        if (obj == Heap[i].object)
+        {
+            Heap[i].value = value;
             heapify(i);
             return;
         }

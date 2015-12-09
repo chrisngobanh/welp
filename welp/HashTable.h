@@ -3,6 +3,7 @@
 #ifndef HASHTABLE_H_
 #define HASHTABLE_H_
 #include "List.h"
+#include "MaxHeap.h"
 #include <string>
 #include <iostream>
 #include <cstdlib>
@@ -18,6 +19,10 @@ public:
 
     ~HashTable();
     //Will write as part of Lab 6
+
+    int hash(string key, string identifier);
+    //returns the hash of the key. Uses base + jump
+    //until it finds the right one.
 
     int baseHash(string key, string identifier);
     //returns the base hash value for the given keys
@@ -66,10 +71,6 @@ public:
     int getNumObjects(string key, string identifier);
     //Gets the number of objects stored at an index
 
-    string getObjMostElements();
-    string getObjLeastElements();
-    //Returns (string)List at the index with the biggest/smallest amount of elements
-
 	void clearIndex(string key, string identifier);
 	//Makes the list at that index empty
 
@@ -77,46 +78,52 @@ public:
 	hashobj getFront(int index);
 	//Returns the element at the front of the list at that index
 
-	string getMax();
-	string getMin();
-	//Returns the list whose front element is the highest or lowest inside the table
-
 	bool isInTable(string key, string identifier, hashobj _data);
+	//Returns true if the object is found
+
+	string getMax();
+	//returns the object at the front of listSizeHeap
 
 private:
 
     static const int TABLE_SIZE = 48;
     List<hashobj> Table[TABLE_SIZE];
     int numObjects;
-    int indexMostElements;
-    int indexLeastElements;
-	int indexMax;
-	int indexMin;
 
+    MaxHeap<int, string> listSizeHeap;
+    //to show which list is the biggest
 };
 
 template <class hashobj>
 string HashTable<hashobj>::getMax()
 {
-	return (string)Table[indexMax];
+    return listSizeHeap.getMaxObject();
 }
 
 template <class hashobj>
-string HashTable<hashobj>::getMin()
+int HashTable<hashobj>::hash(string key, string identifier)
 {
-	return (string)Table[indexMin];
+    int index = baseHash(key, identifier);
+	int jump = jumpHash(index);
+
+	string name = "";
+	name.append(key);
+	name.append(" ");
+	name.append(identifier);
+
+	while ((string)Table[index] != name && indexIsFilled(index))
+	{
+		index = (index + jump) % TABLE_SIZE;
+	}
+
+	return index;
 }
 
 
 template <class hashobj>
 void HashTable<hashobj>::clearIndex(string key, string identifier)
 {
-	int index = baseHash(key, identifier);
-	int jump = jumpHash(index);
-	while ((string)Table[index] != identifier && indexIsFilled(index))
-	{
-		index = (index + jump) % TABLE_SIZE;
-	}
+	int index = hash(key, identifier);
 
 	while (!Table[index].empty())
 	{
@@ -128,12 +135,7 @@ void HashTable<hashobj>::clearIndex(string key, string identifier)
 template <class hashobj>
 hashobj HashTable<hashobj>::getFront(string key, string identifier)
 {
-	int index = baseHash(key, identifier);
-	int jump = jumpHash(index);
-	while ((string)Table[index] != identifier && indexIsFilled(index))
-	{
-		index = (index + jump) % TABLE_SIZE;
-	}
+	int index = hash(key, identifier);
 
 	Table[index].begin();
 
@@ -157,13 +159,7 @@ int HashTable<hashobj>::getTotalNumObjects()
 template <class hashobj>
 int HashTable<hashobj>::getNumObjects(string key, string identifier)
 {
-    int index = baseHash(key, identifier);
-    int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
-    {
-        index = (index + jump) % TABLE_SIZE;
-    }
-
+    int index = hash(key, identifier);
     return Table[index].get_size();
 }
 
@@ -176,28 +172,14 @@ HashTable<hashobj>::HashTable()
         Table[i] = list;
     }
     numObjects = 0;
-    indexMostElements = 0;
-    indexLeastElements = 0;
-	indexMax = INT_MIN;
-	indexMin = INT_MAX;
+    listSizeHeap = MaxHeap<int, string>(26);
+
 }
 
 template <class hashobj>
 HashTable<hashobj>::~HashTable()
 {
 
-}
-
-template <class hashobj>
-string HashTable<hashobj>::getObjMostElements()
-{
-    return (string)Table[indexMostElements];
-}
-
-template <class hashobj>
-string HashTable<hashobj>::getObjLeastElements()
-{
-    return (string)Table[indexLeastElements];
 }
 
 template <class hashobj>
@@ -210,12 +192,7 @@ template <class hashobj>
 void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 {
     //Calculate the index
-    int index = baseHash(key, identifier);
-    int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
-    {
-        index = (index + jump) % TABLE_SIZE;
-    }
+    int index = hash(key, identifier);
 
     //If there's a review with the same user replace it
     //Otherwise just add it to the list
@@ -226,29 +203,20 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
     }
 	else
 	{
-	    if (Table[index].empty()) Table[index].setIdentifier(identifier);
+	    string name = "";
+	    name.append(key);
+	    name.append(" ");
+	    name.append(identifier);
+
+	    if (Table[index].empty())
+        {
+            Table[index].setIdentifier(name);
+            listSizeHeap.addObject(name, Table[index].get_size());
+        }
 		Table[index].push_back(_data);
+		listSizeHeap.iterateValue(name, 1);
 		numObjects++;
 
-		//Make this the index with the most elements if it has more elements than the record holder
-		if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
-		//Make this the index with the lease elements if it has less elements than the record holder
-		if (Table[index].get_size() < Table[indexLeastElements].get_size()) indexLeastElements = index;
-
-		//Make this the index with the most elements if it has more elements than the record holder
-		if (indexMostElements == INT_MIN) indexMostElements = index;
-		else if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
-		//Make this the index with the lease elements if it has less elements than the record holder
-		if (indexLeastElements == INT_MAX) indexLeastElements = index;
-		else if (Table[index].get_size() < Table[indexLeastElements].get_size()) indexLeastElements = index;
-
-		//Make this the index with the biggest front element if its bigger than the record holder
-		if (indexMax == INT_MIN) indexMax = index;
-		else if (getFront(key, identifier) > getFront(indexMax)) indexMax = index;
-		//Make this the index with the smallest front element if its smaller than the record holder
-		if (indexMin == INT_MAX) indexMin = index;
-		else if (getFront(key, identifier) < getFront(indexMin)) indexMin = index;
-        
 	}
 
 }
@@ -262,12 +230,7 @@ bool HashTable<hashobj>::indexIsFilled(int index)
 template <class hashobj>
 bool HashTable<hashobj>::indexIsFilled(string key, string identifier)
 {
-    int index = baseHash(key, identifier);
-    int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
-    {
-        index = (index + jump) % TABLE_SIZE;
-    }
+    int index = hash(key, identifier);
 
     return !(Table[index].empty());
 }
@@ -319,12 +282,7 @@ void HashTable<hashobj>::printBucket(int index)
 template <class hashobj>
 void HashTable<hashobj>::printBucket(string key, string identifier)
 {
-    int index = baseHash(key, identifier);
-    int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
-    {
-        index = (index + jump) % TABLE_SIZE;
-    }
+    int index = hash(key, identifier);
 
     Table[index].print();
 }
@@ -333,22 +291,20 @@ template <class hashobj>
 bool HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data)
 {
     //Calculate the index
-    int index = baseHash(key, identifier);
-    int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
-    {
-        index = (index + jump) % TABLE_SIZE;
-    }
+    int index = hash(key, identifier);
 
     //If the data is found in the list, delete it
     if (Table[index].scrollTo(_data))
     {
+        string name = "";
+	    name.append(key);
+	    name.append(" ");
+	    name.append(identifier);
+	    listSizeHeap.iterateValue(name, -1);
+
         Table[index].remove();
         numObjects--;
-        //Make this the index with the most elements if it has more elements than the record holder
-		if (Table[index].get_size() > Table[indexMostElements].get_size()) indexMostElements = index;
-		//Make this the index with the lease elements if it has less elements than the record holder
-		if (Table[index].get_size() < Table[indexLeastElements].get_size()) indexLeastElements = index;
+
         return true;
     }
 
@@ -368,12 +324,7 @@ double HashTable<hashobj>::getAverageRatingBucket(int index)
 template <class hashobj>
 double HashTable<hashobj>::getAverageRatingBucket(string key, string identifier)
 {
-    int index = baseHash(key, identifier);
-    int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
-    {
-        index = (index + jump) % TABLE_SIZE;
-    }
+    int index = hash(key, identifier);
 
     return getAverageRatingBucket(index);
 }
@@ -381,12 +332,7 @@ double HashTable<hashobj>::getAverageRatingBucket(string key, string identifier)
 template <class hashobj>
 List<hashobj>& HashTable<hashobj>::getValue(string key, string identifier)
 {
-    int index = baseHash(key, identifier);
-    int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
-    {
-        index = (index + jump) % TABLE_SIZE;
-    }
+    int index = hash(key, identifier);
 
     return Table[index];
 }
@@ -394,10 +340,15 @@ List<hashobj>& HashTable<hashobj>::getValue(string key, string identifier)
 template <class hashobj>
 int HashTable<hashobj>::getNumAccesses(string key, string identifier)
 {
+    string name = "";
+	name.append(key);
+	name.append(" ");
+	name.append(identifier);
+
     int accesses = 1;
     int index = baseHash(key, identifier);
     int jump = jumpHash(index);
-    while ( (string)Table[index] != identifier && indexIsFilled(index) )
+    while ( (string)Table[index] != name && indexIsFilled(index) )
     {
         index = (index + jump) % TABLE_SIZE;
         accesses++;
@@ -409,12 +360,7 @@ template <class hashobj>
 bool HashTable<hashobj>::isInTable(string key, string identifier, hashobj _data)
 {
 	//Calculate the index
-	int index = baseHash(key, identifier);
-	int jump = jumpHash(index);
-	while ((string)Table[index] != identifier && indexIsFilled(index))
-	{
-		index = (index + jump) % TABLE_SIZE;
-	}
+	int index = hash(key, identifier);
 
 	//If the data is found in the list, delete it
 	if (Table[index].scrollTo(_data)) return true;

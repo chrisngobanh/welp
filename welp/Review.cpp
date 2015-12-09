@@ -92,23 +92,34 @@ void enterReview(string make, string model)
     cout << "How many stars does the vehicle deserve? " << endl;
     cout << ": ";
     int stars = getUserInputAsInt(0, 5);
-    
+
     Review newReview(userName, description, stars, make, model);
     reviewTable.addItem(make, model, newReview);
-    
+
     cout << "Your review has successfully been added." << endl;
-    system("PAUSE");
+    pause();
 }
 
 void enterReviewMenu(string make, string model)
 {
+    clearScreen();
     Review review = Review(userName);
     if (reviewTable.isInTable(make, model, review))
     {
         cout << "Would you like to overwrite your exisiting review?" << endl;
-        
-        
+        cout << "1. Yes" << endl;
+        cout << "2. No" << endl;
+        int input = getUserInputAsInt(1, 2);
+
+        switch (input)
+        {
+            case 1:
+                break;
+            case 2:
+                return;
+        }
+
     }
     enterReview(make, model);
-    system("PAUSE");
+    pause();
 }

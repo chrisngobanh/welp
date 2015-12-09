@@ -74,7 +74,7 @@ int main()
     saveReviews(reviewTable, carList);
 	saveCars(carList);
 
-    system("PAUSE");
+    pause();
     return 0;
 }
 
@@ -382,7 +382,7 @@ void testHashEfficiency()
     cout << "The maximum amount of accesses before finding a key's value is: " << max << endl;
     cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl << endl;
 
-    system("PAUSE");
+    pause();
 
 }
 
@@ -440,11 +440,11 @@ void specialPrintMenu()
                 break;
             case 1:
                 mpgBST.levelOrderPrint();
-                system("PAUSE");
+                pause();
                 break;
             case 2:
                 priceBST.levelOrderPrint();
-                system("PAUSE");
+                pause();
                 break;
         }
     }
@@ -458,13 +458,9 @@ void statsMenu()
     cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
 
     cout << "Most viewed car: " << viewHeap.getMaxObject() << endl;
+    cout << "Most reviewed car: " << reviewTable.getMax() << endl;
+    cout << "Highest rated car: " << avgRatingBST.maximum().getName() << endl << endl;
 
-    cout << "Most reviewed car: " << reviewTable.getObjMostElements() << endl;
-    cout << "Least reviewed car: " << reviewTable.getObjLeastElements() << endl << endl;
-
-    cout << "Highest rated car: " << avgRatingBST.maximum().getName() <<endl;
-	cout << "Least rated car: " << avgRatingBST.minimum().getName() << endl << endl;
-
-    system("PAUSE");
+    pause();
 }
 

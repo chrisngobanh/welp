@@ -122,10 +122,10 @@ void Car::displayCarPage()
                 clearScreen();
                 cout << "Printing out all reviews for the " << make << " " << model << ":" << endl << endl;
                 reviewTable.printBucket(make, model);
-                system("PAUSE");
+                pause();
                 break;
             case 2:
-                enterReview(make, model);
+                enterReviewMenu(make, model);
                 break;
             case 3:
                 Review review = Review(userName);
@@ -134,7 +134,7 @@ void Car::displayCarPage()
                     cout << "Your review has successfully been deleted." << endl;
                 } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
 
-                system("PAUSE");
+                pause();
                 break;
         }
     }

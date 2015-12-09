@@ -3,19 +3,32 @@
 // Handler Functions (Reusable Code)
 
 /**
+ * Pause
+ * Author(s): Kevin
+ *
+ * Simply pauses without using system("PAUSE").
+ * Hit any key to continue
+ */
+void pause()
+{
+    std::cout << "Press any key to continue. . ." << std::endl;
+    std::cin.get();
+}
+
+/**
  * Is Integer Handler
  * Author(s): Johnny
  *
  * This function takes a string and checks if it can be converted to an int
  * Returns true if the string can be an int, and false if the string cannot be an int
  */
-inline bool isInteger(const string & s)
+inline bool isInteger(const std::string & s)
 {
     if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
-    
+
     char * p;
     strtol(s.c_str(), &p, 10);
-    
+
     return (*p == 0);
 }
 
@@ -28,7 +41,7 @@ inline bool isInteger(const string & s)
  * If the string is not an int, then it returns -1
  * Otherwise, it'll return an int that is the string's int form
  */
-int convertStringToInt(string input)
+int convertStringToInt(std::string input)
 {
     if (!isInteger(input)) return -1;
     return atoi(input.c_str());
@@ -42,11 +55,11 @@ int convertStringToInt(string input)
  * It returns the user input as string.
  * Ignores empty lines
  */
-string getUserInputAsString()
+std::string getUserInputAsString()
 {
-    string input;
+    std::string input;
     // Check if user input is empty. If it isn't, then end loop
-    while (getline(cin, input))
+    while (getline(std::cin, input))
     {
         if (input.size()) break;
     }
@@ -64,12 +77,12 @@ string getUserInputAsString()
 int getUserInputAsInt()
 {
     while (true) {
-        string input = getUserInputAsString();
+        std::string input = getUserInputAsString();
         int intInput = convertStringToInt(input);
-        
+
         if (intInput == -1)
         {
-            cout << "Invalid Input. Try again: ";
+            std::cout << "Invalid Input. Try again: ";
         }
         else
         {
@@ -92,10 +105,10 @@ int getUserInputAsInt(int min, int max)
 {
     while (true) {
         int intInput = getUserInputAsInt();
-        
+
         if (intInput < min || intInput > max)
         {
-            cout << "Invalid Input. Try again: ";
+            std::cout << "Invalid Input. Try again: ";
         }
         else
         {
