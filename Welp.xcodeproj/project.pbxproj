@@ -14,6 +14,7 @@
 		EE764E7D1C10EFAA0044EA7C /* FileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E7C1C10EFAA0044EA7C /* FileIO.cpp */; };
 		EE764E801C10F5950044EA7C /* Browse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E7F1C10F5950044EA7C /* Browse.cpp */; };
 		EE764E841C1104E50044EA7C /* Sort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E831C1104E50044EA7C /* Sort.cpp */; };
+		EE764E881C110B260044EA7C /* Search.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E861C110B260044EA7C /* Search.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,8 @@
 		EE764E811C10F5DB0044EA7C /* Browse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Browse.h; sourceTree = "<group>"; };
 		EE764E831C1104E50044EA7C /* Sort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sort.cpp; path = welp/Sort.cpp; sourceTree = SOURCE_ROOT; };
 		EE764E851C1104F60044EA7C /* Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sort.h; sourceTree = "<group>"; };
+		EE764E861C110B260044EA7C /* Search.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Search.cpp; path = welp/Search.cpp; sourceTree = SOURCE_ROOT; };
+		EE764E871C110B260044EA7C /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Search.h; path = welp/Search.h; sourceTree = SOURCE_ROOT; };
 		EEAB56EA1C0D11B900618B72 /* Kars Data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Kars Data.txt"; path = "welp/Kars Data.txt"; sourceTree = SOURCE_ROOT; };
 		EEB8B9931C0D08FF00040A10 /* reviews.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = reviews.txt; path = welp/reviews.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -95,6 +98,8 @@
 				EE764E811C10F5DB0044EA7C /* Browse.h */,
 				EE764E7C1C10EFAA0044EA7C /* FileIO.cpp */,
 				EE764E7E1C10EFB70044EA7C /* FileIO.h */,
+				EE764E861C110B260044EA7C /* Search.cpp */,
+				EE764E871C110B260044EA7C /* Search.h */,
 				1AA271E51C0A4B7500D425DB /* Review.cpp */,
 				1AA271E61C0A4B7500D425DB /* Review.h */,
 				1AA271DF1C0A4B6C00D425DB /* HashTable.h */,
@@ -159,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE764E7D1C10EFAA0044EA7C /* FileIO.cpp in Sources */,
+				EE764E881C110B260044EA7C /* Search.cpp in Sources */,
 				EE764E801C10F5950044EA7C /* Browse.cpp in Sources */,
 				1AA271E91C0A4B7500D425DB /* Review.cpp in Sources */,
 				1AA271E01C0A4B6C00D425DB /* Car.cpp in Sources */,
