@@ -71,7 +71,7 @@ int main()
     saveReviews(reviewTable, carList);
 	saveCars(carList);
 
-    pause();
+    pauseProgram();
     return 0;
 }
 
@@ -187,7 +187,7 @@ void testHashEfficiency()
     cout << "The maximum amount of accesses before finding a key's value is: " << max << endl;
     cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl << endl;
 
-    pause();
+    pauseProgram();
 
 }
 
@@ -245,11 +245,11 @@ void specialPrintMenu()
                 break;
             case 1:
                 mpgBST.levelOrderPrint();
-                pause();
+                pauseProgram();
                 break;
             case 2:
                 priceBST.levelOrderPrint();
-                pause();
+                pauseProgram();
                 break;
         }
     }
@@ -266,6 +266,6 @@ void statsMenu()
     cout << "Most reviewed car: " << reviewTable.getMax() << endl;
     cout << "Highest rated car: " << avgRatingBST.maximum().getName() << endl << endl;
 
-    pause();
+    pauseProgram();
 }
 

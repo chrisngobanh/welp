@@ -97,7 +97,7 @@ void enterReview(string make, string model)
     reviewTable.addItem(make, model, newReview);
 
     cout << "Your review has successfully been added." << endl;
-    pause();
+    pauseProgram();
 }
 
 void enterReviewMenu(string make, string model)
@@ -121,5 +121,5 @@ void enterReviewMenu(string make, string model)
 
     }
     enterReview(make, model);
-    pause();
+    pauseProgram();
 }

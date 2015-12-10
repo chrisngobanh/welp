@@ -9,7 +9,7 @@
  * Simply pauses without using system("PAUSE").
  * Hit any key to continue
  */
-void pause()
+void pauseProgram()
 {
     cout << "Press any key to continue. . ." << endl;
     cin.get();

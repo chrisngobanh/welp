@@ -13,4 +13,4 @@ int getUserInputAsInt();
 int getUserInputAsInt(int min, int max);
 int getUserInputAsInt(int min, size_t max);
 void clearScreen();
-void pause();
+void pauseProgram();
