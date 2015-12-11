@@ -2,7 +2,7 @@
 
 /**
  * Review Constructor
- * Author(s):
+ * Author(s): Carlos
  *
  * Creates a review object.
  * Initializes all the fields
@@ -18,7 +18,7 @@ Review::Review()
 
 /**
  * Review Constructor
- * Author(s):
+ * Author(s): Carlos
  *
  * Creates a review object.
  * Initializes all the fields. Gets owner as an argument
@@ -34,7 +34,7 @@ Review::Review(string _owner)
 
 /**
  * Review Constructor
- * Author(s):
+ * Author(s): Carlos
  *
  * Initializes all the fields. Gets all the fields as arguments
  */
@@ -49,7 +49,7 @@ Review::Review(string _owner, string _description, int _stars, string _make, str
 
 /**
  * Get Owner
- * Author(s):
+ * Author(s): Carlos
  *
  * Returns the owner of the review
  */
@@ -60,7 +60,7 @@ string Review::getOwner()
 
 /**
  * Get Description
- * Author(s):
+ * Author(s): Carlos
  *
  * Returns the description the user gave
  */
@@ -71,7 +71,7 @@ string Review::getDescription()
 
 /**
  * Get Stars
- * Author(s):
+ * Author(s): Carlos
  *
  * Returns the rating the user gave
  */
@@ -82,7 +82,7 @@ int Review::getStars()
 
 /**
  * Get Make
- * Author(s):
+ * Author(s): Carlos
  *
  * Returns the make of the car that this review belongs to
  */
@@ -93,7 +93,7 @@ string Review::getMake()
 
 /**
  * Get Model
- * Author(s):
+ * Author(s): Carlos
  *
  * Returns the model of the car that this review belongs to
  */
@@ -104,7 +104,7 @@ string Review::getModel()
 
 /**
  * Set Description
- * Author(s):
+ * Author(s): Carlos
  *
  * Changes the description in the review to a new one
  */
@@ -115,7 +115,7 @@ void Review::setDescription(string _description)
 
 /**
  * Set Stars
- * Author(s):
+ * Author(s): Carlos
  *
  * Changes the stars in the review to a new amount
  */
@@ -126,7 +126,7 @@ void Review::setStars(int _stars)
 
 /**
  * == Operator
- * Author(s):
+ * Author(s): Carlos
  *
  * Checks if the reviews are the same.
  * Returns true if the owners are the same
@@ -138,7 +138,7 @@ bool Review::operator==(const Review &review)
 
 /**
  * != Operator
- * Author(s):
+ * Author(s): Carlos
  *
  * Checks if the reviews are the same.
  * Returns true if the owners are not the same
@@ -150,7 +150,7 @@ bool Review::operator!=(const Review &review)
 
 /**
  * << Operator
- * Author(s):
+ * Author(s): Carlos
  *
  * Overloads the << operator.
  * Outputs the review in pretty formatting
@@ -166,7 +166,7 @@ ostream& operator<<(ostream &os, const Review &review)
 
 /**
  * Enter Review
- * Author(s):
+ * Author(s): Carlos
  *
  * A submenu for the user to add a review for a car
  */
