@@ -1,3 +1,6 @@
+// Author(s): Kevin
+
+
 #ifndef BST_H_
 #define BST_H_
 
@@ -9,6 +12,8 @@
 #include <queue>
 
 using namespace std;
+
+// Documentation is provided before the implementation of every function
 
 //An object can have multiple ways to compare itself
 template <class bstvalue, class bstobj>

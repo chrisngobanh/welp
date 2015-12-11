@@ -1,3 +1,5 @@
+// Author(s): Kevin
+
 #ifndef HASHTABLE_H_
 #define HASHTABLE_H_
 #include "List.h"
@@ -8,6 +10,10 @@
 #include <climits>
 
 using namespace std;
+
+
+// Documentation is provided before the implementation of every function
+
 
 template <class hashobj>
 class HashTable {
