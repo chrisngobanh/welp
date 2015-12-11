@@ -29,7 +29,6 @@ void testHashEfficiency();
 void specialPrintMenu();
 void miscMenu();
 void statsMenu();
-void saveCars(Car* cList);
 void enterReviewMenu(string make, string model);
 
 string userName;
@@ -107,7 +106,6 @@ void splashMenu()
     userName = getUserInputAsString();
 }
 
-// This is the only menu that should have a loop
 void mainMenu()
 {
     bool isGood = false;
