@@ -1,5 +1,3 @@
-// Authors(s): Chris, Kevin
-
 #ifndef BST_H_
 #define BST_H_
 
