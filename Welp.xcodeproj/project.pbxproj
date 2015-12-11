@@ -15,6 +15,7 @@
 		EE764E801C10F5950044EA7C /* Browse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E7F1C10F5950044EA7C /* Browse.cpp */; };
 		EE764E841C1104E50044EA7C /* Sort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E831C1104E50044EA7C /* Sort.cpp */; };
 		EE764E881C110B260044EA7C /* Search.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE764E861C110B260044EA7C /* Search.cpp */; };
+		EECD1EB51C1A603100256459 /* Misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EECD1EB41C1A603100256459 /* Misc.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,8 @@
 		EE764E871C110B260044EA7C /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Search.h; path = welp/Search.h; sourceTree = SOURCE_ROOT; };
 		EEAB56EA1C0D11B900618B72 /* Kars Data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Kars Data.txt"; path = "welp/Kars Data.txt"; sourceTree = SOURCE_ROOT; };
 		EEB8B9931C0D08FF00040A10 /* reviews.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = reviews.txt; path = welp/reviews.txt; sourceTree = SOURCE_ROOT; };
+		EECD1EB31C1A601300256459 /* Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Misc.h; sourceTree = "<group>"; };
+		EECD1EB41C1A603100256459 /* Misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Misc.cpp; path = welp/Misc.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				1AA271E11C0A4B7500D425DB /* List.h */,
 				EEAB56EA1C0D11B900618B72 /* Kars Data.txt */,
 				1AA271EC1C0A574C00D425DB /* main.cpp */,
+				EECD1EB31C1A601300256459 /* Misc.h */,
+				EECD1EB41C1A603100256459 /* Misc.cpp */,
 				EE764E831C1104E50044EA7C /* Sort.cpp */,
 				EE764E851C1104F60044EA7C /* Sort.h */,
 				EE764E7F1C10F5950044EA7C /* Browse.cpp */,
@@ -163,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EECD1EB51C1A603100256459 /* Misc.cpp in Sources */,
 				EE764E7D1C10EFAA0044EA7C /* FileIO.cpp in Sources */,
 				EE764E881C110B260044EA7C /* Search.cpp in Sources */,
 				EE764E801C10F5950044EA7C /* Browse.cpp in Sources */,
