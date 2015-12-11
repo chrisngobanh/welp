@@ -1,3 +1,6 @@
+// This is the main file for Welp, Yelp for Cars!
+// Author(s): Han, Kevin, Carlos, Johnny, Chris
+
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
@@ -29,7 +32,6 @@ void testHashEfficiency();
 void specialPrintMenu();
 void miscMenu();
 void statsMenu();
-void saveCars(Car* cList);
 void enterReviewMenu(string make, string model);
 
 string userName;
@@ -107,7 +109,6 @@ void splashMenu()
     userName = getUserInputAsString();
 }
 
-// This is the only menu that should have a loop
 void mainMenu()
 {
     bool isGood = false;
