@@ -115,7 +115,7 @@ MaxHeap<heap_val, heap_obj>::MaxHeap(int size)
 template <class heap_val, class heap_obj>
 MaxHeap<heap_val, heap_obj>::~MaxHeap()
 {
-    delete []Heap;
+
 }
 
 /**

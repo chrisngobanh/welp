@@ -51,6 +51,7 @@
 		EE764E861C110B260044EA7C /* Search.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Search.cpp; path = welp/Search.cpp; sourceTree = SOURCE_ROOT; };
 		EE764E871C110B260044EA7C /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Search.h; path = welp/Search.h; sourceTree = SOURCE_ROOT; };
 		EEAB56EA1C0D11B900618B72 /* Kars Data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Kars Data.txt"; path = "welp/Kars Data.txt"; sourceTree = SOURCE_ROOT; };
+		EEAC76161C1AC4AA0000A105 /* MaxHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxHeap.h; path = welp/MaxHeap.h; sourceTree = SOURCE_ROOT; };
 		EEB8B9931C0D08FF00040A10 /* reviews.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = reviews.txt; path = welp/reviews.txt; sourceTree = SOURCE_ROOT; };
 		EECD1EB31C1A601300256459 /* Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Misc.h; sourceTree = "<group>"; };
 		EECD1EB41C1A603100256459 /* Misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Misc.cpp; path = welp/Misc.cpp; sourceTree = SOURCE_ROOT; };
@@ -97,6 +98,7 @@
 				1AA271EC1C0A574C00D425DB /* main.cpp */,
 				EECD1EB31C1A601300256459 /* Misc.h */,
 				EECD1EB41C1A603100256459 /* Misc.cpp */,
+				EEAC76161C1AC4AA0000A105 /* MaxHeap.h */,
 				EE764E831C1104E50044EA7C /* Sort.cpp */,
 				EE764E851C1104F60044EA7C /* Sort.h */,
 				EE764E7F1C10F5950044EA7C /* Browse.cpp */,
