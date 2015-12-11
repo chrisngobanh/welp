@@ -1,5 +1,6 @@
 #include "Misc.h"
-
+//Author: Kevin
+//
 void testHashEfficiency()
 {
     int min = INT_MAX;
@@ -26,6 +27,8 @@ void testHashEfficiency()
     
 }
 
+//Autor: Kevin
+// Shows a menu where the user has an option to view the special print menu, view statistics, view hash table efficiency, or return
 void miscMenu()
 {
     bool isGood = false;
@@ -59,6 +62,8 @@ void miscMenu()
     }
 }
 
+//Author: Kevin
+// Level order prints the cars by price or MPG
 void specialPrintMenu()
 {
     bool isGood = false;
@@ -90,6 +95,8 @@ void specialPrintMenu()
     }
 }
 
+//Author: Han
+// Displays the following statistics: # of reviews/cars, most/least reviewed car, and highest rated car
 void statsMenu()
 {
     clearScreen();
