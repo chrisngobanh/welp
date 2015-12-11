@@ -1,6 +1,7 @@
 #include "FileIO.h"
 
 // Authors(s): Kevin, Han
+// Loads car data from Kars Data into an array
 Car* load()
 {
     Car* list = new Car[getArrayLength()];
@@ -105,6 +106,7 @@ Car* load()
 }
 
 // Authors(s): Kevin, Han
+// Loads review file into a hashtable
 void loadReviewTable(HashTable<Review> &table)
 {
     string line;
@@ -184,6 +186,7 @@ void loadReviewTable(HashTable<Review> &table)
 }
 
 // Authors(s): Kevin, Han
+// Sorts the car in a BST by MPG
 void loadMpgBST(Car* list, BST<int, Car> &bst)
 {
     int size = getArrayLength();
@@ -194,6 +197,7 @@ void loadMpgBST(Car* list, BST<int, Car> &bst)
 }
 
 // Authors(s): Kevin, Han
+// Sorts the car in a BST by MPGFreeway
 void loadMpgFreewayBST(Car* list, BST<int, Car> &bst)
 {
     int size = getArrayLength();
@@ -204,6 +208,7 @@ void loadMpgFreewayBST(Car* list, BST<int, Car> &bst)
 }
 
 // Authors(s): Kevin, Han
+// Sorts the car in a BST by price
 void loadPriceBST(Car* list, BST<int, Car> &bst)
 {
     int size = getArrayLength();
@@ -214,6 +219,7 @@ void loadPriceBST(Car* list, BST<int, Car> &bst)
 }
 
 // Authors(s): Kevin, Han
+// Sorts the car in a BST by avg rating
 void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst)
 {
     int size = getArrayLength();
@@ -225,7 +231,8 @@ void loadAvgRatingBST(Car* list, HashTable<Review> &table, BST<double, Car> &bst
     }
 }
 
-// Authors(s): Kevin, Han
+// Authors(s): Han
+// Gets an array of the car makes
 void loadCarMake(vector<string>& makeList, Car* cList)
 {
     string Make;
@@ -263,7 +270,8 @@ void loadCarMake(vector<string>& makeList, Car* cList)
     }
 }
 
-// Authors(s): Kevin, Han
+// Authors(s): Han
+// Saves the reviews from the HashTable to a file
 void saveReviews(HashTable<Review> &Table, Car* list)
 {
     // Make/Model/Owner/Stars/Description
@@ -306,7 +314,8 @@ void saveReviews(HashTable<Review> &Table, Car* list)
 
 }
 
-// Authors(s): Kevin, Han
+// Authors(s): Han
+// Saves the car array into a file
 void saveCars(Car* cList)
 {
     // Make/Model/MPGe City/MPGe Highway/Type/Price/Views
@@ -332,6 +341,7 @@ void saveCars(Car* cList)
 }
 
 // Author : Kevin
+// Loads the car into a MaxHeap according to the no. of views
 void loadViewHeap()
 {
     for (int i = 0; i < getArrayLength(); i++)

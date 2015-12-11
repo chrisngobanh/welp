@@ -94,12 +94,44 @@ private:
     //to show which list is the biggest
 };
 
+/**
+ * HashTable Constructor
+ * Author(s): Kevin
+ *
+ * Initializes the constructor. A List is created at every index.
+ */
 template <class hashobj>
-string HashTable<hashobj>::getMax()
+HashTable<hashobj>::HashTable()
 {
-    return listSizeHeap.getMaxObject();
+    for (int i = 0; i < TABLE_SIZE; i++)
+    {
+        List<hashobj> list = List<hashobj>();
+        Table[i] = list;
+    }
+    numObjects = 0;
+    listSizeHeap = MaxHeap<int, string>(26);
+
 }
 
+/**
+ * HashTable Destructor
+ * Author(s): Kevin
+ *
+ * Nothing is ever made with new
+ */
+template <class hashobj>
+HashTable<hashobj>::~HashTable()
+{
+
+}
+
+/**
+ * Hash
+ * Author(s): Kevin
+ *
+ * Returns the index for a given key.
+ * Jumps until it finds the object or empty index
+ */
 template <class hashobj>
 int HashTable<hashobj>::hash(string key, string identifier)
 {
@@ -119,7 +151,50 @@ int HashTable<hashobj>::hash(string key, string identifier)
 	return index;
 }
 
+/**
+ * Base Hash
+ * Author(s): Kevin
+ *
+ * Calculates the base hash of an object based off its key.
+ */
+template <class hashobj>
+int HashTable<hashobj>::baseHash(string key, string identifier)
+{
+    int index = 0;
 
+    //Add the values of each char together
+    for (int i = 0; i < key.length(); i++)
+    {
+        index = index + key[i];
+    }
+
+    for (int i = 0; i < identifier.length(); i++)
+    {
+        index = index + identifier[i];
+    }
+    return index % TABLE_SIZE;
+}
+
+/**
+ * Jump Hash
+ * Author(s): Kevin
+ *
+ * Calculates how much to jump by so as to resolve collisions
+ */
+template <class hashobj>
+int HashTable<hashobj>::jumpHash(int key)
+{
+    //Prevents the jump hash being 0
+    //which prevents infinite loops
+    return 7 - (key % 7);
+}
+
+/**
+ * Clear Index
+ * Author(s): Kevin
+ *
+ * Empties the list at a given index
+ */
 template <class hashobj>
 void HashTable<hashobj>::clearIndex(string key, string identifier)
 {
@@ -132,6 +207,24 @@ void HashTable<hashobj>::clearIndex(string key, string identifier)
 	}
 }
 
+/**
+ * Get Max
+ * Author(s): Kevin
+ *
+ * Returns the longest list casted to a string
+ */
+template <class hashobj>
+string HashTable<hashobj>::getMax()
+{
+    return listSizeHeap.getMaxObject();
+}
+
+/**
+ * Get Front
+ * Author(s): Kevin
+ *
+ * Returns the object at the front of a list at a given index
+ */
 template <class hashobj>
 hashobj HashTable<hashobj>::getFront(string key, string identifier)
 {
@@ -142,6 +235,12 @@ hashobj HashTable<hashobj>::getFront(string key, string identifier)
 	return Table[index].current();
 }
 
+/**
+ * Get Front
+ * Author(s): Kevin
+ *
+ * Overloaded function from above
+ */
 template <class hashobj>
 hashobj HashTable<hashobj>::getFront(int index)
 {
@@ -150,12 +249,24 @@ hashobj HashTable<hashobj>::getFront(int index)
 	return Table[index].current();
 }
 
+/**
+ * Get Total Number of Objects
+ * Author(s): Kevin
+ *
+ * Returns the total number of objects inside the Table
+ */
 template <class hashobj>
 int HashTable<hashobj>::getTotalNumObjects()
 {
     return numObjects;
 }
 
+/**
+ * Get Number of Objects
+ * Author(s): Kevin
+ *
+ * Returns the total number of objects of a List at a given index
+ */
 template <class hashobj>
 int HashTable<hashobj>::getNumObjects(string key, string identifier)
 {
@@ -163,31 +274,24 @@ int HashTable<hashobj>::getNumObjects(string key, string identifier)
     return Table[index].get_size();
 }
 
-template <class hashobj>
-HashTable<hashobj>::HashTable()
-{
-    for (int i = 0; i < TABLE_SIZE; i++)
-    {
-        List<hashobj> list = List<hashobj>();
-        Table[i] = list;
-    }
-    numObjects = 0;
-    listSizeHeap = MaxHeap<int, string>(26);
-
-}
-
-template <class hashobj>
-HashTable<hashobj>::~HashTable()
-{
-
-}
-
+/**
+ * Get Table Size
+ * Author(s): Kevin
+ *
+ * Returns the Table Size
+ */
 template <class hashobj>
 int HashTable<hashobj>::getTableSize()
 {
     return TABLE_SIZE;
 }
 
+/**
+ * Add Item
+ * Author(s): Kevin
+ *
+ * Adds an object to a List in the Table
+ */
 template <class hashobj>
 void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 {
@@ -221,12 +325,25 @@ void HashTable<hashobj>::addItem(string key, string identifier, hashobj _data)
 
 }
 
+/**
+ * Index Is Filled
+ * Author(s): Kevin
+ *
+ * Checks if an index is empty or not.
+ * Returns true if it is not empty.
+ */
 template <class hashobj>
 bool HashTable<hashobj>::indexIsFilled(int index)
 {
     return !(Table[index].empty());
 }
 
+/**
+ * Index Is Filled
+ * Author(s): Kevin
+ *
+ * Same as above, overloaded function
+ */
 template <class hashobj>
 bool HashTable<hashobj>::indexIsFilled(string key, string identifier)
 {
@@ -235,32 +352,12 @@ bool HashTable<hashobj>::indexIsFilled(string key, string identifier)
     return !(Table[index].empty());
 }
 
-template <class hashobj>
-int HashTable<hashobj>::baseHash(string key, string identifier)
-{
-    int index = 0;
-
-    //Add the values of each char together
-    for (int i = 0; i < key.length(); i++)
-    {
-        index = index + key[i];
-    }
-
-    for (int i = 0; i < identifier.length(); i++)
-    {
-        index = index + identifier[i];
-    }
-    return index % TABLE_SIZE;
-}
-
-template <class hashobj>
-int HashTable<hashobj>::jumpHash(int key)
-{
-    //Prevents the jump hash being 0
-    //which prevents infinite loops
-    return 7 - (key % 7);
-}
-
+/**
+ * Print Table
+ * Author(s): Kevin
+ *
+ * Prints every object in the table. Debugging purposes mainly
+ */
 template <class hashobj>
 void HashTable<hashobj>::printTable()
 {
@@ -273,12 +370,24 @@ void HashTable<hashobj>::printTable()
     }
 }
 
+/**
+ * Print Bucket
+ * Author(s): Kevin
+ *
+ * Prints every object at a given index.
+ */
 template <class hashobj>
 void HashTable<hashobj>::printBucket(int index)
 {
     Table[index].print();
 }
 
+/**
+ * Print Bucket
+ * Author(s): Kevin
+ *
+ * Same function as above, overloaded
+ */
 template <class hashobj>
 void HashTable<hashobj>::printBucket(string key, string identifier)
 {
@@ -287,6 +396,13 @@ void HashTable<hashobj>::printBucket(string key, string identifier)
     Table[index].print();
 }
 
+/**
+ * Remove Item
+ * Author(s): Kevin
+ *
+ * This function takes a string and checks if it can be converted to an int
+ * Returns true if the string can be an int, and false if the string cannot be an int
+ */
 template <class hashobj>
 bool HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data)
 {
@@ -311,6 +427,13 @@ bool HashTable<hashobj>::removeItem(string key, string identifier, hashobj _data
     return false;
 }
 
+/**
+ * Get Average Rating Bucket
+ * Author(s): Kevin
+ *
+ * Returns the average (int) values of each object in a list.
+ * Pre: Objects in the list have an (int) cast
+ */
 template <class hashobj>
 double HashTable<hashobj>::getAverageRatingBucket(int index)
 {
@@ -321,6 +444,12 @@ double HashTable<hashobj>::getAverageRatingBucket(int index)
     else return 0.0;
 }
 
+/**
+ * Get Average Rating Bucket
+ * Author(s): Kevin
+ *
+ * Same function as above, just overloaded
+ */
 template <class hashobj>
 double HashTable<hashobj>::getAverageRatingBucket(string key, string identifier)
 {
@@ -329,6 +458,13 @@ double HashTable<hashobj>::getAverageRatingBucket(string key, string identifier)
     return getAverageRatingBucket(index);
 }
 
+/**
+ * Get Value
+ * Author(s): Kevin
+ *
+ * Returns a list at a given index.
+ * Shouldn't really be used
+ */
 template <class hashobj>
 List<hashobj>& HashTable<hashobj>::getValue(string key, string identifier)
 {
@@ -337,6 +473,13 @@ List<hashobj>& HashTable<hashobj>::getValue(string key, string identifier)
     return Table[index];
 }
 
+/**
+ * Get Number Accesses
+ * Author(s): Kevin
+ *
+ * Helper function to test efficiency.
+ * Returns the amount of times it is needed to jump before finding an object.
+ */
 template <class hashobj>
 int HashTable<hashobj>::getNumAccesses(string key, string identifier)
 {
@@ -356,6 +499,13 @@ int HashTable<hashobj>::getNumAccesses(string key, string identifier)
     return accesses;
 }
 
+/**
+ * Is In Table
+ * Author(s): Kevin
+ *
+ * Checks if an object is in the table.
+ * Returns true if it is found.
+ */
 template <class hashobj>
 bool HashTable<hashobj>::isInTable(string key, string identifier, hashobj _data)
 {
