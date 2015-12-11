@@ -1,3 +1,6 @@
+// This is the main file for Welp, Yelp for Cars!
+// Author(s): Han, Kevin, Carlos, Johnny, Chris
+
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
