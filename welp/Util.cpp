@@ -3,11 +3,12 @@
 // Handler Functions (Reusable Code)
 
 /**
- * Pause
- * Author(s): Kevin
+ * Pause Program
+ * Author(s): Kevin, Chris
  *
- * Simply pauses without using system("PAUSE").
- * Hit any key to continue
+ * A cross-platform method of pausing the program
+ * Windows uses system("PAUSE")
+ * All other platforms use the 'read' bash command to simulate system("PAUSE")
  */
 #ifdef _WIN32
 void pauseProgram()
