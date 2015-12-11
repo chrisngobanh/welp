@@ -102,7 +102,11 @@ void Car::displayCarPage()
         cout << "Rating: " << reviewTable.getAverageRatingBucket(make, model) << " stars" << endl;
         cout << "Views: " << viewTable.getFront(make, model) << endl;
 
-        ///////////////Reviews Menu///////////////
+        /****** Reviews Menu -----
+         *
+         * Coder: Carlos Quirarte
+         *
+         *****/
         cout << "************* Review Menu *************" << endl;
         cout << "1. View list of reviews" << endl;
         cout << "2. Add a review" << endl;
