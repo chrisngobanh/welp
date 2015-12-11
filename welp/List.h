@@ -184,20 +184,22 @@ List<listitem>::List()
 template <class listitem>
 List<listitem>::~List()
 {
-//	iterator = head;
-//	NodeRef temp;
-//	while (iterator != NULL)
-//	{
-//		temp = iterator;
-//		iterator = iterator->next;
-//		delete temp;
-//	}
-//
-//	if (iterator != NULL)
-//	{
-//		cout << "Iterator not pointing to NULL. Something went wrong." << endl;
-//		assert(iterator != NULL);
-//	}
+	iterator = head;
+	NodeRef temp;
+	while (iterator != NULL)
+	{
+		temp = iterator;
+		iterator = iterator->next;
+		delete temp;
+	}
+
+	head = tail = NULL;
+
+	if (iterator != NULL)
+	{
+		cout << "Iterator not pointing to NULL. Something went wrong." << endl;
+		assert(iterator != NULL);
+	}
 }
 
 template <class listitem>
