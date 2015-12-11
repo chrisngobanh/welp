@@ -1,5 +1,12 @@
 #include "Car.h"
 
+/**
+ * Car Constructor
+ * Author(s):
+ *
+ * Creates a car object
+ * Initializes every field
+ */
 Car::Car()
 {
 	make = "";
@@ -10,6 +17,13 @@ Car::Car()
 	price = 0;
 }
 
+/**
+ * Car Constructor
+ * Author(s):
+ *
+ * Creates a car object
+ * Overloaded function that initializes every field with inputs
+ */
 Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFreeway, int _price)
 {
 	make = _make;
@@ -20,56 +34,126 @@ Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFree
 	price = _price;
 }
 
+/**
+ * Get Make
+ * Author(s):
+ *
+ * Returns the make field
+ */
 string Car::getMake() {
 	return make;
 }
 
+/**
+ * Get Model
+ * Author(s):
+ *
+ * Returns the model field
+ */
 string Car::getModel()
 {
 	return model;
 }
 
+/**
+ * Get Name
+ * Author(s):
+ *
+ * Returns the name field
+ */
 string Car::getName()
 {
 	return make + " " + model;
 }
 
+/**
+ * Get Engine
+ * Author(s):
+ *
+ * Returns the engine field
+ */
 string Car::getEngine()
 {
 	return engine;
 }
 
+/**
+ * Get MPG City
+ * Author(s):
+ *
+ * Returns the mpg city field
+ */
 int Car::getMPGCity()
 {
 	return MPGCity;
 }
 
+/**
+ * Get MPG Freeway
+ * Author(s):
+ *
+ * Returns the mpg freeway field
+ */
 int Car::getMPGFreeway()
 {
 	return MPGFreeway;
 }
 
+/**
+ * Get Price
+ * Author(s):
+ *
+ * Returns the price field
+ */
 int Car::getPrice()
 {
 	return price;
 }
 
+/**
+ * << Operator
+ * Author(s): Kevin
+ *
+ * Overloads the << operator. Outputs the car make and model
+ * Ex. Honda Accord
+ */
 ostream& operator<<(ostream &os, const Car &car)
 {
 	os << car.make << ' ' << car.model;
 	return os;
 }
 
+/**
+ * == Operator
+ * Author(s): Kevin
+ *
+ * Overloads the == operator.
+ * Returns true if the models match
+ */
 bool Car::operator==(const Car &car)
 {
     return (car.model == this->model);
 }
 
+/**
+ * != Operator
+ * Author(s): Kevin
+ *
+ * Overloads the != operator
+ * Returns true if the models don't match
+ */
 bool Car::operator!=(const Car &car)
 {
     return !(*this == car);
 }
 
+/**
+ * Display Car Page
+ * Author(s):
+ *
+ * Print the car page.
+ * Displays the car specs to the console.
+ */
 void Car::displayCarPage()
 {
     //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
