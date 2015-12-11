@@ -1,4 +1,4 @@
-// Author(s): Chris, Johnny
+// Author(s): Chris, Johnny, Kevin
 
 #include <string>
 #include <iostream>

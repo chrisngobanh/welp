@@ -64,7 +64,7 @@ void searchForCarByNameMenu()
         string name = getUserInputAsString();
         
         // This is a linear search
-        for (int i = 0; i < getArrayLength(); i++)
+        for (int i = 0; i < numOfCars; i++)
         {
             // If the car's name is found, then render the car page for the user
             if (name.compare(carList[i].getName()) == 0)
@@ -148,7 +148,7 @@ void searchForCarsByPriceMenu()
         vector<Car> cars;
         
         // This is a linear search
-        for (int i = 0; i < getArrayLength(); i++)
+        for (int i = 0; i < numOfCars; i++)
         {
             // If car price is in range
             if (carList[i].getPrice() >= min && carList[i].getPrice() <= max)

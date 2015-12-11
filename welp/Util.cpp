@@ -3,18 +3,24 @@
 // Handler Functions (Reusable Code)
 
 /**
- * Pause
- * Author(s): Kevin
+ * Pause Program
+ * Author(s): Kevin, Chris
  *
- * Simply pauses without using system("PAUSE").
- * Hit any key to continue
+ * A cross-platform method of pausing the program
+ * Windows uses system("PAUSE")
+ * All other platforms use the 'read' bash command to simulate system("PAUSE")
  */
+#ifdef _WIN32
 void pauseProgram()
 {
-    cout << "Press any key to continue. . ." << endl;
-    cin.get();
+    system("PAUSE");
 }
-
+#else
+void pauseProgram()
+{
+    system( "read -n 1 -s -p \"Press any key to continue . . . \"" );
+}
+#endif
 /**
  * Is Integer Handler
  * Author(s): Johnny
