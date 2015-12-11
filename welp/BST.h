@@ -76,6 +76,13 @@ public:
 
 /**Private helper functions*/
 
+/**
+ * Add Value
+ * Author(s): Kevin
+ *
+ * Adds a value into the BST. Sorted by bstvalue.
+ * Has the ability to add objects with the same bstvalue
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::addValue(Nodeptr root, bstvalue value, bstobj obj)
 {
@@ -99,6 +106,12 @@ void BST<bstvalue, bstobj>::addValue(Nodeptr root, bstvalue value, bstobj obj)
     };
 }
 
+/**
+ * In Order Print
+ * Author(s): Kevin
+ *
+ * Helper function to print the nodes in order
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::inOrderPrint(Nodeptr root)
 {
@@ -110,6 +123,12 @@ void BST<bstvalue, bstobj>::inOrderPrint(Nodeptr root)
     }
 }
 
+/**
+ * Pre Order Print
+ * Author(s): Kevin
+ *
+ * Helper function to print the nodes in pre order
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::preOrderPrint(Nodeptr root)
 {
@@ -121,6 +140,12 @@ void BST<bstvalue, bstobj>::preOrderPrint(Nodeptr root)
     }
 }
 
+/**
+ * Post Order Print
+ * Author(s): Kevin
+ *
+ * Helper function to print the nodes in post order
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::postOrderPrint(Nodeptr root)
 {
@@ -134,6 +159,13 @@ void BST<bstvalue, bstobj>::postOrderPrint(Nodeptr root)
 
 //--------------------------------------
 
+/**
+ * In Order Print
+ * Author(s): Kevin
+ *
+ * Helper function to print the nodes in order
+ * This function is overloaded to print only within a range between min and max
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::inOrderPrint(Nodeptr root, bstvalue min, bstvalue max)
 {
@@ -145,6 +177,13 @@ void BST<bstvalue, bstobj>::inOrderPrint(Nodeptr root, bstvalue min, bstvalue ma
     }
 }
 
+/**
+ * Pre Order Print
+ * Author(s): Kevin
+ *
+ * Helper function to print the nodes in pre order
+ * This function is overloaded to print only within a range between min and max
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::preOrderPrint(Nodeptr root, bstvalue min, bstvalue max)
 {
@@ -156,6 +195,13 @@ void BST<bstvalue, bstobj>::preOrderPrint(Nodeptr root, bstvalue min, bstvalue m
     }
 }
 
+/**
+ * Post Order Print
+ * Author(s): Kevin
+ *
+ * Helper function to print the nodes in post order
+ * This function is overloaded to print only within a range between min and max
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::postOrderPrint(Nodeptr root, bstvalue min, bstvalue max)
 {
@@ -167,6 +213,12 @@ void BST<bstvalue, bstobj>::postOrderPrint(Nodeptr root, bstvalue min, bstvalue 
     }
 }
 
+/**
+ * In Order Vector
+ * Author(s): Kevin
+ *
+ * Adds values into a vector in order.
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, vector<bstobj> &list)
 {
@@ -178,139 +230,14 @@ void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, vector<bstobj> &list)
     }
 }
 
-template <class bstvalue, class bstobj>
-void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, bstvalue min, bstvalue max, vector<bstobj> &list)
-{
-    if (root != NULL)
-    {
-        inOrderVector(root->left, min, max, list);
-		if (root->value >= min && root->value <= max) list.insert(list.begin(), root->obj);
-        inOrderVector(root->right, min, max, list);
-    }
-}
-
-template <class bstvalue, class bstobj>
-void BST<bstvalue, bstobj>::deleteTree(Nodeptr root)
-{
-    if (root != NULL)
-    {
-        deleteTree(root->left);
-        deleteTree(root->right);
-        delete root;
-    }
-}
-
-template <class bstvalue, class bstobj>
-bool BST<bstvalue, bstobj>::containsValue(Nodeptr root, bstvalue value, bstobj obj)
-{
-    if (root != NULL)
-    {
-        if (value == root->value) return true;
-        else if (value < root->value) return containsValue(root->left, value, obj);
-        else return containsValue(root->right, value, obj);
-    }
-    return false;
-}
-
-template <class bstvalue, class bstobj>
-bstobj BST<bstvalue, bstobj>::findMin(Nodeptr root)
-{
-    if (root->left == NULL)
-    {
-        return root->obj;
-    }
-    else
-    {
-        return findMin(root->left);
-    }
-
-}
-
-template <class bstvalue, class bstobj>
-bstobj BST<bstvalue, bstobj>::findMax(Nodeptr root)
-{
-    if (root->right == NULL)
-    {
-        return root->obj;
-    }
-    else
-    {
-        return findMin(root->left);
-        
-    }
-}
-
-
-/**Public functions*/
-
-template <class bstvalue, class bstobj>
-BST<bstvalue, bstobj>::BST()
-{
-    root = NULL;
-    size = 0;
-}
-
-template <class bstvalue, class bstobj>
-BST<bstvalue, bstobj>::~BST()
-{
-    deleteTree(root);
-}
-
-template <class bstvalue, class bstobj>
-bool BST<bstvalue, bstobj>::isEmpty()
-{
-    return root == NULL;
-}
-
-template <class bstvalue, class bstobj>
-int BST<bstvalue, bstobj>::getSize()
-{
-    return size;
-}
-
-template <class bstvalue, class bstobj>
-void BST<bstvalue, bstobj>::add(bstvalue value, bstobj obj)
-{
-    if (root == NULL)
-    {
-        root = new Node(value, obj); //if the tree is empty insert the value at the root
-        size++;
-    }
-    else addValue(root, value, obj); //otherwise call the helper function, passing it the root
-}
-
-template <class bstvalue, class bstobj>
-bstobj BST<bstvalue, bstobj>::getRoot()
-{
-    if (root == NULL)
-    {
-        cout << "Error: The tree is empty." << endl << endl;
-        exit(-1); // what to do if bstdata is a non reference like string?
-    }
-    else return root->obj;
-}
-
-template <class bstvalue, class bstobj>
-void BST<bstvalue, bstobj>::printInOrder()
-{
-    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
-    else inOrderPrint(root);
-}
-
-template <class bstvalue, class bstobj>
-void BST<bstvalue, bstobj>::printPreOrder()
-{
-    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
-    else preOrderPrint(root);
-}
-
-template <class bstvalue, class bstobj>
-void BST<bstvalue, bstobj>::printPostOrder()
-{
-    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
-    else postOrderPrint(root);
-}
-
+/**
+ * Print Level Order
+ * Author(s): Kevin
+ *
+ * Helper function.
+ * Special print, shows the level of each object.
+ * Uses a BFS algorithm
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printLevelOrder(Nodeptr root)
 {
@@ -350,6 +277,243 @@ void BST<bstvalue, bstobj>::printLevelOrder(Nodeptr root)
     }
 }
 
+
+/**
+ * In Order Vector
+ * Author(s): Kevin
+ *
+ * Adds values into a vector in order.
+ * This function is overloaded so it only adds values between min and max
+ */
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::inOrderVector(Nodeptr root, bstvalue min, bstvalue max, vector<bstobj> &list)
+{
+    if (root != NULL)
+    {
+        inOrderVector(root->left, min, max, list);
+		if (root->value >= min && root->value <= max) list.insert(list.begin(), root->obj);
+        inOrderVector(root->right, min, max, list);
+    }
+}
+
+
+/**
+ * Delete Tree
+ * Author(s): Kevin
+ *
+ * Deletes a subtree starting at a given root
+ */
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::deleteTree(Nodeptr root)
+{
+    if (root != NULL)
+    {
+        deleteTree(root->left);
+        deleteTree(root->right);
+        delete root;
+    }
+}
+
+
+/**
+ * Contians Value
+ * Author(s): Kevin
+ *
+ * Checks if a value can be found inside the tree.
+ * If an object with that value is found, return true.
+ */
+template <class bstvalue, class bstobj>
+bool BST<bstvalue, bstobj>::containsValue(Nodeptr root, bstvalue value, bstobj obj)
+{
+    if (root != NULL)
+    {
+        if (value == root->value) return true;
+        else if (value < root->value) return containsValue(root->left, value, obj);
+        else return containsValue(root->right, value, obj);
+    }
+    return false;
+}
+
+
+/**
+ * Find Min
+ * Author(s): Kevin
+ *
+ * Helper function to find the minimum value in a BST
+ */
+template <class bstvalue, class bstobj>
+bstobj BST<bstvalue, bstobj>::findMin(Nodeptr root)
+{
+    if (root->left == NULL)
+    {
+        return root->obj;
+    }
+    else
+    {
+        return findMin(root->left);
+    }
+
+}
+
+
+/**
+ * Find Max
+ * Author(s): Kevin
+ *
+ * Helper function to find the maximum value in a BST
+ */
+template <class bstvalue, class bstobj>
+bstobj BST<bstvalue, bstobj>::findMax(Nodeptr root)
+{
+    if (root->right == NULL)
+    {
+        return root->obj;
+    }
+    else
+    {
+        return findMin(root->left);
+
+    }
+}
+
+
+/**Public functions*/
+
+/**
+ * BST Constructor
+ * Author(s): Kevin
+ *
+ * Simply makes a root and makes size 0
+ */
+template <class bstvalue, class bstobj>
+BST<bstvalue, bstobj>::BST()
+{
+    root = NULL;
+    size = 0;
+}
+
+/**
+ * BST Destructor
+ * Author(s): Kevin
+ *
+ * Deletes the tree to free allocated memory
+ */
+template <class bstvalue, class bstobj>
+BST<bstvalue, bstobj>::~BST()
+{
+    deleteTree(root);
+}
+
+/**
+ * Is Empty
+ * Author(s): Kevin
+ *
+ * Checks if the tree is empty.
+ * Returns true if it is empty
+ */
+template <class bstvalue, class bstobj>
+bool BST<bstvalue, bstobj>::isEmpty()
+{
+    return root == NULL;
+}
+
+/**
+ * Get Size
+ * Author(s): Kevin
+ *
+ * Returns the amount of objects stored in the BST
+ */
+template <class bstvalue, class bstobj>
+int BST<bstvalue, bstobj>::getSize()
+{
+    return size;
+}
+
+/**
+ * Add
+ * Author(s): Kevin
+ *
+ * Wrapper function to addValue(). Adds an object to the tree.
+ * Has the ability to add objects with the same bstvalue
+ */
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::add(bstvalue value, bstobj obj)
+{
+    if (root == NULL)
+    {
+        root = new Node(value, obj); //if the tree is empty insert the value at the root
+        size++;
+    }
+    else addValue(root, value, obj); //otherwise call the helper function, passing it the root
+}
+
+/**
+ * Get Root
+ * Author(s): Kevin
+ *
+ * Returns the object stored at the root.
+ * Pre: List is not empty
+ */
+template <class bstvalue, class bstobj>
+bstobj BST<bstvalue, bstobj>::getRoot()
+{
+    if (root == NULL)
+    {
+        cout << "Error: The tree is empty." << endl << endl;
+        exit(-1); // what to do if bstdata is a non reference like string?
+    }
+    else return root->obj;
+}
+
+/**
+ * Print In Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to printInOrder
+ * Prints the BST in order
+ */
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::printInOrder()
+{
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
+    else inOrderPrint(root);
+}
+
+/**
+ * Print Pre Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to printPreOrder
+ * Prints the BST in pre order
+ */
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::printPreOrder()
+{
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
+    else preOrderPrint(root);
+}
+
+/**
+ * Print Post Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to printPostOrder
+ * Prints the BST in post order
+ */
+template <class bstvalue, class bstobj>
+void BST<bstvalue, bstobj>::printPostOrder()
+{
+    if (isEmpty()) cout << "Error: The tree is empty." << endl << endl;
+    else postOrderPrint(root);
+}
+
+/**
+ * Level Order Print
+ * Author(s): Kevin
+ *
+ * Wrapper function to printLevelOrder
+ * Shows the level of each object
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::levelOrderPrint()
 {
@@ -357,8 +521,14 @@ void BST<bstvalue, bstobj>::levelOrderPrint()
     else printLevelOrder(root);
 }
 
-//------------------------------------------------
-
+/**
+ * Print In Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to inOrderPrint
+ * Prints the BST in order
+ * This function prints values that are within a certain range
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printInOrder(bstvalue min, bstvalue max)
 {
@@ -366,6 +536,14 @@ void BST<bstvalue, bstobj>::printInOrder(bstvalue min, bstvalue max)
     else inOrderPrint(root, min, max);
 }
 
+/**
+ * Print Pre Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to preOrderPrint
+ * Prints the BST in pre order
+ * This function prints values that are within a certain range
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printPreOrder(bstvalue min, bstvalue max)
 {
@@ -373,6 +551,14 @@ void BST<bstvalue, bstobj>::printPreOrder(bstvalue min, bstvalue max)
     else preOrderPrint(root, min, max);
 }
 
+/**
+ * Print Post Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to postOrderPrint
+ * Prints the BST in post order
+ * This function prints values that are within a certain range
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::printPostOrder(bstvalue min, bstvalue max)
 {
@@ -380,6 +566,13 @@ void BST<bstvalue, bstobj>::printPostOrder(bstvalue min, bstvalue max)
     else postOrderPrint(root, min, max);
 }
 
+/**
+ * Get Vector In Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to vectorInOrder
+ * Adds values to a vector in order
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::getVectorInOrder(vector<bstobj> &list)
 {
@@ -387,6 +580,14 @@ void BST<bstvalue, bstobj>::getVectorInOrder(vector<bstobj> &list)
     else inOrderVector(root, list);
 }
 
+/**
+ * Get Vector In Order
+ * Author(s): Kevin
+ *
+ * Wrapper function to vectorInOrder
+ * Adds values to a vector in order
+ * This function only adds values between a certain range
+ */
 template <class bstvalue, class bstobj>
 void BST<bstvalue, bstobj>::getVectorInOrder(bstvalue min, bstvalue max, vector<bstobj> &list)
 {
@@ -394,6 +595,13 @@ void BST<bstvalue, bstobj>::getVectorInOrder(bstvalue min, bstvalue max, vector<
     else inOrderVector(root, min, max, list);
 }
 
+/**
+ * Contains
+ * Author(s): Kevin
+ *
+ * Wrapper function to containtsValue
+ * Returns true if a value is found within the BST
+ */
 template <class bstvalue, class bstobj>
 bool BST<bstvalue, bstobj>::contains(bstvalue value)
 {
@@ -402,6 +610,14 @@ bool BST<bstvalue, bstobj>::contains(bstvalue value)
     else return containsValue(root, value);
 }
 
+/**
+ * Minimum
+ * Author(s): Kevin
+ *
+ * Wrapper function to findMin
+ * Returns the minimum object in the BST
+ * Pre: BST is not empty
+ */
 template <class bstvalue, class bstobj>
 bstobj BST<bstvalue, bstobj>::minimum()
 {
@@ -417,6 +633,14 @@ bstobj BST<bstvalue, bstobj>::minimum()
     }
 }
 
+/**
+ * Maximum
+ * Author(s): Kevin
+ *
+ * Wrapper function to findMax
+ * Returns the maximum object in the BST
+ * Pre: BST is not empty
+ */
 template <class bstvalue, class bstobj>
 bstobj BST<bstvalue, bstobj>::maximum()
 {
