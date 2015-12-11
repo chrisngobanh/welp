@@ -8,6 +8,7 @@ using namespace std;
 
 extern vector<string> carMakeVector;
 extern Car* carList;
+extern int numOfCars;
 
 void browseForCarsMenu();
 void listAllCarsMenu();

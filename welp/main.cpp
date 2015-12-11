@@ -34,6 +34,7 @@ void enterReviewMenu(string make, string model);
 
 string userName;
 Car* carList;
+int numOfCars;
 vector<string> carMakeVector;
 HashTable<Review> reviewTable;
 HashTable<int> viewTable;
@@ -49,13 +50,15 @@ int main()
 {
     splashMenu();
 
+    numOfCars = getNumberOfCars();
+    
     reviewTable = HashTable<Review>();
 	viewTable = HashTable<int>();
     mpgBST = BST<int, Car>();
     priceBST = BST<int, Car>();
     avgRatingBST = BST<double, Car>();
     mpgFreewayBST = BST<int, Car>();
-    viewHeap = MaxHeap<int, Car>(getArrayLength());
+    viewHeap = MaxHeap<int, Car>(numOfCars);
 
     carList = load();
     loadMpgBST(carList, mpgBST);
@@ -141,36 +144,12 @@ void mainMenu()
     }
 }
 
-
-int getArrayLength()
-{
-    string line;
-    int length = 0;
-    ifstream in("Kars Data.txt");
-    if (in.is_open())
-    {
-        in.clear();
-        in.seekg(0, ios::beg);
-        while (getline(in, line))
-        {
-            length++;
-        }
-        in.close();
-        return length;
-    }
-    else
-    {
-        cout << "Error 1: Unable to open file \"Kars Data.txt\"" << endl << endl;
-        return -1;
-    }
-}
-
 void testHashEfficiency()
 {
     int min = INT_MAX;
     int max = INT_MIN;
     int sum = 0;
-    double size = getArrayLength();
+    double size = numOfCars;
     for (int i = 0; i < size; i++)
     {
         Car car = carList[i];
@@ -260,7 +239,7 @@ void statsMenu()
     clearScreen();
 
     cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
-    cout << "Total number of cars in Welp: " << getArrayLength() << endl << endl;
+    cout << "Total number of cars in Welp: " << numOfCars << endl << endl;
 
     cout << "Most viewed car: " << viewHeap.getMaxObject() << endl;
     cout << "Most reviewed car: " << reviewTable.getMax() << endl;

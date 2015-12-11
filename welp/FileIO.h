@@ -12,7 +12,6 @@
 using namespace std;
 
 Car* load();
-int getArrayLength();
 void loadMpgBST(Car* list, BST<int, Car> &bst);
 void loadMpgFreewayBST(Car* list, BST<int, Car> &bst);
 void loadPriceBST(Car* list, BST<int, Car> &bst);
@@ -22,8 +21,10 @@ void loadCarMake(vector<string>& makeList, Car* cList);
 void saveReviews(HashTable<Review> &Table, Car* list);
 void listCars(int);
 void loadViewHeap();
+int getNumberOfCars();
 
 extern Car* carList;
+extern int numOfCars;
 extern vector<string> carMakeVector;
 extern HashTable<Review> reviewTable;
 extern HashTable<int> viewTable;
