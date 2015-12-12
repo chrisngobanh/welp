@@ -1,5 +1,13 @@
 #include "Car.h"
-//Author(s): Jonathan, Chris
+
+/**
+ * Car Constructor
+ * Author(s): Chris, Johnny
+ *
+ * Creates a car object
+ * Initializes every field
+ */
+
 Car::Car()
 {
 	make = "";
@@ -10,6 +18,13 @@ Car::Car()
 	price = 0;
 }
 
+/**
+ * Car Constructor
+ * Author(s): Chris, Johnny
+ *
+ * Creates a car object
+ * Overloaded function that initializes every field with inputs
+ */
 Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFreeway, int _price)
 {
 	make = _make;
@@ -20,56 +35,126 @@ Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFree
 	price = _price;
 }
 
+/**
+ * Get Make
+ * Author(s): Chris, Johnny
+ *
+ * Returns the make field
+ */
 string Car::getMake() {
 	return make;
 }
 
+/**
+ * Get Model
+ * Author(s): Chris, Johnny
+ *
+ * Returns the model field
+ */
 string Car::getModel()
 {
 	return model;
 }
 
+/**
+ * Get Name
+ * Author(s): Chris, Johnny
+ *
+ * Returns the name field
+ */
 string Car::getName()
 {
 	return make + " " + model;
 }
 
+/**
+ * Get Engine
+ * Author(s): Chris, Johnny
+ *
+ * Returns the engine field
+ */
 string Car::getEngine()
 {
 	return engine;
 }
 
+/**
+ * Get MPG City
+ * Author(s): Chris, Johnny
+ *
+ * Returns the mpg city field
+ */
 int Car::getMPGCity()
 {
 	return MPGCity;
 }
 
+/**
+ * Get MPG Freeway
+ * Author(s): Chris, Johnny
+ *
+ * Returns the mpg freeway field
+ */
 int Car::getMPGFreeway()
 {
 	return MPGFreeway;
 }
 
+/**
+ * Get Price
+ * Author(s): Chris, Johnny
+ *
+ * Returns the price field
+ */
 int Car::getPrice()
 {
 	return price;
 }
 
+/**
+ * << Operator
+ * Author(s): Kevin
+ *
+ * Overloads the << operator. Outputs the car make and model
+ * Ex. Honda Accord
+ */
 ostream& operator<<(ostream &os, const Car &car)
 {
 	os << car.make << ' ' << car.model;
 	return os;
 }
 
+/**
+ * == Operator
+ * Author(s): Kevin
+ *
+ * Overloads the == operator.
+ * Returns true if the models match
+ */
 bool Car::operator==(const Car &car)
 {
     return (car.model == this->model);
 }
 
+/**
+ * != Operator
+ * Author(s): Kevin
+ *
+ * Overloads the != operator
+ * Returns true if the models don't match
+ */
 bool Car::operator!=(const Car &car)
 {
     return !(*this == car);
 }
 
+/**
+ * Display Car Page
+ * Author(s): Carlos, Kevin, Johnny
+ *
+ * Print the car page.
+ * Displays the car specs to the console.
+ */
 void Car::displayCarPage()
 {
     //Increment the car's view count. Outside the while loop so that it only counts "unique" views.
@@ -102,7 +187,11 @@ void Car::displayCarPage()
         cout << "Rating: " << reviewTable.getAverageRatingBucket(make, model) << " stars" << endl;
         cout << "Views: " << viewTable.getFront(make, model) << endl;
 
-        ///////////////Reviews Menu///////////////
+        /****** Reviews Menu -----
+         *
+         * Coder: Carlos Quirarte
+         *
+         *****/
         cout << "************* Review Menu *************" << endl;
         cout << "1. View list of reviews" << endl;
         cout << "2. Add a review" << endl;
@@ -122,7 +211,7 @@ void Car::displayCarPage()
                 clearScreen();
                 cout << "Printing out all reviews for the " << make << " " << model << ":" << endl << endl;
                 reviewTable.printBucket(make, model);
-                pause();
+                pauseProgram();
                 break;
             case 2:
                 enterReviewMenu(make, model);
@@ -134,7 +223,7 @@ void Car::displayCarPage()
                     cout << "Your review has successfully been deleted." << endl;
                 } else cout << "Could not find a review under the username \"" << userName << "\"." << endl;
 
-                pause();
+                pauseProgram();
                 break;
         }
     }

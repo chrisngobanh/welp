@@ -1,4 +1,4 @@
-// Authors(s): Chris, Kevin
+// Author(s): Chris, Kevin
 // Doubly Linked List
 #ifndef LIST_H
 #define LIST_H
@@ -9,6 +9,8 @@
 #include <assert.h>
 
 using namespace std;
+
+// Documentation is provided before the implementation of every function
 
 template <class listitem>
 class List
@@ -134,6 +136,13 @@ public:
 	//Calls the reverse helper function to
 	//Pre: !isEmpty()
 
+    /**
+     * String Cast
+     * Author(s): Kevin
+     *
+     * Returns the identifier.
+     * One of the ways that the List can be compared by
+     */
 	explicit operator const string()
 	{
 	    return identifier;
@@ -143,12 +152,12 @@ public:
 
 };
 
-//template class List<int>;
-//template class List<double>;
-//template class List<char>;
-//template class List<string>;
-//#endif
-
+/**
+ * List Constructor
+ * Author(s): Chris
+ *
+ * Creates a list. Sets the head, tail, and iterator to NULL;
+ */
 template <class listitem>
 List<listitem>::List()
 {
@@ -181,25 +190,39 @@ List<listitem>::List()
 	}
 }
 
+/**
+ * List Destructor
+ * Author(s): Chris
+ *
+ * Frees up allocated memory. Loops through the list and deletes every node
+ */
 template <class listitem>
 List<listitem>::~List()
 {
-//	iterator = head;
-//	NodeRef temp;
-//	while (iterator != NULL)
-//	{
-//		temp = iterator;
-//		iterator = iterator->next;
-//		delete temp;
-//	}
-//
-//	if (iterator != NULL)
-//	{
-//		cout << "Iterator not pointing to NULL. Something went wrong." << endl;
-//		assert(iterator != NULL);
-//	}
+	iterator = head;
+	NodeRef temp;
+	while (iterator != NULL)
+	{
+		temp = iterator;
+		iterator = iterator->next;
+		delete temp;
+	}
+
+	head = tail = NULL;
+
+	if (iterator != NULL)
+	{
+		cout << "Iterator not pointing to NULL. Something went wrong." << endl;
+		assert(iterator != NULL);
+	}
 }
 
+/**
+ * List Copy Constructor
+ * Author(s): Chris
+ *
+ * Creates a deep copy of a list.
+ */
 template <class listitem>
 List<listitem>::List(const List &list) : size(list.size)
 {
@@ -278,6 +301,13 @@ List<listitem>::List(const List &list) : size(list.size)
 
 }
 
+/**
+ * Back
+ * Author(s): Chris
+ *
+ * Returns the last object inside the list
+ * Pre: The tail is not NULL
+ */
 template <class listitem>
 listitem List<listitem>::back()
 {
@@ -290,6 +320,13 @@ listitem List<listitem>::back()
 	return tail->data;
 }
 
+/**
+ * Current
+ * Author(s): Chris
+ *
+ * Returns the object that the iterator currently is pointing at
+ * Pre: The iterator is pointing at something not NULL
+ */
 template <class listitem>
 listitem List<listitem>::current()
 {
@@ -308,6 +345,13 @@ listitem List<listitem>::current()
 	return iterator->data;
 }
 
+/**
+ * Front
+ * Author(s): Chris
+ *
+ * Returns the first object in the list
+ * Pre: The head is not NULL
+ */
 template <class listitem>
 listitem List<listitem>::front()
 {
@@ -321,25 +365,50 @@ listitem List<listitem>::front()
 	return head->data;
 }
 
+/**
+ * Empty
+ * Author(s): Chris
+ *
+ * Checks if the list is empty or not
+ * Returns true if it is
+ */
 template <class listitem>
 bool List<listitem>::empty()
 {
 	return (size == 0);
 }
 
+/**
+ * Off End
+ * Author(s): Chris
+ *
+ * Checks if the iterator is pointing to NULL
+ * Returns true if the iterator is pointing to NULL
+ */
 template <class listitem>
 bool List<listitem>::off_end()
 {
 	return (iterator == NULL);
 }
 
+/**
+ * Get Size
+ * Author(s): Chris
+ *
+ * Returns the length of the list
+ */
 template <class listitem>
 int List<listitem>::get_size()
 {
 	return size;
 }
 
-
+/**
+ * Begin
+ * Author(s): Chris
+ *
+ * Makes the iterator point to the head
+ */
 template <class listitem>
 void List<listitem>::begin()
 {
@@ -357,6 +426,13 @@ void List<listitem>::begin()
 	}
 }
 
+/**
+ * Insert
+ * Author(s): Chris
+ *
+ * Inserts an object after the iterator
+ * Pre: Iterator is not NULL
+ */
 template <class listitem>
 void List<listitem>::insert(listitem data)
 {
@@ -384,6 +460,12 @@ void List<listitem>::insert(listitem data)
 	}
 }
 
+/**
+ * Push Back
+ * Author(s): Chris
+ *
+ * Adds an object to the end of the list. The tail is the new object
+ */
 template <class listitem>
 void List<listitem>::push_back(listitem data)
 {
@@ -407,6 +489,12 @@ void List<listitem>::push_back(listitem data)
 	}
 }
 
+/**
+ * Push Front
+ * Author(s): Chris
+ *
+ * Adds an object to the front of the list. The head is the new object
+ */
 template <class listitem>
 void List<listitem>::push_front(listitem data)
 {
@@ -431,6 +519,12 @@ void List<listitem>::push_front(listitem data)
 
 }
 
+/**
+ * Pop Front
+ * Author(s): Chris
+ *
+ * Deletes the object at the front. The object after the head is the new head
+ */
 template <class listitem>
 void List<listitem>::pop_front()
 {
@@ -462,6 +556,12 @@ void List<listitem>::pop_front()
 	}
 }
 
+/**
+ * Empty
+ * Author(s): Chris
+ *
+ * Deletes an object at the end of the list. The object before the tail is the new tail
+ */
 template <class listitem>
 void List<listitem>::pop_back()
 {
@@ -491,7 +591,13 @@ void List<listitem>::pop_back()
 	}
 }
 
-
+/**
+ * Remove
+ * Author(s): Chris
+ *
+ * Deletes the object that is currently pointed at by the iterator
+ * Pre: Iterator is pointing at an object
+ */
 template <class listitem>
 void List<listitem>::remove()
 {
@@ -524,6 +630,12 @@ void List<listitem>::remove()
 	}
 }
 
+/**
+ * Scroll
+ * Author(s): Chris
+ *
+ * Iterates the iterator
+ */
 template <class listitem>
 void List<listitem>::scroll()
 {
@@ -533,6 +645,13 @@ void List<listitem>::scroll()
 	}
 }
 
+/**
+ * Scroll To
+ * Author(s): Kevin
+ *
+ * Moves the iterator to a given object
+ * Returns true if the object was found
+ */
 template <class listitem>
 bool List<listitem>::scrollTo(listitem _data)
 {
@@ -544,6 +663,12 @@ bool List<listitem>::scrollTo(listitem _data)
     return (iterator != NULL);
 }
 
+/**
+ * Print
+ * Author(s): Chris
+ *
+ * Prints the list forwards, from head to tail
+ */
 template <class listitem>
 void List<listitem>::print()
 {
@@ -554,12 +679,25 @@ void List<listitem>::print()
 	}
 }
 
+/**
+ * Print Reverse
+ * Author(s): Chris
+ *
+ * Prints the list backwards, from tail to head
+ */
 template <class listitem>
 void List<listitem>::printReverse()
 {
 	reverse(tail);
 }
 
+/**
+ * Reverse
+ * Author(s): Chris
+ *
+ * Helper function to printReverse
+ * Used to print the list backwards, from tail to head
+ */
 template <class listitem>
 void List<listitem>::reverse(NodeRef node)
 {
@@ -569,12 +707,27 @@ void List<listitem>::reverse(NodeRef node)
 	}
 }
 
+/**
+ * Set Identifier
+ * Author(s): Kevin
+ *
+ * Sets the identifier of the list.
+ * The identifier is used when the list
+ * is (string) cast
+ */
 template <class listitem>
 void List<listitem>::setIdentifier(string _identifier)
 {
 	identifier = _identifier;
 }
 
+/**
+ * Get Average
+ * Author(s): Kevin
+ *
+ * Returns the average of all values inside the list
+ * Pre: The objects inside the list can be (int) cast
+ */
 template <class listitem>
 double List<listitem>::getAverage()
 {
@@ -587,11 +740,5 @@ double List<listitem>::getAverage()
     }
     return sum/size;
 }
-
-//template <class listitem>
-//operator const List<listitem>::string()
-//{
-//	return identifier;
-//}
 
 #endif

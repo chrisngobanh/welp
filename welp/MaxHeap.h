@@ -6,6 +6,9 @@
 
 using std::cout;
 
+// Documentation is provided before the implementation of every function
+
+
 template <class heap_val, class heap_obj>
 class MaxHeap
 {
@@ -76,12 +79,25 @@ public:
 
 };
 
+
+/**
+ * Max Heap Constructor
+ * Author(s): Kevin
+ *
+ * Default constructor. Never used
+ */
 template <class heap_val, class heap_obj>
 MaxHeap<heap_val, heap_obj>::MaxHeap()
 {
 
 }
 
+/**
+ * Max Heap Constructor
+ * Author(s): Kevin
+ *
+ * Overloaded constructor. Creates an array with the input size
+ */
 template <class heap_val, class heap_obj>
 MaxHeap<heap_val, heap_obj>::MaxHeap(int size)
 {
@@ -90,24 +106,49 @@ MaxHeap<heap_val, heap_obj>::MaxHeap(int size)
     numObjects = 0;
 }
 
+/**
+ * Max Heap Destructor
+ * Author(s): Kevin
+ *
+ * Frees up allocated memory
+ */
 template <class heap_val, class heap_obj>
 MaxHeap<heap_val, heap_obj>::~MaxHeap()
 {
-//    delete []Heap;
+
 }
 
+/**
+ * Get Max Value
+ * Author(s): Kevin
+ *
+ * Returns the value of the the biggest object inside the Max Heap
+ */
 template <class heap_val, class heap_obj>
 heap_val MaxHeap<heap_val, heap_obj>::getMaxValue()
 {
     return Heap[1].value;
 }
 
+/**
+ * Get Max Object
+ * Author(s): Kevin
+ *
+ * Returns the object with the biggest value inside the Max Heap
+ */
 template <class heap_val, class heap_obj>
 heap_obj MaxHeap<heap_val, heap_obj>::getMaxObject()
 {
     return Heap[1].object;
 }
 
+/**
+ * Iterate Value
+ * Author(s): Kevin
+ *
+ * Iterates to the value of an object count times if it is found.
+ * Ex. value = value + count;
+ */
 template <class heap_val, class heap_obj>
 void MaxHeap<heap_val, heap_obj>::iterateValue(heap_obj obj, heap_val count)
 {
@@ -122,6 +163,12 @@ void MaxHeap<heap_val, heap_obj>::iterateValue(heap_obj obj, heap_val count)
     }
 }
 
+/**
+ * Replace Value
+ * Author(s): Kevin
+ *
+ * Replaces the value of an object with the new one
+ */
 template <class heap_val, class heap_obj>
 void MaxHeap<heap_val, heap_obj>::replaceValue(heap_obj obj, heap_val value)
 {
@@ -136,6 +183,15 @@ void MaxHeap<heap_val, heap_obj>::replaceValue(heap_obj obj, heap_val value)
     }
 }
 
+/**
+ * Add Object
+ * Author(s): Kevin
+ *
+ * Adds an object to an empty slot if an empty slot exists
+ * Otherwise does nothing
+ * It is neccessary to use build() after this
+ * because this method is meant to be called multiple times in a row.
+ */
 template <class heap_val, class heap_obj>
 void MaxHeap<heap_val, heap_obj>::addObject(heap_obj obj, heap_val value)
 {
@@ -146,6 +202,13 @@ void MaxHeap<heap_val, heap_obj>::addObject(heap_obj obj, heap_val value)
     }
 }
 
+/**
+ * Heapify
+ * Author(s): Kevin
+ *
+ * Restores a part of the array so that the parent is the biggest value
+ *
+ */
 template <class heap_val, class heap_obj>
 void MaxHeap<heap_val, heap_obj>::heapify(int index)
 {
@@ -168,24 +231,48 @@ void MaxHeap<heap_val, heap_obj>::heapify(int index)
     }
 }
 
+/**
+ * Parent
+ * Author(s): Kevin
+ *
+ * Utility function that gets the index of the index's parent
+ */
 template <class heap_val, class heap_obj>
 int MaxHeap<heap_val, heap_obj>::parent(int index)
 {
     return index/2;
 }
 
+/**
+ * Left
+ * Author(s): Kevin
+ *
+ * Utility function that gets the index of the index's left child
+ */
 template <class heap_val, class heap_obj>
 int MaxHeap<heap_val, heap_obj>::left(int index)
 {
     return index*2;
 }
 
+/**
+ * Right
+ * Author(s): Kevin
+ *
+ * Utility function that gets the index of the index's right child
+ */
 template <class heap_val, class heap_obj>
 int MaxHeap<heap_val, heap_obj>::right(int index)
 {
     return index*2 + 1;
 }
 
+/**
+ * Print
+ * Author(s): Kevin
+ *
+ * Prints the Heap's objects as if it were a regular array
+ */
 template <class heap_val, class heap_obj>
 void MaxHeap<heap_val, heap_obj>::print()
 {
@@ -195,6 +282,12 @@ void MaxHeap<heap_val, heap_obj>::print()
     }
 }
 
+/**
+ * Print Value
+ * Author(s): Kevin
+ *
+ * Prints the value of the Heap's objects as if it were a regular array
+ */
 template <class heap_val, class heap_obj>
 void MaxHeap<heap_val, heap_obj>::printValue()
 {
@@ -204,6 +297,13 @@ void MaxHeap<heap_val, heap_obj>::printValue()
     }
 }
 
+/**
+ * Build
+ * Author(s): Kevin
+ *
+ * Turns a regular array into a Max Heap.
+ * It is neccessary to use this after using addObject
+ */
 template <class heap_val, class heap_obj>
 void MaxHeap<heap_val, heap_obj>::build()
 {

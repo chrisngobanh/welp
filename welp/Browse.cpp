@@ -1,5 +1,4 @@
 #include "Browse.h"
-#include "Util.h"
 
 // Author(s): Jonathan
 // Menu for the list of all the car makes
@@ -50,7 +49,7 @@ void filterCarsMenu(string carMake)
     cout << "******************** CAR LIST ********************" << endl << endl;
     int count = 0;
     Car filteredCars[30];
-    for (int i = 0; i < getArrayLength(); i++)
+    for (int i = 0; i < numOfCars; i++)
     {
         if (carList[i].getMake() == carMake)
         {
@@ -76,7 +75,7 @@ void listAllCarsMenu()
     clearScreen();
     cout << "******************* ALL CARS MENU ********************" << endl << endl;
     // Print out list of all cars
-    for (int i = 1; i < getArrayLength() + 1; i++)
+    for (int i = 1; i < numOfCars + 1; i++)
     {
         cout << i << ". ";
         cout << carList[i - 1].getMake() << " ";
@@ -85,7 +84,7 @@ void listAllCarsMenu()
     cout << "0. Quit" << endl;
     
     // Input validation by checking for integer and range
-    int choice = getUserInputAsInt(0, getArrayLength());
+    int choice = getUserInputAsInt(0, numOfCars);
     
     if (choice != 0) carList[choice - 1].displayCarPage();
 }

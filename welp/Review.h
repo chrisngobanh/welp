@@ -14,7 +14,6 @@ using namespace std;
 //A review from a user for a specific car. Can be edited by the user (stars and description)
 class Review
 {
-#include "Util.h"
 
 private:
 

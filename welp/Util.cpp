@@ -3,18 +3,24 @@
 // Handler Functions (Reusable Code)
 
 /**
- * Pause
- * Author(s): Kevin
+ * Pause Program
+ * Author(s): Kevin, Chris
  *
- * Simply pauses without using system("PAUSE").
- * Hit any key to continue
+ * A cross-platform method of pausing the program
+ * Windows uses system("PAUSE")
+ * All other platforms use the 'read' bash command to simulate system("PAUSE")
  */
-void pause()
+#ifdef _WIN32
+void pauseProgram()
 {
-    std::cout << "Press any key to continue. . ." << std::endl;
-    std::cin.get();
+    system("PAUSE");
 }
-
+#else
+void pauseProgram()
+{
+    system( "read -n 1 -s -p \"Press any key to continue . . . \"" );
+}
+#endif
 /**
  * Is Integer Handler
  * Author(s): Johnny
@@ -22,7 +28,7 @@ void pause()
  * This function takes a string and checks if it can be converted to an int
  * Returns true if the string can be an int, and false if the string cannot be an int
  */
-inline bool isInteger(const std::string & s)
+inline bool isInteger(const string & s)
 {
     if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
 
@@ -41,7 +47,7 @@ inline bool isInteger(const std::string & s)
  * If the string is not an int, then it returns -1
  * Otherwise, it'll return an int that is the string's int form
  */
-int convertStringToInt(std::string input)
+int convertStringToInt(string input)
 {
     if (!isInteger(input)) return -1;
     return atoi(input.c_str());
@@ -55,11 +61,11 @@ int convertStringToInt(std::string input)
  * It returns the user input as string.
  * Ignores empty lines
  */
-std::string getUserInputAsString()
+string getUserInputAsString()
 {
-    std::string input;
+    string input;
     // Check if user input is empty. If it isn't, then end loop
-    while (getline(std::cin, input))
+    while (getline(cin, input))
     {
         if (input.size()) break;
     }
@@ -77,12 +83,12 @@ std::string getUserInputAsString()
 int getUserInputAsInt()
 {
     while (true) {
-        std::string input = getUserInputAsString();
+        string input = getUserInputAsString();
         int intInput = convertStringToInt(input);
 
         if (intInput == -1)
         {
-            std::cout << "Invalid Input. Try again: ";
+            cout << "Invalid Input. Try again: ";
         }
         else
         {
@@ -108,7 +114,7 @@ int getUserInputAsInt(int min, int max)
 
         if (intInput < min || intInput > max)
         {
-            std::cout << "Invalid Input. Try again: ";
+            cout << "Invalid Input. Try again: ";
         }
         else
         {

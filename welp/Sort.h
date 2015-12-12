@@ -1,4 +1,5 @@
-#include <iostream>
+// Author(s): Johnny
+
 #include <vector>
 
 #include "Util.h"
