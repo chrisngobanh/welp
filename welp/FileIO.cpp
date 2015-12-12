@@ -1,5 +1,7 @@
 #include "FileIO.h"
 
+// Author(s): Kevin
+// Gets the amount of cars
 int getNumberOfCars()
 {
     ifstream in("Kars Data.txt");
@@ -34,14 +36,14 @@ Car* load()
     {
         string line;
         int index = 0;
-        
+
         int substr_start, offset;
-        
+
         string make, model, type, engine;
         int mpgcity, mpgfree, msrp, views;
-        
+
         char divider = '/';
-        
+
         in.clear();
         in.seekg(0, ios::beg);
         while (getline(in, line))

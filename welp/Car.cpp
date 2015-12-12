@@ -2,7 +2,7 @@
 
 /**
  * Car Constructor
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Creates a car object
  * Initializes every field
@@ -19,7 +19,7 @@ Car::Car()
 
 /**
  * Car Constructor
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Creates a car object
  * Overloaded function that initializes every field with inputs
@@ -36,7 +36,7 @@ Car::Car(string _make, string _model, string _engine, int _MPGCity, int _MPGFree
 
 /**
  * Get Make
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Returns the make field
  */
@@ -46,7 +46,7 @@ string Car::getMake() {
 
 /**
  * Get Model
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Returns the model field
  */
@@ -57,7 +57,7 @@ string Car::getModel()
 
 /**
  * Get Name
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Returns the name field
  */
@@ -68,7 +68,7 @@ string Car::getName()
 
 /**
  * Get Engine
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Returns the engine field
  */
@@ -79,7 +79,7 @@ string Car::getEngine()
 
 /**
  * Get MPG City
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Returns the mpg city field
  */
@@ -90,7 +90,7 @@ int Car::getMPGCity()
 
 /**
  * Get MPG Freeway
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Returns the mpg freeway field
  */
@@ -101,7 +101,7 @@ int Car::getMPGFreeway()
 
 /**
  * Get Price
- * Author(s):
+ * Author(s): Chris, Johnny
  *
  * Returns the price field
  */
@@ -149,7 +149,7 @@ bool Car::operator!=(const Car &car)
 
 /**
  * Display Car Page
- * Author(s):
+ * Author(s): Carlos, Kevin
  *
  * Print the car page.
  * Displays the car specs to the console.

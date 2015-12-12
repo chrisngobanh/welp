@@ -1,4 +1,4 @@
-// Authors(s): Chris, Kevin, Han
+// Authors(s): Chris, Kevin, Han, Johnny
 #ifndef CAR_H
 #define CAR_H
 #include <string>

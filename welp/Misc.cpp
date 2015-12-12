@@ -1,6 +1,6 @@
 #include "Misc.h"
 //Author: Kevin
-//
+// Shows the results of the HashTable efficiency test
 void testHashEfficiency()
 {
     int min = INT_MAX;
@@ -15,16 +15,16 @@ void testHashEfficiency()
         if (accesses > max) max = accesses;
         sum = sum + accesses;
     }
-    
+
     clearScreen();
-    
+
     cout << "The load factor is: " << size/reviewTable.getTableSize() << endl;
     cout << "The minimum amount of accesses before finding a key's value is: " << min << endl;
     cout << "The maximum amount of accesses before finding a key's value is: " << max << endl;
     cout << "The average amount of accesses before finding a key's value is: " << sum/size << endl << endl;
-    
+
     pauseProgram();
-    
+
 }
 
 //Autor: Kevin
@@ -41,9 +41,9 @@ void miscMenu()
         cout << "3. Test hash table efficiency" << endl;
         cout << "0. Back" << endl << endl;
         cout << "What is your option? ";
-        
+
         int choice = getUserInputAsInt(0, 3);
-        
+
         switch (choice)
         {
             case 0:
@@ -75,9 +75,9 @@ void specialPrintMenu()
         cout << "2. Print by price" << endl;
         cout << "0. Return to misc" << endl;
         cout << ": ";
-        
+
         int choice = getUserInputAsInt(0, 2);
-        
+
         switch (choice)
         {
             case 0:
@@ -100,13 +100,13 @@ void specialPrintMenu()
 void statsMenu()
 {
     clearScreen();
-    
+
     cout << "Total number of reviews in Welp: " << reviewTable.getTotalNumObjects() << endl;
     cout << "Total number of cars in Welp: " << numOfCars << endl << endl;
-    
+
     cout << "Most viewed car: " << viewHeap.getMaxObject() << endl;
     cout << "Most reviewed car: " << reviewTable.getMax() << endl;
     cout << "Highest rated car: " << avgRatingBST.maximum().getName() << endl << endl;
-    
+
     pauseProgram();
 }
