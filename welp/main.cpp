@@ -44,6 +44,12 @@ MaxHeap<int, Car> viewHeap;
 
 // The rest of the program
 
+/**
+* Main
+* Author(s): Han, Kevin, Carlos, Johnny, Chris
+*
+* This is the main function of the program.
+*/
 int main()
 {
     splashMenu();
@@ -76,6 +82,12 @@ int main()
     return 0;
 }
 
+/**
+* Main Menu
+* Author(s): Han, Kevin, Carlos, Johnny, Chris
+*
+* This is the main menu of the program
+*/
 void mainMenu()
 {
     bool isGood = false;
@@ -112,6 +124,12 @@ void mainMenu()
     }
 }
 
+/**
+* Splash Menu
+* Author(s): Kevin, Johnny, Chris
+*
+* This is the splash menu
+*/
 void splashMenu()
 {
     cout << "*************************************************************************" << endl;
