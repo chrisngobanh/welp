@@ -198,14 +198,14 @@ List<listitem>::List()
  */
 template <class listitem>
 List<listitem>::~List()
-{
+{/*
 	iterator = head;
 	NodeRef temp;
 	while (iterator != NULL)
 	{
 		temp = iterator;
 		iterator = iterator->next;
-		delete temp;
+-		delete temp;
 	}
 
 	head = tail = NULL;
@@ -214,7 +214,7 @@ List<listitem>::~List()
 	{
 		cout << "Iterator not pointing to NULL. Something went wrong." << endl;
 		assert(iterator != NULL);
-	}
+	}*/
 }
 
 /**

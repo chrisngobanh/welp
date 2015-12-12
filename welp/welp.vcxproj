@@ -68,7 +68,10 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Review.cpp" />
+    <ClCompile Include="Search.cpp" />
+    <ClCompile Include="Sort.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -78,7 +81,11 @@
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="MaxHeap.h" />
+    <ClInclude Include="Misc.h" />
     <ClInclude Include="Review.h" />
+    <ClInclude Include="Search.h" />
+    <ClInclude Include="Sort.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
