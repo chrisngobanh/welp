@@ -142,8 +142,9 @@ int getUserInputAsInt(int min, size_t max)
  * Clear Screen Handler
  * Author(s): Chris
  *
- * This function clears the screen by making a lot of empty new lines
- * This method is cross platform
+ * A cross-platform method of clearing the console screen.
+ * Windows uses system("CLS")
+ * All other platforms make a ton of new lines.
  */
 #ifdef _WIN32
 void clearScreen()
