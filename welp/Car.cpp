@@ -1,5 +1,5 @@
 #include "Car.h"
-
+//Author(s): Jonathan, Chris
 Car::Car()
 {
 	make = "";

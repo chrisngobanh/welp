@@ -1,5 +1,7 @@
 #include "Sort.h"
 
+// Author(s): Jonathan, Chris
+// The menu for choosing a category to sort a car frrom greatest to least. Takes input to choose a specific car
 void sortByCategoryMenu()
 {
     bool isGood = false;
@@ -37,6 +39,7 @@ void sortByCategoryMenu()
     }
 }
 
+// The menu for listing all the cars by MPG from greatest to least. Takes input to choose a specific car
 void sortByMpgMenu()
 {
     vector<Car> carVector;
@@ -64,6 +67,7 @@ void sortByMpgMenu()
     if (choice != 0) carVector[choice - 1].displayCarPage();
 }
 
+// The menu for listing all the cars by MPG in the freeway from greatest to least. Takes input to choose a specific car
 void sortByMpgFreewayMenu()
 {
     vector<Car> carVector;
@@ -91,6 +95,7 @@ void sortByMpgFreewayMenu()
     if (choice != 0) carVector[choice - 1].displayCarPage();
 }
 
+// The menu for listing all the cars by price in the freeway from greatest to least. Takes input to choose a specific car
 void sortByPriceMenu()
 {
     vector<Car> carVector;
@@ -117,6 +122,7 @@ void sortByPriceMenu()
     if (choice != 0) carVector[choice - 1].displayCarPage();
 }
 
+// The menu for listing all the cars by rating in the freeway from greatest to least. Takes input to choose a specific car
 void sortByRatingMenu()
 {
     vector<Car> carVector;

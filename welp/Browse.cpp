@@ -1,6 +1,8 @@
 #include "Browse.h"
 #include "Util.h"
 
+// Author(s): Jonathan
+// Menu for the list of all the car makes
 void browseForCarsMenu()
 {
     bool isGood = false;
@@ -32,6 +34,7 @@ void browseForCarsMenu()
     }
 }
 
+// Menu for when input is taken for the all the car makes. It takes input to filter to a specific car make or list all the cars
 void listCars(int carType)
 {
     if (carType > 0 && carType < carMakeVector.size() + 1)
@@ -40,6 +43,7 @@ void listCars(int carType)
         listAllCarsMenu();
 }
 
+// Menu for the list of all the cars of a specified car make (e.g. Honda or Tesla)
 void filterCarsMenu(string carMake)
 {
     clearScreen();
@@ -66,6 +70,7 @@ void filterCarsMenu(string carMake)
     if (choice != 0) filteredCars[choice - 1].displayCarPage();
 }
 
+// Menu for the list of all the cars of a specified car make (e.g. Honda or Tesla)
 void listAllCarsMenu()
 {
     clearScreen();
